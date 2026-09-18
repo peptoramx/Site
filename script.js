@@ -219,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.site-header');
   const onScroll = () => {
     if (window.scrollY > 20) {
-      header.style.borderBottomColor = 'rgba(255,255,255,.18)';
+      header.style.borderBottomColor = 'rgba(191,160,84,.45)';
     } else {
-      header.style.borderBottomColor = 'rgba(255,255,255,.08)';
+      header.style.borderBottomColor = 'rgba(0,0,0,.08)';
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
