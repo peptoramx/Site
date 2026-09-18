@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>PEPTORA — Research Peptide Labs | The Future of Human Optimization</title>
-<meta name="description" content="PEPTORA — Research Peptide Labs. Ecosistema de ciencia aplicada a la optimización humana: investigación, biohacking, longevidad y rendimiento.">
-<link rel="icon" href="assets/logo-peptora.png" type="image/png">
+<meta name="description" content="PEPTORA — Research Peptide Labs. An applied-science ecosystem for human optimization: research, biohacking, longevity and performance.">
+
+<!-- Favicons -->
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#faf9f6">
+
+<!-- iOS "Add to Home Screen" -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PEPTORA">
+
+<!-- Android / Chrome install -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="PEPTORA">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,16 +38,20 @@
       <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
     </a>
     <nav class="main-nav" id="mainNav">
-      <a href="#inicio">Inicio</a>
-      <a href="#ecosistema">Ecosistema</a>
-      <a href="#productos">Productos</a>
-      <a href="#historia">Historia</a>
-      <a href="#filosofia">Filosofía</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#inicio" data-i18n="nav.inicio">Home</a>
+      <a href="#ecosistema" data-i18n="nav.ecosistema">Ecosystem</a>
+      <a href="#productos" data-i18n="nav.productos">Products</a>
+      <a href="#historia" data-i18n="nav.historia">History</a>
+      <a href="#filosofia" data-i18n="nav.filosofia">Philosophy</a>
+      <a href="#contacto" data-i18n="nav.contacto">Contact</a>
     </nav>
     <div class="header-cta">
-      <a href="#contacto" class="btn btn-ghost">Contacto</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language / Cambiar idioma">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9Z"/></svg>
+        <span id="langLabel">ES</span>
+      </button>
+      <a href="#contacto" class="btn btn-ghost" data-i18n="nav.contacto">Contact</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
     </div>
@@ -41,214 +63,215 @@
   <div class="hex-field"></div>
   <div class="wrap">
     <div class="hero-copy">
-      <div class="eyebrow" style="justify-content:center;">Ciencia · Rendimiento · Longevidad · Evolución</div>
+      <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Science · Performance · Longevity · Evolution</div>
       <h1>The Future of <span>Human Optimization</span></h1>
-      <p class="lede">Ciencia aplicada a la optimización humana. Un ecosistema de biohacking, investigación y educación para el rendimiento, la recuperación y la longevidad.</p>
+      <p class="lede" data-i18n="hero.lede">Applied science for human optimization. An ecosystem of biohacking, research and education for performance, recovery and longevity.</p>
       <div class="hero-actions">
         <a href="#productos" class="btn btn-primary">
-          Ver productos
+          <span data-i18n="hero.cta1">View Products</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#ecosistema" class="btn btn-ghost">Explorar ecosistema</a>
+        <a href="#ecosistema" class="btn btn-ghost" data-i18n="hero.cta2">Explore Ecosystem</a>
       </div>
     </div>
   </div>
-  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+  <div class="scroll-cue"><span data-i18n="hero.scroll">Scroll</span><span class="line"></span></div>
 </section>
 
-<!-- ============ INTRODUCCIÓN ============ -->
+<!-- ============ INTRO ============ -->
 <section class="intro section-pad">
   <div class="wrap">
     <div class="reveal">
-      <div class="eyebrow">Introducción</div>
-      <h2>Ciencia aplicada para una mejor versión de ti.</h2>
+      <div class="eyebrow" data-i18n="intro.eyebrow">Introduction</div>
+      <h2 data-i18n="intro.h2">Applied science for a better version of you.</h2>
     </div>
     <div class="intro-body reveal">
-      <p>Acercamos la innovación científica y la optimización humana a quienes buscan mejorar su calidad de vida con responsabilidad.</p>
-      <p>Integramos ciencia, biohacking, tecnología y educación en un mismo ecosistema, enfocado en rendimiento, recuperación, composición corporal y longevidad.</p>
+      <p data-i18n="intro.p1">We bring scientific innovation and human optimization to those seeking to responsibly improve their quality of life.</p>
+      <p data-i18n="intro.p2">We integrate science, biohacking, technology and education into one ecosystem, focused on performance, recovery, body composition and longevity.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ ECOSISTEMA / DIVISIONES ============ -->
+<!-- ============ ECOSYSTEM / DIVISIONS ============ -->
 <section class="section-pad" id="ecosistema">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Divisiones de marca</div>
-      <h2>Un ecosistema diseñado para la evolución humana</h2>
-      <p class="lede">Cuatro divisiones especializadas, una misma identidad: innovación, excelencia y ciencia aplicada.</p>
+      <div class="eyebrow" data-i18n="eco.eyebrow">Brand Divisions</div>
+      <h2 data-i18n="eco.h2">An ecosystem designed for human evolution</h2>
+      <p class="lede" data-i18n="eco.lede">Four specialized divisions, one identity: innovation, excellence and applied science.</p>
     </div>
     <div class="eco-grid reveal">
       <div class="eco-card">
         <svg class="eco-mark" viewBox="0 0 40 40" fill="none" stroke="#bfa054" stroke-width="1.6"><path d="M20 6c6 6-6 10 0 16s-6 10 0 16" stroke-linecap="round"/><path d="M20 6c-6 6 6 10 0 16s6 10 0 16" stroke-linecap="round" opacity=".5"/></svg>
-        <span class="eco-sub">Núcleo de marca</span>
+        <span class="eco-sub" data-i18n="eco1.sub">Core brand</span>
         <h3>PEPTORA BIOHACKING™</h3>
-        <p>Biohacking responsable y educación científica al servicio del bienestar y la longevidad.</p>
+        <p data-i18n="eco1.p">Responsible biohacking and scientific education in service of wellness and longevity.</p>
         <div class="tag-row">
-          <span class="tag">Biohacking</span>
-          <span class="tag">Longevidad</span>
-          <span class="tag">Rendimiento cognitivo</span>
+          <span class="tag" data-i18n="eco1.tag1">Biohacking</span>
+          <span class="tag" data-i18n="eco1.tag2">Longevity</span>
+          <span class="tag" data-i18n="eco1.tag3">Cognitive Performance</span>
         </div>
       </div>
       <div class="eco-card">
         <svg class="eco-mark" viewBox="0 0 40 40" fill="none" stroke="#bfa054" stroke-width="1.6"><polygon points="20,4 32,11 32,25 20,32 8,25 8,11"/><circle cx="20" cy="18" r="4"/></svg>
-        <span class="eco-sub">Investigación &amp; desarrollo</span>
+        <span class="eco-sub" data-i18n="eco2.sub">Research & Development</span>
         <h3>PEPTORA LABS™</h3>
-        <p>Investigación científica y tecnologías emergentes para el futuro de la optimización humana.</p>
+        <p data-i18n="eco2.p">Scientific research and emerging technologies for the future of human optimization.</p>
         <div class="tag-row">
-          <span class="tag">Investigación</span>
-          <span class="tag">Productos RUO</span>
+          <span class="tag" data-i18n="eco2.tag1">Research</span>
+          <span class="tag" data-i18n="eco2.tag2">RUO Products</span>
         </div>
       </div>
       <div class="eco-card">
         <svg class="eco-mark" viewBox="0 0 40 40" fill="none" stroke="#bfa054" stroke-width="1.6"><path d="M8 32 L20 8 L32 32 Z"/><line x1="14" y1="24" x2="26" y2="24"/></svg>
-        <span class="eco-sub">Máximo rendimiento físico</span>
+        <span class="eco-sub" data-i18n="eco3.sub">Peak Physical Performance</span>
         <h3>PEPTORA PERFORMANCE™</h3>
-        <p>Desempeño deportivo, recuperación y composición corporal basados en evidencia.</p>
+        <p data-i18n="eco3.p">Athletic performance, recovery and body composition based on evidence.</p>
         <div class="tag-row">
-          <span class="tag">Rendimiento</span>
-          <span class="tag">Recuperación</span>
+          <span class="tag" data-i18n="eco3.tag1">Performance</span>
+          <span class="tag" data-i18n="eco3.tag2">Recovery</span>
         </div>
       </div>
       <div class="eco-card">
         <svg class="eco-mark" viewBox="0 0 40 40" fill="none" stroke="#bfa054" stroke-width="1.6"><circle cx="20" cy="12" r="5"/><path d="M10 34c0-8 4.5-14 10-14s10 6 10 14"/></svg>
-        <span class="eco-sub">Lifestyle deportivo</span>
+        <span class="eco-sub" data-i18n="eco4.sub">Athletic Lifestyle</span>
         <h3>PEPTORA ACTIVE™</h3>
-        <p>Apparel técnico y accesorios para un estilo de vida enfocado en el movimiento.</p>
+        <p data-i18n="eco4.p">Technical apparel and accessories for a lifestyle focused on movement.</p>
         <div class="tag-row">
-          <span class="tag">Gym Wear</span>
-          <span class="tag">Athleisure</span>
+          <span class="tag" data-i18n="eco4.tag1">Gym Wear</span>
+          <span class="tag" data-i18n="eco4.tag2">Athleisure</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ PRODUCTOS ============ -->
+<!-- ============ PRODUCTS ============ -->
 <section class="section-pad" id="productos" style="background:var(--bg-alt); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
   <div class="wrap">
     <div class="products-intro reveal">
       <div>
-        <div class="eyebrow">Catálogo</div>
-        <h2 style="font-size:clamp(28px,3.6vw,42px); font-weight:600; line-height:1.15;">Innovación científica para la optimización humana</h2>
-        <p class="lede" style="margin-top:16px;">Portafolio especializado, organizado por líneas de investigación.</p>
+        <div class="eyebrow" data-i18n="products.eyebrow">Catalog</div>
+        <h2 style="font-size:clamp(28px,3.6vw,42px); font-weight:600; line-height:1.15;" data-i18n="products.h2">Scientific innovation for human optimization</h2>
+        <p class="lede" style="margin-top:16px;" data-i18n="products.lede">Specialized portfolio, organized by research lines.</p>
       </div>
-      <p class="products-notice">Productos <strong style="color:var(--ink);">Research Use Only (RUO)</strong> cuando corresponda. Fines educativos e informativos. No constituyen asesoría médica ni sustituyen consulta profesional.</p>
+      <p class="products-notice">
+        <span data-i18n="products.notice_pre">Products</span>
+        <strong style="color:var(--ink);" data-i18n="products.notice_strong">Research Use Only (RUO)</strong>
+        <span data-i18n="products.notice_post">where applicable. For educational and informational purposes. Not medical advice and not a substitute for professional consultation.</span>
+      </p>
     </div>
 
     <div class="filter-row reveal" id="filterRow">
-      <button class="filter-pill active" data-filter="all">Todos</button>
-      <button class="filter-pill" data-filter="Metabólico & Apetito">Metabólico &amp; Apetito</button>
-      <button class="filter-pill" data-filter="GH / IGF & Recuperación">GH / IGF &amp; Recuperación</button>
-      <button class="filter-pill" data-filter="Cerebro & Sueño">Cerebro &amp; Sueño</button>
-      <button class="filter-pill" data-filter="Rendimiento & Longevidad">Rendimiento &amp; Longevidad</button>
-      <button class="filter-pill" data-filter="Inmunidad & Bienestar">Inmunidad &amp; Bienestar</button>
-      <button class="filter-pill" data-filter="Hormonal & Sexual">Hormonal &amp; Sexual</button>
-      <button class="filter-pill" data-filter="Estética & Piel">Estética &amp; Piel</button>
-      <button class="filter-pill" data-filter="Stacks">Stacks</button>
-      <button class="filter-pill" data-filter="Insumos">Insumos</button>
+      <button class="filter-pill active" data-filter="all" data-i18n="filters.all">All</button>
+      <button class="filter-pill" data-filter="metabolic">Metabolic & Appetite</button>
+      <button class="filter-pill" data-filter="gh-igf">GH / IGF & Recovery</button>
+      <button class="filter-pill" data-filter="brain-sleep">Brain & Sleep</button>
+      <button class="filter-pill" data-filter="performance">Performance & Longevity</button>
+      <button class="filter-pill" data-filter="immune">Immunity & Wellness</button>
+      <button class="filter-pill" data-filter="hormonal">Hormonal & Sexual</button>
+      <button class="filter-pill" data-filter="aesthetic">Aesthetics & Skin</button>
+      <button class="filter-pill" data-filter="stacks">Stacks</button>
+      <button class="filter-pill" data-filter="supplies">Supplies</button>
     </div>
 
     <div class="product-grid reveal" id="productGrid"></div>
     <div class="product-count" id="productCount"></div>
 
-    <p class="catalog-note reveal">Si deseas obtener información sobre el catálogo disponible, favor de solicitarlo al número de WhatsApp <a href="https://wa.me/526624621816" target="_blank" rel="noopener">+52 662 462 1816</a>.</p>
+    <p class="catalog-note reveal"><span data-i18n="catalog.note_pre">For information on our full available catalog, please request it via WhatsApp</span> <a href="https://wa.me/526624621816" target="_blank" rel="noopener">+52 662 462 1816</a>.</p>
   </div>
 </section>
 
-<!-- ============ POR QUÉ PEPTORA ============ -->
+<!-- ============ WHY PEPTORA ============ -->
 <section class="section-pad why">
   <div class="wrap">
-    <div class="eyebrow" style="justify-content:center;">¿Por qué PEPTORA?</div>
-    <h2 class="reveal">El cuerpo humano tiene un <em>potencial extraordinario</em> con las herramientas adecuadas.</h2>
-    <p class="lede reveal">Reunimos ciencia moderna sobre metabolismo, recuperación y rendimiento en un ecosistema pensado para evolucionar constantemente.</p>
-    <p class="punch reveal">No seguimos tendencias.<span>Acercamos la ciencia a las personas.</span></p>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="why.eyebrow">Why PEPTORA?</div>
+    <h2 class="reveal"><span data-i18n="why.h2_pre">The human body holds </span><em data-i18n="why.h2_em">extraordinary potential</em><span data-i18n="why.h2_post"> with the right tools.</span></h2>
+    <p class="lede reveal" data-i18n="why.lede">We bring together modern science on metabolism, recovery and performance in an ecosystem built to evolve constantly.</p>
+    <p class="punch reveal"><span data-i18n="why.punch1">We don't follow trends.</span><span data-i18n="why.punch2">We bring science to people.</span></p>
 
     <div class="pillars-grid reveal">
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3h6M12 3v6l5 9a2 2 0 0 1-1.8 3H8.8A2 2 0 0 1 7 18l5-9"/></svg>
-        <h4>Ciencia Aplicada</h4>
-        <p>Información basada en evidencia disponible.</p>
+        <h4 data-i18n="pillar1.h">Applied Science</h4>
+        <p data-i18n="pillar1.p">Information based on available evidence.</p>
       </div>
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <h4>Optimización Humana</h4>
-        <p>Bienestar, recuperación y metabolismo.</p>
+        <h4 data-i18n="pillar2.h">Human Optimization</h4>
+        <p data-i18n="pillar2.p">Wellness, recovery and metabolism.</p>
       </div>
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
-        <h4>Innovación</h4>
-        <p>Tecnologías emergentes en biohacking y longevidad.</p>
+        <h4 data-i18n="pillar3.h">Innovation</h4>
+        <p data-i18n="pillar3.p">Emerging technologies in biohacking and longevity.</p>
       </div>
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v16M4 12h16" stroke-linecap="round"/></svg>
-        <h4>Educación</h4>
-        <p>Contenido claro y responsable.</p>
+        <h4 data-i18n="pillar4.h">Education</h4>
+        <p data-i18n="pillar4.p">Clear and responsible content.</p>
       </div>
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
-        <h4>Rendimiento</h4>
-        <p>Máximo potencial físico y cognitivo.</p>
+        <h4 data-i18n="pillar5.h">Performance</h4>
+        <p data-i18n="pillar5.p">Peak physical and cognitive potential.</p>
       </div>
       <div class="pillar">
         <svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12a8 8 0 1 0 8-8" stroke-linecap="round"/><path d="M4 5v7h7"/></svg>
-        <h4>Evolución</h4>
-        <p>Mejora continua como identidad.</p>
+        <h4 data-i18n="pillar6.h">Evolution</h4>
+        <p data-i18n="pillar6.p">Continuous improvement as identity.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ MANIFIESTO ============ -->
+<!-- ============ MANIFESTO ============ -->
 <section class="section-pad manifesto" id="manifiesto">
   <div class="wrap">
-    <div class="eyebrow reveal">Manifiesto</div>
-    <h2 class="reveal">Evolucionar no es una opción.<br><span class="accent">Es una decisión.</span></h2>
+    <div class="eyebrow reveal" data-i18n="manifesto.eyebrow">Manifesto</div>
+    <h2 class="reveal"><span data-i18n="manifesto.h2_1">Evolving is not an option.</span><br><span class="accent" data-i18n="manifesto.h2_2">It's a decision.</span></h2>
     <div class="manifesto-lines reveal">
-      <p>La ciencia avanza más rápido que nunca — y con ella, nuestra comprensión del metabolismo, el envejecimiento y el rendimiento humano.</p>
-      <p><strong>Creemos en el conocimiento antes que en la promesa.<br>
-      En la disciplina respaldada por información correcta.<br>
-      En la tecnología al servicio de la calidad de vida.<br>
-      En la longevidad como vivir con energía y propósito.</strong></p>
-      <p>No vendemos promesas. Construimos una comunidad que valora la educación y la mejora continua.</p>
+      <p data-i18n="manifesto.p1">Science is advancing faster than ever — and with it, our understanding of metabolism, aging and human performance.</p>
+      <p><strong data-i18n-html="manifesto.p2">We believe in knowledge before promises.<br>In discipline backed by correct information.<br>In technology in service of quality of life.<br>In longevity as living with energy and purpose.</strong></p>
+      <p data-i18n="manifesto.p3">We don't sell promises. We build a community that values education and continuous improvement.</p>
     </div>
-    <div class="manifesto-sign reveal">The Future of Human Optimization</div>
+    <div class="manifesto-sign">The Future of Human Optimization</div>
   </div>
 </section>
 
-<!-- ============ NUESTRA HISTORIA ============ -->
+<!-- ============ OUR HISTORY ============ -->
 <section class="section-pad" id="historia">
   <div class="wrap">
     <div class="history-wrap">
       <div class="reveal">
-        <div class="eyebrow">Nuestra Historia</div>
-        <h2 style="font-size:clamp(26px,3.2vw,38px); font-weight:600; line-height:1.2;">Donde la ciencia impulsa la evolución</h2>
-        <p class="lede" style="margin-top:20px;">PEPTORA nace para acercar la ciencia de vanguardia y el biohacking a quienes buscan más salud, energía y rendimiento.</p>
+        <div class="eyebrow" data-i18n="historia.eyebrow">Our History</div>
+        <h2 style="font-size:clamp(26px,3.2vw,38px); font-weight:600; line-height:1.2;" data-i18n="historia.h2">Where science drives evolution</h2>
+        <p class="lede" style="margin-top:20px;" data-i18n="historia.lede">PEPTORA was born to bring cutting-edge science and biohacking to those seeking more health, energy and performance.</p>
         <ul class="history-list">
-          <li>Dormir mejor.</li>
-          <li>Entrenar con inteligencia.</li>
-          <li>Comprender el metabolismo.</li>
-          <li>Favorecer la recuperación.</li>
-          <li>Aprender continuamente.</li>
+          <li data-i18n="historia.li1">Sleep better.</li>
+          <li data-i18n="historia.li2">Train smarter.</li>
+          <li data-i18n="historia.li3">Understand metabolism.</li>
+          <li data-i18n="historia.li4">Support recovery.</li>
+          <li data-i18n="historia.li5">Keep learning.</li>
         </ul>
       </div>
       <div class="reveal">
         <div class="timeline">
           <div class="tl-item">
-            <h4>El origen</h4>
-            <p>La evolución humana depende también de las decisiones diarias. Con esa filosofía nace PEPTORA — Research Peptide Labs.</p>
+            <h4 data-i18n="tl1.h">The Origin</h4>
+            <p data-i18n="tl1.p">Human evolution also depends on daily decisions. With that philosophy, PEPTORA — Research Peptide Labs was born.</p>
           </div>
           <div class="tl-item">
-            <h4>Crecimiento del ecosistema</h4>
-            <p>Surgen nuevas divisiones: PEPTORA LABS™, PERFORMANCE™ y ACTIVE™.</p>
+            <h4 data-i18n="tl2.h">Ecosystem Growth</h4>
+            <p data-i18n="tl2.p">New divisions emerge: PEPTORA LABS™, PERFORMANCE™ and ACTIVE™.</p>
           </div>
           <div class="tl-item">
-            <h4>Un mismo propósito</h4>
-            <p>Cada división impulsa una comunidad que valora la ciencia y la evolución constante.</p>
+            <h4 data-i18n="tl3.h">One Shared Purpose</h4>
+            <p data-i18n="tl3.p">Each division drives a community that values science and constant evolution.</p>
           </div>
           <div class="tl-item">
-            <h4>Más que una empresa</h4>
-            <p>Una filosofía de vida donde la ciencia impulsa la evolución.</p>
+            <h4 data-i18n="tl4.h">More Than a Company</h4>
+            <p data-i18n="tl4.p">A philosophy of life where science drives evolution.</p>
           </div>
         </div>
       </div>
@@ -256,191 +279,194 @@
   </div>
 </section>
 
-<!-- ============ QUIÉNES SOMOS ============ -->
+<!-- ============ WHO WE ARE ============ -->
 <section class="section-pad" id="quienes-somos" style="background:var(--bg-alt); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
   <div class="wrap">
     <div class="split">
       <div class="reveal">
-        <div class="eyebrow">Quiénes Somos</div>
-        <h2 style="font-size:clamp(26px,3.2vw,38px); font-weight:600; line-height:1.2;">Un ecosistema dedicado a la optimización humana</h2>
+        <div class="eyebrow" data-i18n="quienes.eyebrow">Who We Are</div>
+        <h2 style="font-size:clamp(26px,3.2vw,38px); font-weight:600; line-height:1.2;" data-i18n="quienes.h2">An ecosystem dedicated to human optimization</h2>
       </div>
       <div class="reveal">
-        <p class="lede">Empresa orientada a la optimización humana mediante ciencia aplicada, educación e innovación tecnológica.</p>
-        <p class="lede">No reemplazamos la atención médica ni promovemos soluciones milagrosas. Fomentamos el aprendizaje continuo sobre cómo funciona el organismo.</p>
+        <p class="lede" data-i18n="quienes.p1">A company focused on human optimization through applied science, education and technological innovation.</p>
+        <p class="lede" data-i18n="quienes.p2">We don't replace medical care or promote miracle solutions. We foster continuous learning about how the body works.</p>
         <div class="chip-list">
-          <span class="tag">Biohacking responsable</span>
-          <span class="tag">Educación científica</span>
-          <span class="tag">Composición corporal</span>
-          <span class="tag">Recuperación</span>
-          <span class="tag">Longevidad</span>
+          <span class="tag" data-i18n="quienes.tag1">Responsible Biohacking</span>
+          <span class="tag" data-i18n="quienes.tag2">Scientific Education</span>
+          <span class="tag" data-i18n="quienes.tag3">Body Composition</span>
+          <span class="tag" data-i18n="quienes.tag4">Recovery</span>
+          <span class="tag" data-i18n="quienes.tag5">Longevity</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ FILOSOFÍA ============ -->
+<!-- ============ PHILOSOPHY ============ -->
 <section class="section-pad" id="filosofia">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Filosofía</div>
-      <h2>La evolución comienza con el conocimiento</h2>
-      <p class="lede">Seis principios sostienen nuestra manera de entender la optimización humana.</p>
+      <div class="eyebrow" data-i18n="filosofia.eyebrow">Philosophy</div>
+      <h2 data-i18n="filosofia.h2">Evolution begins with knowledge</h2>
+      <p class="lede" data-i18n="filosofia.lede">Six principles support the way we understand human optimization.</p>
     </div>
     <div class="philo-grid reveal">
-      <div class="philo-item"><h4>Ciencia</h4><p>Sustentada en evidencia y pensamiento crítico.</p></div>
-      <div class="philo-item"><h4>Educación</h4><p>Comprender el cuerpo para decidir mejor.</p></div>
-      <div class="philo-item"><h4>Prevención</h4><p>Invertir hoy en la salud del futuro.</p></div>
-      <div class="philo-item"><h4>Innovación</h4><p>Evolucionamos junto con la ciencia.</p></div>
-      <div class="philo-item"><h4>Responsabilidad</h4><p>Comunicación ética y transparente.</p></div>
-      <div class="philo-item"><h4>Evolución Continua</h4><p>Siempre hay una oportunidad de mejora.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo1.h">Science</h4><p data-i18n="philo1.p">Grounded in evidence and critical thinking.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo2.h">Education</h4><p data-i18n="philo2.p">Understanding the body to decide better.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo3.h">Prevention</h4><p data-i18n="philo3.p">Investing today in tomorrow's health.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo4.h">Innovation</h4><p data-i18n="philo4.p">We evolve alongside science.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo5.h">Responsibility</h4><p data-i18n="philo5.p">Ethical and transparent communication.</p></div>
+      <div class="philo-item"><h4 data-i18n="philo6.h">Continuous Evolution</h4><p data-i18n="philo6.p">There's always room to improve.</p></div>
     </div>
-    <p class="philo-closer reveal">El biohacking real no es solo tecnología: es mejores hábitos, aprendizaje constante y responsabilidad.</p>
+    <p class="philo-closer reveal" data-i18n="filosofia.closer">Real biohacking isn't just technology: it's better habits, constant learning and responsibility.</p>
   </div>
 </section>
 
-<!-- ============ QUÉ HACEMOS ============ -->
+<!-- ============ WHAT WE DO ============ -->
 <section class="section-pad" id="que-hacemos" style="background:var(--bg-alt); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Qué Hacemos</div>
-      <h2>Ciencia aplicada al potencial humano</h2>
-      <p class="lede">Cuatro áreas integradas al servicio del rendimiento, la salud metabólica y la longevidad.</p>
+      <div class="eyebrow" data-i18n="hacemos.eyebrow">What We Do</div>
+      <h2 data-i18n="hacemos.h2">Applied science for human potential</h2>
+      <p class="lede" data-i18n="hacemos.lede">Four integrated areas serving performance, metabolic health and longevity.</p>
     </div>
 
     <div class="tabs-nav reveal" role="tablist">
-      <button class="tab-btn active" data-tab="t1">Optimización Humana</button>
-      <button class="tab-btn" data-tab="t2">Biohacking &amp; Tecnología</button>
-      <button class="tab-btn" data-tab="t3">Investigación &amp; Desarrollo</button>
-      <button class="tab-btn" data-tab="t4">Apparel &amp; Lifestyle</button>
+      <button class="tab-btn active" data-tab="t1" data-i18n="tab1.label">Human Optimization</button>
+      <button class="tab-btn" data-tab="t2" data-i18n="tab2.label">Biohacking & Technology</button>
+      <button class="tab-btn" data-tab="t3" data-i18n="tab3.label">Research & Development</button>
+      <button class="tab-btn" data-tab="t4" data-i18n="tab4.label">Apparel & Lifestyle</button>
     </div>
 
     <div class="tab-panels reveal">
       <div class="tab-panel active" id="t1">
         <div>
-          <h3>Optimización Humana</h3>
-          <p class="tab-desc">Estrategias respaldadas por evidencia para el bienestar integral y hábitos sostenibles.</p>
+          <h3 data-i18n="tab1.h">Human Optimization</h3>
+          <p class="tab-desc" data-i18n="tab1.desc">Evidence-based strategies for overall wellness and sustainable habits.</p>
         </div>
         <ul class="area-list">
-          <li>Bienestar integral</li><li>Composición corporal</li>
-          <li>Recuperación muscular</li><li>Rendimiento cognitivo</li>
-          <li>Longevidad</li><li>Educación científica</li>
+          <li data-i18n="tab1.li1">Overall Wellness</li><li data-i18n="tab1.li2">Body Composition</li>
+          <li data-i18n="tab1.li3">Muscle Recovery</li><li data-i18n="tab1.li4">Cognitive Performance</li>
+          <li data-i18n="tab1.li5">Longevity</li><li data-i18n="tab1.li6">Scientific Education</li>
         </ul>
       </div>
       <div class="tab-panel" id="t2">
         <div>
-          <h3>Biohacking y Tecnología</h3>
-          <p class="tab-desc">Herramientas para conocer el estado fisiológico y apoyar la optimización con datos objetivos.</p>
+          <h3 data-i18n="tab2.h">Biohacking and Technology</h3>
+          <p class="tab-desc" data-i18n="tab2.desc">Tools to understand physiological status and support optimization with objective data.</p>
         </div>
         <ul class="area-list">
-          <li>Monitoreo del rendimiento</li><li>Protocolos basados en evidencia</li>
-          <li>Innovación científica</li><li>Tecnología aplicada al bienestar</li>
+          <li data-i18n="tab2.li1">Performance Monitoring</li><li data-i18n="tab2.li2">Evidence-Based Protocols</li>
+          <li data-i18n="tab2.li3">Scientific Innovation</li><li data-i18n="tab2.li4">Wellness Technology</li>
         </ul>
       </div>
       <div class="tab-panel" id="t3">
         <div>
-          <h3>Investigación y Desarrollo</h3>
-          <p class="tab-desc">PEPTORA LABS™ explora nuevas tecnologías y divulgación científica, con productos RUO.</p>
+          <h3 data-i18n="tab3.h">Research and Development</h3>
+          <p class="tab-desc" data-i18n="tab3.desc">PEPTORA LABS™ explores new technologies and scientific outreach, with RUO products.</p>
         </div>
         <ul class="area-list">
-          <li>Productos para investigación</li><li>Divulgación científica</li>
-          <li>Innovación biotecnológica</li><li>Tecnologías emergentes</li>
+          <li data-i18n="tab3.li1">Research Products</li><li data-i18n="tab3.li2">Scientific Outreach</li>
+          <li data-i18n="tab3.li3">Biotech Innovation</li><li data-i18n="tab3.li4">Emerging Technologies</li>
         </ul>
       </div>
       <div class="tab-panel" id="t4">
         <div>
-          <h3>Apparel &amp; Lifestyle</h3>
-          <p class="tab-desc">PEPTORA ACTIVE™ acompaña a quienes viven con disciplina y alto rendimiento.</p>
+          <h3 data-i18n="tab4.h">Apparel & Lifestyle</h3>
+          <p class="tab-desc" data-i18n="tab4.desc">PEPTORA ACTIVE™ accompanies those who live with discipline and peak performance.</p>
         </div>
         <ul class="area-list">
-          <li>Gym Wear</li><li>Apparel técnico</li>
-          <li>Athleisure Premium</li><li>Accesorios deportivos</li>
+          <li data-i18n="tab4.li1">Gym Wear</li><li data-i18n="tab4.li2">Technical Apparel</li>
+          <li data-i18n="tab4.li3">Premium Athleisure</li><li data-i18n="tab4.li4">Sports Accessories</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ VALORES ============ -->
+<!-- ============ VALUES ============ -->
 <section class="section-pad">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Valores</div>
-      <h2>Los principios que nos definen</h2>
+      <div class="eyebrow" data-i18n="valores.eyebrow">Values</div>
+      <h2 data-i18n="valores.h2">The principles that define us</h2>
     </div>
     <div class="values-grid reveal">
-      <div class="value-card"><h4>Ciencia</h4><p>Base de todo lo que construimos.</p></div>
-      <div class="value-card"><h4>Integridad</h4><p>Honestidad y transparencia.</p></div>
-      <div class="value-card"><h4>Innovación</h4><p>Nuevas formas de optimizar el organismo.</p></div>
-      <div class="value-card"><h4>Excelencia</h4><p>Altos estándares en todo lo que hacemos.</p></div>
-      <div class="value-card"><h4>Educación</h4><p>Decisiones informadas sobre bienestar.</p></div>
-      <div class="value-card"><h4>Evolución Continua</h4><p>Aprender y superar límites cada día.</p></div>
-      <div class="value-card"><h4>Responsabilidad Científica</h4><p>Ética y objetividad ante todo.</p></div>
+      <div class="value-card"><h4 data-i18n="val1.h">Science</h4><p data-i18n="val1.p">The foundation of everything we build.</p></div>
+      <div class="value-card"><h4 data-i18n="val2.h">Integrity</h4><p data-i18n="val2.p">Honesty and transparency.</p></div>
+      <div class="value-card"><h4 data-i18n="val3.h">Innovation</h4><p data-i18n="val3.p">New ways to optimize the body.</p></div>
+      <div class="value-card"><h4 data-i18n="val4.h">Excellence</h4><p data-i18n="val4.p">High standards in everything we do.</p></div>
+      <div class="value-card"><h4 data-i18n="val5.h">Education</h4><p data-i18n="val5.p">Informed decisions about wellness.</p></div>
+      <div class="value-card"><h4 data-i18n="val6.h">Continuous Evolution</h4><p data-i18n="val6.p">Learning and pushing limits every day.</p></div>
+      <div class="value-card"><h4 data-i18n="val7.h">Scientific Responsibility</h4><p data-i18n="val7.p">Ethics and objectivity above all.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ MISIÓN / VISIÓN ============ -->
+<!-- ============ MISSION / VISION ============ -->
 <section class="section-pad" style="background:var(--bg-alt); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);">
   <div class="wrap">
     <div class="mv-grid reveal">
       <div class="mv-card">
-        <div class="eyebrow">Misión</div>
-        <h3>Democratizar la ciencia aplicada al bienestar</h3>
-        <p>Construir el ecosistema líder de biohacking en Latinoamérica, acercando innovación y conocimiento respaldado por evidencia.</p>
+        <div class="eyebrow" data-i18n="mission.eyebrow">Mission</div>
+        <h3 data-i18n="mission.h">Democratizing science applied to wellness</h3>
+        <p data-i18n="mission.p">Building the leading biohacking ecosystem in Latin America, bringing innovation and evidence-based knowledge closer.</p>
       </div>
       <div class="mv-card">
-        <div class="eyebrow">Visión</div>
-        <h3>Construir el futuro de la optimización humana</h3>
-        <p>Conectar investigación, educación, tecnología y estilo de vida bajo una misma filosofía de evolución continua.</p>
+        <div class="eyebrow" data-i18n="vision.eyebrow">Vision</div>
+        <h3 data-i18n="vision.h">Building the future of human optimization</h3>
+        <p data-i18n="vision.p">Connecting research, education, technology and lifestyle under one philosophy of continuous evolution.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ COMPROMISO CON LA CIENCIA ============ -->
+<!-- ============ COMMITMENT TO SCIENCE ============ -->
 <section class="section-pad compliance">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">Compromiso con la ciencia</div>
-      <h2>Ética, transparencia y evidencia</h2>
-      <p class="lede">Muchas moléculas y péptidos de nuestro ecosistema son <em>Research Use Only (RUO)</em>, exclusivamente para investigación, conforme a la jurisdicción correspondiente.</p>
+      <div class="eyebrow" data-i18n="compliance.eyebrow">Commitment to Science</div>
+      <h2 data-i18n="compliance.h2">Ethics, transparency and evidence</h2>
+      <p class="lede">
+        <span data-i18n="compliance.lede_pre">Many molecules and peptides in our ecosystem are</span>
+        <em data-i18n="compliance.lede_em">Research Use Only (RUO)</em><span data-i18n="compliance.lede_post">, intended exclusively for research, in accordance with applicable jurisdiction.</span>
+      </p>
     </div>
     <div class="compliance-grid reveal">
-      <div class="compliance-card"><h4>Educación basada en evidencia</h4><p>Información fundamentada en literatura científica.</p></div>
-      <div class="compliance-card"><h4>Transparencia</h4><p>Diferenciamos evidencia consolidada de investigación emergente.</p></div>
-      <div class="compliance-card"><h4>Responsabilidad científica</h4><p>Desalentamos expectativas poco realistas.</p></div>
-      <div class="compliance-card"><h4>Investigación continua</h4><p>Actualización permanente con la evidencia disponible.</p></div>
+      <div class="compliance-card"><h4 data-i18n="comp1.h">Evidence-Based Education</h4><p data-i18n="comp1.p">Information grounded in scientific literature.</p></div>
+      <div class="compliance-card"><h4 data-i18n="comp2.h">Transparency</h4><p data-i18n="comp2.p">We distinguish established evidence from emerging research.</p></div>
+      <div class="compliance-card"><h4 data-i18n="comp3.h">Scientific Responsibility</h4><p data-i18n="comp3.p">We discourage unrealistic expectations.</p></div>
+      <div class="compliance-card"><h4 data-i18n="comp4.h">Ongoing Research</h4><p data-i18n="comp4.p">Continuous updates as evidence evolves.</p></div>
     </div>
     <div class="notice-box reveal">
-      <strong>Aviso importante:</strong> información con fines educativos. No constituye asesoría médica ni sustituye consulta profesional. Los productos RUO están destinados exclusivamente a investigación y deben usarse conforme a la legislación vigente.
+      <strong data-i18n="notice.strong">Important notice:</strong> <span data-i18n="notice.text">information for educational purposes. Does not constitute medical advice or replace professional consultation. RUO products are intended exclusively for research and must be used in accordance with applicable law.</span>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACTO ============ -->
+<!-- ============ CONTACT ============ -->
 <section class="section-pad contact" id="contacto">
   <div class="wrap">
-    <div class="eyebrow" style="justify-content:center;">Contacto</div>
-    <h2 class="reveal" style="font-size:clamp(28px,3.6vw,40px); font-weight:600;">Estamos para ayudarte</h2>
-    <p class="lede reveal" style="margin-top:16px;">Escríbenos para conocer más sobre nuestros productos y divisiones.</p>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="contact.eyebrow">Contact</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.6vw,40px); font-weight:600;" data-i18n="contact.h2">We're here to help</h2>
+    <p class="lede reveal" style="margin-top:16px;" data-i18n="contact.lede">Reach out to learn more about our products and divisions.</p>
 
     <div class="contact-grid reveal">
       <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <input type="text" name="name" placeholder="Nombre" required>
-          <input type="email" name="email" placeholder="Tu correo" required>
+          <input type="text" name="name" data-i18n-placeholder="contact.name" placeholder="Name" required>
+          <input type="email" name="email" data-i18n-placeholder="contact.email" placeholder="Your email" required>
         </div>
-        <textarea name="message" placeholder="¿Qué información necesitas?" rows="4" required></textarea>
+        <textarea name="message" data-i18n-placeholder="contact.message" placeholder="What information do you need?" rows="4" required></textarea>
         <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
-        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        <button type="submit" class="btn btn-primary" data-i18n="contact.send">Send Message</button>
         <p class="form-status" id="formStatus"></p>
       </form>
 
       <div class="contact-method">
-        <div class="eyebrow">WhatsApp</div>
+        <div class="eyebrow" data-i18n="contact.whatsapp">WhatsApp</div>
         <a href="https://wa.me/526624621816" target="_blank" rel="noopener">+52 662 462 1816</a>
-        <p class="contact-side-note">Respuesta directa y personalizada, sin intermediarios.</p>
+        <p class="contact-side-note" data-i18n="contact.side_note">Direct, personal response — no intermediaries.</p>
       </div>
     </div>
   </div>
@@ -452,19 +478,19 @@
     <div class="footer-top">
       <div class="footer-brand">
         <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
-        <div class="fb-tag">Ciencia · Rendimiento · Longevidad · Evolución</div>
+        <div class="fb-tag" data-i18n="footer.tag">Science · Performance · Longevity · Evolution</div>
       </div>
       <nav class="footer-nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#ecosistema">Ecosistema</a>
-        <a href="#productos">Productos</a>
-        <a href="#historia">Historia</a>
-        <a href="#filosofia">Filosofía</a>
+        <a href="#inicio" data-i18n="nav.inicio">Home</a>
+        <a href="#ecosistema" data-i18n="nav.ecosistema">Ecosystem</a>
+        <a href="#productos" data-i18n="nav.productos">Products</a>
+        <a href="#historia" data-i18n="nav.historia">History</a>
+        <a href="#filosofia" data-i18n="nav.filosofia">Philosophy</a>
       </nav>
     </div>
     <div class="divider-line"></div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. Todos los derechos reservados.</span>
+      <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <span class="f-motto">The Future of Human Optimization</span>
     </div>
   </div>

@@ -74,6 +74,12 @@ a:focus-visible, button:focus-visible{
   margin:0 auto;
   padding:0 32px;
 }
+@media (max-width:480px){
+  .wrap{ padding:0 20px; }
+  .brand img{ height:32px; }
+  .lang-toggle{ padding:6px 9px; font-size:11px; }
+  .lang-toggle span{ display:none; }
+}
 
 .eyebrow{
   font-family:var(--f-mono);
@@ -166,6 +172,7 @@ a:focus-visible, button:focus-visible{
   backdrop-filter:blur(14px) saturate(140%);
   border-bottom:1px solid var(--hairline);
   transition:border-color .3s ease;
+  padding-top:env(safe-area-inset-top);
 }
 .site-header .wrap{
   display:flex;
@@ -211,12 +218,30 @@ nav.main-nav a::after{
   transition:width .25s ease;
 }
 nav.main-nav a:hover::after{ width:100%; }
-.header-cta{ display:flex; align-items:center; gap:20px; }
-.nav-toggle{ display:none; background:none; border:0; color:var(--white); cursor:pointer; }
+.header-cta{ display:flex; align-items:center; gap:16px; }
+.lang-toggle{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:transparent;
+  border:1px solid var(--hairline);
+  border-radius:999px;
+  padding:7px 12px;
+  color:var(--ink);
+  font-family:var(--f-mono);
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:border-color .2s ease, color .2s ease;
+}
+.lang-toggle:hover{ border-color:var(--teal-2); color:var(--teal-2); }
+.lang-toggle svg{ flex-shrink:0; }
+.nav-toggle{ display:none; background:none; border:0; color:var(--white); cursor:pointer; padding:10px; margin:-10px; }
 
 @media (max-width:900px){
   nav.main-nav{
-    position:fixed; top:78px; left:0; right:0; bottom:0;
+    position:fixed; top:calc(78px + env(safe-area-inset-top)); left:0; right:0; bottom:0;
     background:var(--bg);
     flex-direction:column;
     justify-content:flex-start;
@@ -236,6 +261,7 @@ nav.main-nav a:hover::after{ width:100%; }
    ========================================================================== */
 .hero{
   min-height:100vh;
+  min-height:100dvh;
   display:flex;
   align-items:center;
   padding-top:110px;
