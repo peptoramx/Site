@@ -1,239 +1,226 @@
 // ============================================================================
 // PEPTORA — Research Peptide Labs
-// i18n (EN default / ES toggle), product catalog, and site interactions
+// Research-grade compound catalog, i18n (EN default / ES toggle), interactions
 // ============================================================================
 
-// ---- Category labels per language (category IDs are stable, language-free) ----
 const CAT_LABELS = {
   en: {
-    metabolic: 'Metabolic & Appetite',
-    'gh-igf': 'GH / IGF & Recovery',
-    'brain-sleep': 'Brain & Sleep',
-    performance: 'Performance & Longevity',
-    immune: 'Immunity & Wellness',
-    hormonal: 'Hormonal & Sexual',
-    aesthetic: 'Aesthetics & Skin',
-    stacks: 'Stacks',
-    supplies: 'Supplies',
+    metabolic: 'Metabolic Research', 'gh-igf': 'GH / IGF Research', 'brain-sleep': 'Neuroscience Research',
+    performance: 'Cellular & Longevity Research', immune: 'Immune Research', hormonal: 'Endocrine Research',
+    aesthetic: 'Dermal Research', stacks: 'Research Combinations', supplies: 'Lab Supplies',
   },
   es: {
-    metabolic: 'Metabólico & Apetito',
-    'gh-igf': 'GH / IGF & Recuperación',
-    'brain-sleep': 'Cerebro & Sueño',
-    performance: 'Rendimiento & Longevidad',
-    immune: 'Inmunidad & Bienestar',
-    hormonal: 'Hormonal & Sexual',
-    aesthetic: 'Estética & Piel',
-    stacks: 'Stacks',
-    supplies: 'Insumos',
+    metabolic: 'Investigación Metabólica', 'gh-igf': 'Investigación GH / IGF', 'brain-sleep': 'Investigación Neurocientífica',
+    performance: 'Investigación Celular y Longevidad', immune: 'Investigación Inmune', hormonal: 'Investigación Endocrina',
+    aesthetic: 'Investigación Dérmica', stacks: 'Combinaciones de Investigación', supplies: 'Insumos de Laboratorio',
   },
 };
 
-// ---- Product catalog (bilingual) ----
+// ---- Research compound catalog (bilingual, research-use framing only) ----
 const PEPTORA_PRODUCTS = [
-  // ---- Metabolic & Appetite ----
+  // ---- Metabolic Research ----
   { cat: 'metabolic', name: 'Semaglutide',
-    desc: { en: 'Pioneer GLP-1 for sustained weight loss.', es: 'GLP-1 pionero para una pérdida de peso sostenida.' },
-    mech: { en: 'GLP-1 receptor agonist that mimics the natural incretin hormone, slowing gastric emptying and acting on the hypothalamus to reduce appetite.', es: 'Agonista del receptor GLP-1 que imita la incretina natural, ralentiza el vaciado gástrico y actúa en el hipotálamo para reducir el apetito.' } },
+    desc: { en: 'Studied for GLP-1 receptor-mediated appetite-regulation pathways.', es: 'Estudiado por su acción sobre las vías de regulación del apetito mediadas por el receptor GLP-1.' },
+    mech: { en: 'GLP-1 receptor agonist that mimics the incretin hormone, used in models studying gastric emptying and hypothalamic appetite signaling.', es: 'Agonista del receptor GLP-1 que imita la incretina, utilizado en modelos de investigación sobre vaciado gástrico y señalización hipotalámica del apetito.' } },
   { cat: 'metabolic', name: 'Tirzepatide',
-    desc: { en: 'Next-generation appetite control and weight loss.', es: 'Control de apetito y pérdida de peso de nueva generación.' },
-    mech: { en: 'Dual GLP-1 and GIP receptor agonist, combining appetite control with improved insulin sensitivity.', es: 'Agonista dual de los receptores GLP-1 y GIP, combinando el control del apetito con una mejor sensibilidad a la insulina.' } },
+    desc: { en: 'Investigated as a dual GLP-1/GIP receptor agonist in metabolic research models.', es: 'Investigado como agonista dual de los receptores GLP-1/GIP en modelos de investigación metabólica.' },
+    mech: { en: 'Dual GLP-1 and GIP receptor agonist studied for its combined effect on insulin-sensitivity research pathways.', es: 'Agonista dual de los receptores GLP-1 y GIP, estudiado por su efecto combinado en vías de investigación de sensibilidad a la insulina.' } },
   { cat: 'metabolic', name: 'Retatrutide',
-    desc: { en: 'The next generation in metabolic optimization.', es: 'La siguiente generación en optimización metabólica.' },
-    mech: { en: 'Triple agonist of the GLP-1, GIP and glucagon receptors, adding a thermogenic effect to appetite reduction.', es: 'Agonista triple de los receptores GLP-1, GIP y glucagón, sumando un efecto termogénico a la reducción del apetito.' } },
+    desc: { en: 'Under investigation as a triple GLP-1/GIP/glucagon receptor agonist.', es: 'En investigación como agonista triple de los receptores GLP-1/GIP/glucagón.' },
+    mech: { en: 'Triple agonist of the GLP-1, GIP and glucagon receptors, studied for combined thermogenic and appetite-pathway research.', es: 'Agonista triple de los receptores GLP-1, GIP y glucagón, estudiado por su efecto combinado en vías termogénicas y de apetito.' } },
   { cat: 'metabolic', name: 'Cagrilintide',
-    desc: { en: 'Extended satiety for advanced appetite control.', es: 'Saciedad prolongada para un control avanzado del apetito.' },
-    mech: { en: 'Long-acting amylin analog that acts on the central nervous system to prolong the feeling of fullness.', es: 'Análogo de amilina de acción prolongada que actúa sobre el sistema nervioso central para extender la sensación de saciedad.' } },
+    desc: { en: 'Studied for amylin-receptor-mediated satiety-signaling research.', es: 'Estudiado por su acción en la señalización de saciedad mediada por el receptor de amilina.' },
+    mech: { en: 'Long-acting amylin analog used in central-nervous-system research models studying satiety signaling.', es: 'Análogo de amilina de acción prolongada utilizado en modelos de investigación del sistema nervioso central sobre señalización de saciedad.' } },
   { cat: 'metabolic', name: 'Mazdutide',
-    desc: { en: 'Dual action for weight and metabolism control.', es: 'Doble acción para el control de peso y metabolismo.' },
-    mech: { en: 'Dual GLP-1 and glucagon receptor agonist, combining appetite control with increased energy expenditure.', es: 'Agonista dual de los receptores GLP-1 y glucagón, combinando el control del apetito con mayor gasto energético.' } },
+    desc: { en: 'Investigated as a dual GLP-1/glucagon receptor agonist in energy-expenditure research.', es: 'Investigado como agonista dual de los receptores GLP-1/glucagón en investigación de gasto energético.' },
+    mech: { en: 'Dual GLP-1 and glucagon receptor agonist studied for combined appetite and energy-expenditure pathway research.', es: 'Agonista dual de los receptores GLP-1 y glucagón, estudiado en vías combinadas de apetito y gasto energético.' } },
   { cat: 'metabolic', name: 'Survodutide',
-    desc: { en: 'Triple action for advanced metabolic optimization.', es: 'Triple acción para optimización metabólica avanzada.' },
-    mech: { en: 'Dual GLP-1/glucagon agonist aimed at maximizing fat oxidation alongside appetite control.', es: 'Agonista dual GLP-1/glucagón orientado a maximizar la oxidación de grasa junto con el control del apetito.' } },
+    desc: { en: 'Studied for dual GLP-1/glucagon receptor activity in metabolic research models.', es: 'Estudiado por su actividad dual en los receptores GLP-1/glucagón en modelos de investigación metabólica.' },
+    mech: { en: 'Dual GLP-1/glucagon agonist used in research models examining fat-oxidation pathways.', es: 'Agonista dual GLP-1/glucagón utilizado en modelos de investigación sobre vías de oxidación de grasas.' } },
   { cat: 'metabolic', name: 'GLP-1',
-    desc: { en: 'Appetite and glucose regulation.', es: 'Regulación del apetito y la glucosa.' },
-    mech: { en: 'Incretin peptide that stimulates glucose-dependent insulin release and slows gastric emptying.', es: 'Péptido incretina que estimula la liberación de insulina dependiente de glucosa y enlentece el vaciado gástrico.' } },
+    desc: { en: 'Reference incretin peptide used in glucose-regulation research.', es: 'Péptido incretina de referencia utilizado en investigación de regulación de la glucosa.' },
+    mech: { en: 'Incretin peptide studied for glucose-dependent insulin-release and gastric-emptying research models.', es: 'Péptido incretina estudiado en modelos de liberación de insulina dependiente de glucosa y vaciado gástrico.' } },
   { cat: 'metabolic', name: '5-Amino-1MQ',
-    desc: { en: 'Fat loss while preserving muscle mass.', es: 'Pérdida de grasa preservando masa muscular.' },
-    mech: { en: 'NNMT enzyme inhibitor, promoting greater energy expenditure in adipose tissue.', es: 'Inhibidor de la enzima NNMT, favoreciendo un mayor gasto energético en el tejido adiposo.' } },
+    desc: { en: 'Studied as an NNMT inhibitor in adipose-tissue metabolism research.', es: 'Estudiado como inhibidor de la enzima NNMT en investigación del metabolismo del tejido adiposo.' },
+    mech: { en: 'NNMT enzyme inhibitor used in research models examining energy expenditure in adipose tissue.', es: 'Inhibidor de la enzima NNMT utilizado en modelos de investigación sobre gasto energético en tejido adiposo.' } },
   { cat: 'metabolic', name: 'Lipo-C',
-    desc: { en: 'Lipotropic blend focused on fat metabolism.', es: 'Blend lipotrópico enfocado en el metabolismo de grasas.' },
-    mech: { en: 'Combination of methionine, inositol and choline that supports fat transport and hepatic metabolism.', es: 'Combinación de metionina, inositol y colina que apoya el transporte y metabolismo hepático de las grasas.' } },
+    desc: { en: 'Lipotropic compound blend used in hepatic lipid-metabolism research.', es: 'Combinación lipotrópica utilizada en investigación del metabolismo hepático de lípidos.' },
+    mech: { en: 'Combination of methionine, inositol and choline studied for hepatic fat-transport research models.', es: 'Combinación de metionina, inositol y colina estudiada en modelos de investigación de transporte hepático de grasas.' } },
   { cat: 'metabolic', name: 'Lipo-C + B12',
-    desc: { en: 'Lipotropic blend with added B12 energy.', es: 'Lipotrópico con energía adicional de vitamina B12.' },
-    mech: { en: 'Lipotropic blend boosted with vitamin B12 for fat metabolism and cellular energy production.', es: 'Blend lipotrópico potenciado con vitamina B12 para el metabolismo de grasas y la producción de energía celular.' } },
+    desc: { en: 'Lipotropic blend with B12 for cellular energy-pathway research.', es: 'Blend lipotrópico con B12 para investigación de vías de energía celular.' },
+    mech: { en: 'Lipotropic blend combined with vitamin B12, studied in fat-metabolism and cellular-energy research models.', es: 'Blend lipotrópico combinado con vitamina B12, estudiado en modelos de metabolismo de grasas y energía celular.' } },
 
-  // ---- GH / IGF Axis & Recovery ----
+  // ---- GH / IGF Research ----
   { cat: 'gh-igf', name: 'CJC-1295 (No DAC)',
-    desc: { en: 'Stimulates natural growth hormone production.', es: 'Estimula la producción natural de hormona de crecimiento.' },
-    mech: { en: 'Short-acting GHRH analog that stimulates natural pulses of growth hormone from the pituitary.', es: 'Análogo de GHRH de acción corta que estimula pulsos naturales de hormona de crecimiento en la hipófisis.' } },
+    desc: { en: 'Studied as a short-acting GHRH analog in growth-hormone secretion research.', es: 'Estudiado como análogo de GHRH de acción corta en investigación de secreción de hormona de crecimiento.' },
+    mech: { en: 'Short-acting GHRH analog used in research models studying pulsatile growth-hormone release from the pituitary.', es: 'Análogo de GHRH de acción corta utilizado en modelos de investigación sobre la liberación pulsátil de hormona de crecimiento.' } },
   { cat: 'gh-igf', name: 'CJC-1295 (With DAC)',
-    desc: { en: 'Sustained, longer-lasting GH elevation.', es: 'Elevación sostenida de GH de mayor duración.' },
-    mech: { en: 'CJC-1295 variant bound to an albumin-affinity domain, extending its action on GH release.', es: 'Variante de CJC-1295 unida a un dominio de afinidad a albúmina, que prolonga su acción sobre la liberación de GH.' } },
+    desc: { en: 'Investigated as a long-acting GHRH analog for sustained GH-release research.', es: 'Investigado como análogo de GHRH de acción prolongada para investigación de liberación sostenida de GH.' },
+    mech: { en: 'CJC-1295 variant bound to an albumin-affinity domain, studied for extended GH-release research models.', es: 'Variante de CJC-1295 unida a un dominio de afinidad a albúmina, estudiada en modelos de liberación prolongada de GH.' } },
   { cat: 'gh-igf', name: 'Ipamorelin',
-    desc: { en: 'Recovery, deep rest and body composition.', es: 'Recuperación, descanso profundo y composición corporal.' },
-    mech: { en: 'Selective ghrelin receptor (GHS-R) secretagogue that stimulates GH without affecting cortisol or prolactin.', es: 'Secretagogo selectivo del receptor de grelina (GHS-R) que estimula GH sin afectar cortisol ni prolactina.' } },
+    desc: { en: 'Studied as a selective GHS-R secretagogue in growth-hormone research models.', es: 'Estudiado como secretagogo selectivo del receptor GHS-R en modelos de investigación de hormona de crecimiento.' },
+    mech: { en: 'Selective ghrelin-receptor (GHS-R) secretagogue studied for GH release without notable cortisol or prolactin research interference.', es: 'Secretagogo selectivo del receptor de grelina (GHS-R) estudiado por su liberación de GH sin interferencia notable en cortisol o prolactina.' } },
   { cat: 'gh-igf', name: 'Sermorelin Acetate',
-    desc: { en: 'Classic, well-tolerated stimulation of natural GH.', es: 'Estimulación clásica y bien tolerada de GH natural.' },
-    mech: { en: 'Active GHRH fragment (1-29) that stimulates the physiological release of growth hormone.', es: 'Fragmento activo de GHRH (1-29) que estimula la liberación fisiológica de hormona de crecimiento.' } },
+    desc: { en: 'Reference GHRH(1-29) fragment used in growth-hormone release research.', es: 'Fragmento de referencia GHRH(1-29) utilizado en investigación de liberación de hormona de crecimiento.' },
+    mech: { en: 'Active GHRH fragment (1-29) studied for physiological growth-hormone release research models.', es: 'Fragmento activo de GHRH (1-29) estudiado en modelos de liberación fisiológica de hormona de crecimiento.' } },
   { cat: 'gh-igf', name: 'Hexarelin Acetate',
-    desc: { en: 'Potent release of growth hormone.', es: 'Liberación potente de hormona de crecimiento.' },
-    mech: { en: 'High-potency GH secretagogue that acts on the ghrelin receptor.', es: 'Secretagogo de GH de alta potencia que actúa sobre el receptor de grelina.' } },
+    desc: { en: 'Studied as a high-potency ghrelin-receptor secretagogue.', es: 'Estudiado como secretagogo de alta potencia del receptor de grelina.' },
+    mech: { en: 'High-potency GH secretagogue used in ghrelin-receptor research models.', es: 'Secretagogo de GH de alta potencia utilizado en modelos de investigación del receptor de grelina.' } },
   { cat: 'gh-igf', name: 'GHRP-6 Acetate',
-    desc: { en: 'GH release with an appetite-stimulating effect.', es: 'Liberación de GH con efecto orexigénico.' },
-    mech: { en: 'GH secretagogue that also stimulates appetite through the ghrelin receptor.', es: 'Secretagogo de GH que también estimula el apetito a través del receptor de grelina.' } },
+    desc: { en: 'Investigated for ghrelin-receptor-mediated GH secretion research.', es: 'Investigado por su acción en la secreción de GH mediada por el receptor de grelina.' },
+    mech: { en: 'GH secretagogue studied alongside ghrelin-receptor-mediated appetite-signaling research models.', es: 'Secretagogo de GH estudiado junto con modelos de señalización del apetito mediados por el receptor de grelina.' } },
   { cat: 'gh-igf', name: 'Tesamorelin',
-    desc: { en: 'Specialist in reducing visceral fat.', es: 'Especialista en la reducción de grasa visceral.' },
-    mech: { en: "GHRH analog developed specifically to reduce visceral fat via the GH axis.", es: 'Análogo de GHRH desarrollado específicamente para reducir grasa visceral mediante el eje de GH.' } },
+    desc: { en: 'Studied as a GHRH analog in visceral-adipose-tissue research models.', es: 'Estudiado como análogo de GHRH en modelos de investigación de tejido adiposo visceral.' },
+    mech: { en: 'GHRH analog developed for research specifically examining visceral-fat reduction via the GH axis.', es: 'Análogo de GHRH desarrollado para investigación específica sobre reducción de grasa visceral mediante el eje de GH.' } },
   { cat: 'gh-igf', name: 'HGH 191AA (Somatropin)',
-    desc: { en: 'Reference recombinant growth hormone.', es: 'Hormona de crecimiento recombinante de referencia.' },
-    mech: { en: 'Recombinant human growth hormone, identical in sequence to endogenous GH.', es: 'Hormona de crecimiento humana recombinante, idéntica en secuencia a la GH endógena.' } },
+    desc: { en: 'Reference recombinant growth hormone for laboratory research.', es: 'Hormona de crecimiento recombinante de referencia para investigación de laboratorio.' },
+    mech: { en: 'Recombinant human growth hormone, identical in sequence to endogenous GH, used as a laboratory reference standard.', es: 'Hormona de crecimiento humana recombinante, idéntica en secuencia a la GH endógena, utilizada como estándar de referencia en laboratorio.' } },
   { cat: 'gh-igf', name: 'HGH Fragment 176-191',
-    desc: { en: 'Fragment focused on fat metabolism.', es: 'Fragmento enfocado en el metabolismo de grasas.' },
-    mech: { en: 'C-terminal fragment of GH with no effect on IGF-1, targeted toward lipolysis.', es: 'Fragmento C-terminal de la GH sin efecto sobre IGF-1, con acción dirigida a la lipólisis.' } },
+    desc: { en: 'Studied C-terminal GH fragment in lipolysis-pathway research.', es: 'Fragmento C-terminal de GH estudiado en investigación de vías de lipólisis.' },
+    mech: { en: 'C-terminal fragment of GH with no IGF-1 receptor activity, used in lipolysis-pathway research models.', es: 'Fragmento C-terminal de la GH sin actividad sobre el receptor de IGF-1, utilizado en modelos de investigación de lipólisis.' } },
   { cat: 'gh-igf', name: 'IGF-1 LR3',
-    desc: { en: 'Boosts muscle growth and recovery.', es: 'Potencia el crecimiento y recuperación muscular.' },
-    mech: { en: 'Extended half-life IGF-1 analog that acts directly on the IGF-1 receptor.', es: 'Análogo de IGF-1 con vida media extendida que actúa directamente sobre el receptor de IGF-1.' } },
+    desc: { en: 'Extended half-life IGF-1 analog used in cell-proliferation research.', es: 'Análogo de IGF-1 de vida media extendida utilizado en investigación de proliferación celular.' },
+    mech: { en: 'Extended half-life IGF-1 analog studied for direct IGF-1-receptor activation research.', es: 'Análogo de IGF-1 de vida media extendida, estudiado por su activación directa del receptor de IGF-1.' } },
   { cat: 'gh-igf', name: 'IGF-DES',
-    desc: { en: 'Localized recovery and muscle development.', es: 'Recuperación localizada y desarrollo muscular.' },
-    mech: { en: 'IGF-1 variant with greater local receptor affinity, with more targeted muscular action.', es: 'Variante de IGF-1 con mayor afinidad local al receptor, con acción muscular más focalizada.' } },
+    desc: { en: 'Studied IGF-1 variant in localized tissue-growth research models.', es: 'Variante de IGF-1 estudiada en modelos de investigación de crecimiento tisular localizado.' },
+    mech: { en: 'IGF-1 variant with greater local receptor affinity, studied in targeted tissue-research models.', es: 'Variante de IGF-1 con mayor afinidad local al receptor, estudiada en modelos de investigación tisular focalizada.' } },
   { cat: 'gh-igf', name: 'Follistatin',
-    desc: { en: 'Next-level muscle development.', es: 'Desarrollo muscular de siguiente nivel.' },
-    mech: { en: 'Natural inhibitor of myostatin, the protein that limits muscle growth.', es: 'Inhibidor natural de la miostatina, la proteína que limita el crecimiento muscular.' } },
+    desc: { en: 'Investigated as a myostatin inhibitor in muscle-tissue research.', es: 'Investigado como inhibidor de miostatina en investigación de tejido muscular.' },
+    mech: { en: 'Natural myostatin inhibitor studied in research models examining muscle-tissue growth regulation.', es: 'Inhibidor natural de la miostatina, estudiado en modelos de investigación sobre regulación del crecimiento del tejido muscular.' } },
   { cat: 'gh-igf', name: 'BPC-157',
-    desc: { en: 'Accelerated tissue recovery and digestive health.', es: 'Recuperación acelerada de tejidos y salud digestiva.' },
-    mech: { en: 'Peptide derived from a gastric protein that promotes angiogenesis and tissue repair.', es: 'Péptido derivado de una proteína gástrica que favorece la angiogénesis y la reparación de tejidos.' } },
+    desc: { en: 'Studied for angiogenesis and tissue-repair pathway research.', es: 'Estudiado en investigación de vías de angiogénesis y reparación tisular.' },
+    mech: { en: 'Peptide derived from a gastric protein, studied in research models examining angiogenesis and tissue repair.', es: 'Péptido derivado de una proteína gástrica, estudiado en modelos de investigación de angiogénesis y reparación de tejidos.' } },
   { cat: 'gh-igf', name: 'TB-500 (Thymosin B4 Acetate)',
-    desc: { en: 'Comprehensive repair of muscles and joints.', es: 'Reparación integral de músculos y articulaciones.' },
-    mech: { en: 'Regulates cellular actin, promoting cell migration and tissue repair.', es: 'Regula la actina celular, favoreciendo la migración celular y la reparación de tejidos.' } },
+    desc: { en: 'Investigated for actin-regulation and cell-migration research.', es: 'Investigado en regulación de actina y migración celular.' },
+    mech: { en: 'Regulates cellular actin in research models studying cell migration and tissue-repair pathways.', es: 'Regula la actina celular en modelos de investigación sobre migración celular y vías de reparación tisular.' } },
   { cat: 'gh-igf', name: 'KPV',
-    desc: { en: 'Gut balance and inflammation control.', es: 'Equilibrio intestinal y control de la inflamación.' },
-    mech: { en: 'Alpha-MSH-derived tripeptide with local anti-inflammatory activity in the digestive tract.', es: 'Tripéptido derivado de la alfa-MSH con actividad antiinflamatoria local en el tracto digestivo.' } },
+    desc: { en: 'Studied tripeptide in gut anti-inflammatory pathway research.', es: 'Tripéptido estudiado en investigación de vías antiinflamatorias intestinales.' },
+    mech: { en: 'Alpha-MSH-derived tripeptide studied for local anti-inflammatory activity in digestive-tract research models.', es: 'Tripéptido derivado de la alfa-MSH, estudiado por su actividad antiinflamatoria local en modelos de investigación del tracto digestivo.' } },
   { cat: 'gh-igf', name: 'GHK-Cu',
-    desc: { en: 'Skin regeneration and rejuvenation.', es: 'Regeneración y rejuvenecimiento cutáneo.' },
-    mech: { en: 'Copper-peptide complex that stimulates collagen synthesis and extracellular matrix remodeling.', es: 'Complejo péptido-cobre que estimula la síntesis de colágeno y la remodelación de la matriz extracelular.' } },
+    desc: { en: 'Studied copper-peptide complex in collagen-synthesis research.', es: 'Complejo péptido-cobre estudiado en investigación de síntesis de colágeno.' },
+    mech: { en: 'Copper-peptide complex studied for its role in collagen synthesis and extracellular-matrix research models.', es: 'Complejo péptido-cobre estudiado por su papel en la síntesis de colágeno y modelos de investigación de la matriz extracelular.' } },
 
-  // ---- Brain, Mood & Sleep ----
+  // ---- Neuroscience Research ----
   { cat: 'brain-sleep', name: 'Semax',
-    desc: { en: 'Peak focus, memory and cognitive performance.', es: 'Máximo enfoque, memoria y rendimiento cognitivo.' },
-    mech: { en: 'Synthetic ACTH fragment that increases BDNF, promoting neuroplasticity and focus.', es: 'Fragmento sintético de ACTH que incrementa el BDNF, favoreciendo la neuroplasticidad y el enfoque.' } },
+    desc: { en: 'Studied ACTH-fragment analog in BDNF and neuroplasticity research.', es: 'Análogo de fragmento de ACTH estudiado en investigación de BDNF y neuroplasticidad.' },
+    mech: { en: 'Synthetic ACTH fragment studied for its effect on BDNF expression in neuroplasticity research models.', es: 'Fragmento sintético de ACTH estudiado por su efecto sobre la expresión de BDNF en modelos de investigación de neuroplasticidad.' } },
   { cat: 'brain-sleep', name: 'Selank',
-    desc: { en: 'Calm and mental clarity without sedation.', es: 'Calma y claridad mental sin sedación.' },
-    mech: { en: 'Tuftsin analog with anxiolytic activity that modulates GABAergic activity without causing sedation.', es: 'Análogo de tuftsina con actividad ansiolítica que modula la actividad GABAérgica sin causar sedación.' } },
+    desc: { en: 'Investigated tuftsin analog in GABAergic-modulation research models.', es: 'Análogo de tuftsina investigado en modelos de modulación GABAérgica.' },
+    mech: { en: 'Tuftsin analog studied for anxiolytic-related GABAergic activity in non-sedative research models.', es: 'Análogo de tuftsina estudiado por su actividad GABAérgica de tipo ansiolítico en modelos no sedantes.' } },
   { cat: 'brain-sleep', name: 'Cerebrolysin',
-    desc: { en: 'Neurotrophic support for cognitive function.', es: 'Soporte neurotrófico para la función cognitiva.' },
-    mech: { en: 'Mixture of neurotrophic peptides derived from brain protein, with action similar to BDNF and NGF.', es: 'Mezcla de péptidos neurotróficos derivados de proteína cerebral, con acción similar a BDNF y NGF.' } },
+    desc: { en: 'Neurotrophic peptide mixture used in neurodegeneration research.', es: 'Mezcla de péptidos neurotróficos utilizada en investigación de neurodegeneración.' },
+    mech: { en: 'Mixture of neurotrophic peptides derived from brain protein, studied alongside BDNF and NGF research models.', es: 'Mezcla de péptidos neurotróficos derivados de proteína cerebral, estudiada junto a modelos de investigación de BDNF y NGF.' } },
   { cat: 'brain-sleep', name: 'DSIP',
-    desc: { en: 'Deep sleep and overnight recovery.', es: 'Sueño profundo y recuperación nocturna.' },
-    mech: { en: 'Neuropeptide that interacts with GABA receptors to induce slow-wave sleep.', es: 'Neuropéptido que interactúa con receptores GABA para inducir sueño de ondas lentas.' } },
+    desc: { en: 'Studied neuropeptide in slow-wave-sleep induction research models.', es: 'Neuropéptido estudiado en modelos de inducción de sueño de ondas lentas.' },
+    mech: { en: 'Neuropeptide studied for GABA-receptor interaction in slow-wave-sleep research models.', es: 'Neuropéptido estudiado por su interacción con receptores GABA en modelos de investigación de sueño de ondas lentas.' } },
   { cat: 'brain-sleep', name: 'Ara-290',
-    desc: { en: 'Research in neuroprotection and wellness.', es: 'Investigación en neuroprotección y bienestar.' },
-    mech: { en: 'Non-hematopoietic derivative of erythropoietin that acts on cytoprotective receptors to promote neural repair.', es: 'Derivado no hematopoyético de la eritropoyetina que actúa sobre receptores de citoprotección para favorecer la reparación neural.' } },
+    desc: { en: 'Non-hematopoietic EPO derivative studied in neuroprotection research.', es: 'Derivado no hematopoyético de EPO estudiado en investigación de neuroprotección.' },
+    mech: { en: 'Non-hematopoietic derivative of erythropoietin studied for cytoprotective-receptor activity in neural-repair research.', es: 'Derivado no hematopoyético de la eritropoyetina, estudiado por su actividad en receptores citoprotectores en investigación de reparación neural.' } },
 
-  // ---- Performance & Cellular Longevity ----
+  // ---- Cellular & Longevity Research ----
   { cat: 'performance', name: 'MOTS-c',
-    desc: { en: 'Cellular energy for performance and recovery.', es: 'Energía celular para rendimiento y recuperación.' },
-    mech: { en: 'Mitochondrial-DNA-derived peptide that activates the AMPK pathway, improving metabolic efficiency.', es: 'Péptido derivado del ADN mitocondrial que activa la vía AMPK, mejorando la eficiencia metabólica.' } },
+    desc: { en: 'Mitochondrial-derived peptide studied in AMPK-pathway research.', es: 'Péptido mitocondrial estudiado en investigación de la vía AMPK.' },
+    mech: { en: 'Mitochondrial-DNA-derived peptide studied for AMPK-pathway activation in metabolic-efficiency research.', es: 'Péptido derivado del ADN mitocondrial, estudiado por la activación de la vía AMPK en investigación de eficiencia metabólica.' } },
   { cat: 'performance', name: 'SS-31',
-    desc: { en: 'Mitochondrial health and cellular resilience.', es: 'Salud mitocondrial y resistencia celular.' },
-    mech: { en: 'Binds to cardiolipin in the inner mitochondrial membrane, stabilizing ATP production.', es: 'Se une a la cardiolipina en la membrana mitocondrial interna, estabilizando la producción de ATP.' } },
+    desc: { en: 'Studied for cardiolipin-binding mitochondrial-stabilization research.', es: 'Estudiado en investigación de estabilización mitocondrial mediante unión a cardiolipina.' },
+    mech: { en: 'Binds to cardiolipin in the inner mitochondrial membrane, studied in ATP-production research models.', es: 'Se une a la cardiolipina en la membrana mitocondrial interna, estudiado en modelos de investigación de producción de ATP.' } },
   { cat: 'performance', name: 'NAD+',
-    desc: { en: 'Cellular energy and longevity from within.', es: 'Energía celular y longevidad desde el interior.' },
-    mech: { en: 'Essential coenzyme in cellular energy production and sirtuin activity.', es: 'Coenzima esencial en la producción de energía celular y en la actividad de las sirtuinas.' } },
+    desc: { en: 'Essential coenzyme studied in cellular bioenergetics and sirtuin research.', es: 'Coenzima esencial estudiada en bioenergética celular e investigación de sirtuinas.' },
+    mech: { en: 'Essential coenzyme studied for its role in cellular energy production and sirtuin-activity research models.', es: 'Coenzima esencial estudiada por su papel en la producción de energía celular y modelos de investigación de sirtuinas.' } },
   { cat: 'performance', name: 'L-Carnitine',
-    desc: { en: 'Converts fat into energy for your performance.', es: 'Convierte grasa en energía para tu rendimiento.' },
-    mech: { en: 'Transports long-chain fatty acids into the mitochondria for oxidation.', es: 'Transporta ácidos grasos de cadena larga hacia la mitocondria para su oxidación.' } },
+    desc: { en: 'Studied in fatty-acid oxidation and mitochondrial-transport research.', es: 'Estudiado en investigación de oxidación de ácidos grasos y transporte mitocondrial.' },
+    mech: { en: 'Transports long-chain fatty acids into the mitochondria, studied in fat-oxidation research models.', es: 'Transporta ácidos grasos de cadena larga hacia la mitocondria, estudiado en modelos de investigación de oxidación de grasas.' } },
   { cat: 'performance', name: 'AOD-9604',
-    desc: { en: 'Localized fat reduction.', es: 'Reducción de grasa localizada.' },
-    mech: { en: 'GH fragment (176-191) that stimulates lipolysis without activating the IGF-1 receptor.', es: 'Fragmento de la GH (176-191) que estimula la lipólisis sin activar el receptor de IGF-1.' } },
+    desc: { en: 'GH-fragment studied in lipolysis-pathway research models.', es: 'Fragmento de GH estudiado en modelos de investigación de vías de lipólisis.' },
+    mech: { en: 'GH fragment (176-191) studied for lipolysis-pathway activity without IGF-1-receptor research interference.', es: 'Fragmento de GH (176-191) estudiado por su actividad en vías de lipólisis sin interferencia en el receptor de IGF-1.' } },
   { cat: 'performance', name: 'Epitalon',
-    desc: { en: 'Cellular regeneration and healthy aging.', es: 'Regeneración celular y envejecimiento saludable.' },
-    mech: { en: 'Tetrapeptide that acts on the pineal gland, regulating melatonin production and telomerase activity.', es: 'Tetrapéptido que actúa sobre la glándula pineal, regulando la producción de melatonina y la actividad de la telomerasa.' } },
+    desc: { en: 'Tetrapeptide studied in telomerase-activity and pineal-function research.', es: 'Tetrapéptido estudiado en investigación de actividad de telomerasa y función pineal.' },
+    mech: { en: 'Tetrapeptide studied for its action on the pineal gland, melatonin-production and telomerase-activity research models.', es: 'Tetrapéptido estudiado por su acción sobre la glándula pineal y modelos de investigación de producción de melatonina y actividad de la telomerasa.' } },
 
-  // ---- Immunity & Overall Wellness ----
+  // ---- Immune Research ----
   { cat: 'immune', name: 'Thymosin Alpha-1',
-    desc: { en: 'Advanced support for the immune system.', es: 'Apoyo avanzado al sistema inmunológico.' },
-    mech: { en: 'Thymic peptide that modulates the maturation and function of T lymphocytes.', es: 'Péptido tímico que modula la maduración y función de los linfocitos T.' } },
+    desc: { en: 'Thymic peptide studied in T-lymphocyte modulation research.', es: 'Péptido tímico estudiado en investigación de modulación de linfocitos T.' },
+    mech: { en: 'Thymic peptide studied for its role in T-lymphocyte maturation and function research models.', es: 'Péptido tímico estudiado por su papel en la maduración y función de los linfocitos T.' } },
   { cat: 'immune', name: 'Thymalin',
-    desc: { en: "Strengthens the body's natural defenses.", es: 'Fortalece las defensas naturales del organismo.' },
-    mech: { en: 'Thymus-derived peptide extract that helps restore balance in the cellular immune response.', es: 'Extracto peptídico del timo que ayuda a restaurar el equilibrio de la respuesta inmune celular.' } },
+    desc: { en: "Thymus-derived extract studied in cellular immune-response research.", es: 'Extracto derivado del timo estudiado en investigación de respuesta inmune celular.' },
+    mech: { en: 'Thymus-derived peptide extract studied for its role in cellular immune-response balance research.', es: 'Extracto peptídico del timo estudiado por su papel en el equilibrio de la respuesta inmune celular.' } },
   { cat: 'immune', name: 'LL-37',
-    desc: { en: 'Natural defenses and tissue recovery.', es: 'Defensas naturales y recuperación de tejidos.' },
-    mech: { en: 'Cathelicidin peptide with direct antimicrobial activity and innate immune response modulation.', es: 'Péptido catelicidina con actividad antimicrobiana directa y modulación de la respuesta inmune innata.' } },
+    desc: { en: 'Cathelicidin peptide studied in antimicrobial and immune-modulation research.', es: 'Péptido catelicidina estudiado en investigación antimicrobiana y de modulación inmune.' },
+    mech: { en: 'Cathelicidin peptide studied for direct antimicrobial activity and innate immune-response research.', es: 'Péptido catelicidina estudiado por su actividad antimicrobiana directa e investigación de la respuesta inmune innata.' } },
   { cat: 'immune', name: 'VIP',
-    desc: { en: 'Immune balance and neuroprotection.', es: 'Equilibrio inmunológico y neuroprotección.' },
-    mech: { en: 'Neuropeptide that regulates inflammation through VPAC receptors present on immune cells.', es: 'Neuropéptido que regula la inflamación a través de receptores VPAC presentes en células inmunes.' } },
+    desc: { en: 'Neuropeptide studied for VPAC-receptor-mediated immune research.', es: 'Neuropéptido estudiado en investigación inmune mediada por el receptor VPAC.' },
+    mech: { en: 'Neuropeptide studied for inflammation regulation through VPAC receptors in immune-cell research models.', es: 'Neuropéptido estudiado por la regulación de la inflamación a través de receptores VPAC en modelos de investigación de células inmunes.' } },
   { cat: 'immune', name: 'FOXO4',
-    desc: { en: 'Cutting-edge senolytic research.', es: 'Investigación senolítica de vanguardia.' },
-    mech: { en: 'Peptide that disrupts the FOXO4-p53 interaction, promoting the clearance of senescent cells.', es: 'Péptido disruptor de la interacción FOXO4-p53, favoreciendo la eliminación de células senescentes.' } },
+    desc: { en: 'Peptide studied for FOXO4–p53 interaction in senescent-cell research.', es: 'Péptido estudiado por su interacción FOXO4-p53 en investigación de células senescentes.' },
+    mech: { en: 'Peptide studied for disrupting the FOXO4-p53 interaction in senescent-cell clearance research.', es: 'Péptido estudiado por interrumpir la interacción FOXO4-p53 en investigación de eliminación de células senescentes.' } },
   { cat: 'immune', name: 'Kisspeptin-10',
-    desc: { en: 'Comprehensive hormonal balance.', es: 'Equilibrio hormonal integral.' },
-    mech: { en: 'Activates the KISS1R receptor, stimulating GnRH release along the hypothalamic-pituitary-gonadal axis.', es: 'Activa el receptor KISS1R, estimulando la liberación de GnRH en el eje hipotálamo-hipófisis-gónadas.' } },
+    desc: { en: 'Studied for KISS1R-mediated HPG-axis signaling research.', es: 'Estudiado en investigación de señalización del eje HPG mediada por KISS1R.' },
+    mech: { en: 'Activates the KISS1R receptor, studied in hypothalamic-pituitary-gonadal axis signaling research.', es: 'Activa el receptor KISS1R, estudiado en investigación de señalización del eje hipotálamo-hipófisis-gónadas.' } },
   { cat: 'immune', name: 'Glutathione',
-    desc: { en: 'Master antioxidant for cellular protection.', es: 'Antioxidante maestro para la protección celular.' },
-    mech: { en: 'Endogenous antioxidant tripeptide that neutralizes free radicals and supports liver detoxification.', es: 'Tripéptido antioxidante endógeno que neutraliza radicales libres y apoya la desintoxicación hepática.' } },
+    desc: { en: 'Endogenous antioxidant tripeptide studied in oxidative-stress research.', es: 'Tripéptido antioxidante endógeno estudiado en investigación de estrés oxidativo.' },
+    mech: { en: 'Endogenous antioxidant tripeptide studied for free-radical neutralization and hepatic research models.', es: 'Tripéptido antioxidante endógeno estudiado por la neutralización de radicales libres en modelos de investigación hepática.' } },
 
-  // ---- Hormonal & Sexual Wellness ----
+  // ---- Endocrine Research ----
   { cat: 'hormonal', name: 'PT-141',
-    desc: { en: 'Restores desire and intimate connection.', es: 'Recupera el deseo y la conexión íntima.' },
-    mech: { en: 'Melanocortin receptor agonist (MC3R/MC4R) that acts on the central nervous system to stimulate sexual desire.', es: 'Agonista de receptores de melanocortina (MC3R/MC4R) que actúa en el sistema nervioso central para estimular el deseo sexual.' } },
+    desc: { en: 'Melanocortin-receptor (MC3R/MC4R) agonist studied in CNS arousal-pathway research.', es: 'Agonista de receptores de melanocortina (MC3R/MC4R) estudiado en investigación de vías de excitación del SNC.' },
+    mech: { en: 'Melanocortin receptor agonist studied for central-nervous-system arousal-pathway signaling research.', es: 'Agonista de receptores de melanocortina estudiado por su señalización en vías de excitación del sistema nervioso central.' } },
   { cat: 'hormonal', name: 'HCG',
-    desc: { en: 'Support for natural testosterone production.', es: 'Apoyo a la producción natural de testosterona.' },
-    mech: { en: 'Hormone that mimics LH, stimulating Leydig cells for testosterone production.', es: 'Hormona que imita a la LH, estimulando las células de Leydig para la producción de testosterona.' } },
+    desc: { en: 'Studied for LH-receptor-mediated Leydig-cell steroidogenesis research.', es: 'Estudiado en investigación de esteroidogénesis de células de Leydig mediada por el receptor de LH.' },
+    mech: { en: 'Hormone studied for LH-receptor mimicry in Leydig-cell steroidogenesis research models.', es: 'Hormona estudiada por su acción mimética sobre el receptor de LH en modelos de investigación de esteroidogénesis en células de Leydig.' } },
   { cat: 'hormonal', name: 'Melanotan I',
-    desc: { en: 'Natural pigmentation and skin protection.', es: 'Pigmentación natural y protección cutánea.' },
-    mech: { en: 'Selective alpha-MSH analog that stimulates melanogenesis in melanocytes.', es: 'Análogo selectivo de la alfa-MSH que estimula la melanogénesis en los melanocitos.' } },
+    desc: { en: 'Selective alpha-MSH analog studied in melanogenesis-pathway research.', es: 'Análogo selectivo de alfa-MSH estudiado en investigación de la vía de melanogénesis.' },
+    mech: { en: 'Selective alpha-MSH analog studied for melanocyte-stimulating pathway research.', es: 'Análogo selectivo de la alfa-MSH, estudiado en investigación de vías de estimulación de melanocitos.' } },
   { cat: 'hormonal', name: 'Melanotan II',
-    desc: { en: 'Even tanning with added libido support.', es: 'Bronceado uniforme con apoyo a la libido.' },
-    mech: { en: 'Non-selective melanocortin receptor agonist, with effects on pigmentation and libido.', es: 'Agonista no selectivo de receptores de melanocortina, con efecto sobre pigmentación y libido.' } },
+    desc: { en: 'Non-selective melanocortin-receptor agonist studied in pigmentation-pathway research.', es: 'Agonista no selectivo de receptores de melanocortina estudiado en investigación de vías de pigmentación.' },
+    mech: { en: 'Non-selective melanocortin-receptor agonist studied across pigmentation and melanocortin-signaling research models.', es: 'Agonista no selectivo de receptores de melanocortina, estudiado en modelos de investigación de pigmentación y señalización de melanocortina.' } },
 
-  // ---- Aesthetics & Skin ----
+  // ---- Dermal Research ----
   { cat: 'aesthetic', name: 'Snap-8',
-    desc: { en: 'Smoothing of expression lines.', es: 'Suavizado de líneas de expresión.' },
-    mech: { en: 'Octapeptide that inhibits neurotransmitter release at the neuromuscular junction, relaxing facial muscles.', es: 'Octapéptido que inhibe la liberación de neurotransmisores en la unión neuromuscular, relajando la musculatura facial.' } },
+    desc: { en: 'Octapeptide studied for neuromuscular-junction inhibition in dermal research.', es: 'Octapéptido estudiado por la inhibición de la unión neuromuscular en investigación dérmica.' },
+    mech: { en: 'Octapeptide studied for inhibiting neurotransmitter release at the neuromuscular junction in dermal-research models.', es: 'Octapéptido estudiado por inhibir la liberación de neurotransmisores en la unión neuromuscular en modelos de investigación dérmica.' } },
   { cat: 'aesthetic', name: 'Lemon Bottle',
-    desc: { en: 'Localized fat dissolution, professional aesthetic use.', es: 'Disolución localizada de grasa, uso estético profesional.' },
-    mech: { en: 'Injectable lipolytic solution that promotes the breakdown of localized adipocyte membranes.', es: 'Solución lipolítica inyectable que favorece la ruptura de membranas adipocitarias localizadas.' } },
+    desc: { en: 'Lipolytic solution studied for localized adipocyte-membrane research.', es: 'Solución lipolítica estudiada en investigación de membranas adipocitarias localizadas.' },
+    mech: { en: 'Lipolytic solution studied for its effect on localized adipocyte-membrane breakdown in laboratory models.', es: 'Solución lipolítica estudiada por su efecto en la ruptura de membranas adipocitarias localizadas en modelos de laboratorio.' } },
   { cat: 'aesthetic', name: 'Botulinum Toxin',
-    desc: { en: 'Muscle relaxation for aesthetic purposes, professional use.', es: 'Relajación muscular para fines estéticos, uso profesional.' },
-    mech: { en: 'Neurotoxin that blocks acetylcholine release at the neuromuscular junction, relaxing the treated muscle.', es: 'Neurotoxina que bloquea la liberación de acetilcolina en la placa neuromuscular, relajando el músculo tratado.' } },
+    desc: { en: 'Neurotoxin studied for acetylcholine-release inhibition at the neuromuscular junction.', es: 'Neurotoxina estudiada por la inhibición de la liberación de acetilcolina en la unión neuromuscular.' },
+    mech: { en: 'Neurotoxin studied for blocking acetylcholine release at the neuromuscular junction in laboratory research models.', es: 'Neurotoxina estudiada por bloquear la liberación de acetilcolina en la unión neuromuscular en modelos de investigación de laboratorio.' } },
   { cat: 'aesthetic', name: 'Hyaluronic Acid',
-    desc: { en: 'Hydration and volume for the skin.', es: 'Hidratación y volumen para la piel.' },
-    mech: { en: 'Glycosaminoglycan that retains water in the dermal matrix, providing volume and hydration.', es: 'Glicosaminoglicano que retiene agua en la matriz dérmica, aportando volumen e hidratación.' } },
+    desc: { en: 'Glycosaminoglycan studied in dermal-matrix hydration research.', es: 'Glicosaminoglicano estudiado en investigación de hidratación de la matriz dérmica.' },
+    mech: { en: 'Glycosaminoglycan studied for water retention in dermal-matrix research models.', es: 'Glicosaminoglicano estudiado por la retención de agua en modelos de investigación de la matriz dérmica.' } },
 
-  // ---- Stacks ----
+  // ---- Research Combinations ----
   { cat: 'stacks', name: { en: 'CJC-1295 (No DAC) + Ipamorelin', es: 'CJC-1295 (No DAC) + Ipamorelin' },
-    desc: { en: 'Classic synergy for GH, recovery and sleep.', es: 'Sinergia clásica para GH, recuperación y sueño.' },
-    mech: { en: 'Combines a short-acting GHRH with a selective ghrelin secretagogue for a fuller GH pulse.', es: 'Combina un GHRH de acción corta con un secretagogo selectivo de grelina para un pulso de GH más completo.' } },
+    desc: { en: 'Combined GHRH/secretagogue blend studied in GH-pulse research.', es: 'Blend combinado de GHRH/secretagogo estudiado en investigación de pulsos de GH.' },
+    mech: { en: 'Combines a short-acting GHRH with a selective ghrelin secretagogue for fuller GH-pulse research models.', es: 'Combina un GHRH de acción corta con un secretagogo selectivo de grelina para modelos de investigación de pulsos de GH más completos.' } },
   { cat: 'stacks', name: { en: 'CagriSema Standard', es: 'CagriSema Estándar' },
-    desc: { en: 'Cagrilintide + Semaglutide — dual-action appetite control.', es: 'Cagrilintide + Semaglutide — control de apetito de doble acción.' },
-    mech: { en: 'Combines an amylin analog with a GLP-1 agonist, acting on two distinct appetite-control pathways.', es: 'Combina un análogo de amilina con un agonista GLP-1, actuando sobre dos vías distintas del control del apetito.' } },
+    desc: { en: 'Amylin + GLP-1 combination studied in dual-pathway appetite research.', es: 'Combinación de amilina + GLP-1 estudiada en investigación de doble vía del apetito.' },
+    mech: { en: 'Combines an amylin analog with a GLP-1 agonist, studied across two distinct appetite-pathway research models.', es: 'Combina un análogo de amilina con un agonista GLP-1, estudiado en dos vías distintas de investigación del apetito.' } },
   { cat: 'stacks', name: { en: 'CagriSema High Concentration', es: 'CagriSema Alta Concentración' },
-    desc: { en: 'Higher-concentration version of the most sought-after duo.', es: 'Versión de mayor concentración del dúo más buscado.' },
-    mech: { en: 'Same amylin + GLP-1 synergy, in a higher-concentration vial.', es: 'Misma sinergia amilina + GLP-1, en una presentación de mayor concentración por vial.' } },
+    desc: { en: 'Higher-concentration research vial of the amylin + GLP-1 combination.', es: 'Vial de mayor concentración de la combinación amilina + GLP-1.' },
+    mech: { en: 'Same amylin + GLP-1 research synergy, in a higher-concentration research vial.', es: 'Misma sinergia de investigación amilina + GLP-1, en un vial de mayor concentración.' } },
   { cat: 'stacks', name: { en: 'BPC-157 + TB-500 Standard', es: 'BPC-157 + TB-500 Estándar' },
-    desc: { en: 'Comprehensive tissue recovery, standard presentation.', es: 'Recuperación integral de tejidos, presentación estándar.' },
-    mech: { en: 'Combines local angiogenesis with cellular actin regulation for more complete tissue recovery.', es: 'Combina angiogénesis local con regulación de actina celular para una recuperación de tejidos más completa.' } },
+    desc: { en: 'Combined tissue-repair peptide blend for regenerative research models.', es: 'Blend combinado de péptidos de reparación tisular para modelos de investigación regenerativa.' },
+    mech: { en: 'Combines local angiogenesis with cellular-actin regulation research for more complete tissue-repair models.', es: 'Combina angiogénesis local con regulación de actina celular para modelos de investigación de reparación tisular más completos.' } },
   { cat: 'stacks', name: { en: 'BPC-157 + TB-500 High Concentration', es: 'BPC-157 + TB-500 Alta Concentración' },
-    desc: { en: 'Comprehensive tissue recovery, higher concentration.', es: 'Recuperación integral de tejidos, mayor concentración.' },
-    mech: { en: 'Same tissue-repair synergy in a higher-concentration vial.', es: 'Misma sinergia de reparación tisular en una presentación de mayor concentración por vial.' } },
+    desc: { en: 'Higher-concentration research vial of the tissue-repair blend.', es: 'Vial de mayor concentración del blend de reparación tisular.' },
+    mech: { en: 'Same tissue-repair research synergy, in a higher-concentration research vial.', es: 'Misma sinergia de investigación de reparación tisular, en un vial de mayor concentración.' } },
   { cat: 'stacks', name: { en: 'BPC-157 + GHK-Cu + TB-500', es: 'BPC-157 + GHK-Cu + TB-500' },
-    desc: { en: 'Triple combination for recovery and skin regeneration.', es: 'Triple combinación para recuperación y regeneración cutánea.' },
-    mech: { en: 'Combines gastric repair, collagen remodeling and tissue regeneration in a single protocol.', es: 'Une reparación gástrica, remodelación de colágeno y regeneración tisular en un mismo protocolo.' } },
+    desc: { en: 'Triple-peptide blend studied in tissue-regeneration research.', es: 'Blend triple de péptidos estudiado en investigación de regeneración tisular.' },
+    mech: { en: 'Combines gastric-repair, collagen-remodeling and tissue-regeneration research pathways in a single blend.', es: 'Combina vías de investigación de reparación gástrica, remodelación de colágeno y regeneración tisular en un solo blend.' } },
   { cat: 'stacks', name: { en: 'GHK-Cu + TB-500 + BPC-157 + KPV', es: 'GHK-Cu + TB-500 + BPC-157 + KPV' },
-    desc: { en: 'Quadruple blend for advanced comprehensive recovery.', es: 'Blend cuádruple para recuperación integral avanzada.' },
-    mech: { en: 'Combines four mechanisms: skin regeneration, tissue repair, angiogenesis and local inflammation control.', es: 'Combina cuatro mecanismos: regeneración cutánea, reparación tisular, angiogénesis y control local de la inflamación.' } },
+    desc: { en: 'Quad-peptide blend for advanced multi-pathway research.', es: 'Blend cuádruple para investigación avanzada de múltiples vías.' },
+    mech: { en: 'Combines four research pathways: dermal regeneration, tissue repair, angiogenesis and local inflammatory-response models.', es: 'Combina cuatro vías de investigación: regeneración dérmica, reparación tisular, angiogénesis y modelos de respuesta inflamatoria local.' } },
 
-  // ---- Supplies & Reconstitution ----
+  // ---- Lab Supplies ----
   { cat: 'supplies', name: { en: 'Bacteriostatic Water / PBS', es: 'Agua Bacteriostática / PBS' },
-    desc: { en: 'Sterile solution for peptide reconstitution.', es: 'Solución estéril para reconstitución de péptidos.' },
-    mech: { en: 'Sterile isotonic solution used to reconstitute lyophilized peptides while maintaining their stability.', es: 'Solución isotónica estéril utilizada para reconstituir péptidos liofilizados manteniendo su estabilidad.' } },
+    desc: { en: 'Sterile solution for laboratory peptide reconstitution.', es: 'Solución estéril para reconstitución de péptidos en laboratorio.' },
+    mech: { en: 'Sterile isotonic solution used to reconstitute lyophilized research peptides while maintaining stability.', es: 'Solución isotónica estéril utilizada para reconstituir péptidos de investigación liofilizados manteniendo su estabilidad.' } },
   { cat: 'supplies', name: { en: 'Benzyl Alcohol 0.9%', es: 'Alcohol Bencílico 0.9%' },
-    desc: { en: 'Bacteriostatic water with preservative for reconstitution.', es: 'Agua bacteriostática con conservador para reconstitución.' },
-    mech: { en: 'Bacteriostatic water with preservative that extends the stability of the reconstituted peptide.', es: 'Agua bacteriostática con conservador que prolonga la estabilidad del péptido ya reconstituido.' } },
+    desc: { en: 'Bacteriostatic water with preservative for laboratory reconstitution.', es: 'Agua bacteriostática con conservador para reconstitución de laboratorio.' },
+    mech: { en: 'Bacteriostatic water with preservative studied for extending reconstituted-peptide stability in laboratory settings.', es: 'Agua bacteriostática con conservador utilizada para prolongar la estabilidad del péptido reconstituido en laboratorio.' } },
   { cat: 'supplies', name: { en: 'Acetic Acid 0.6%', es: 'Ácido Acético 0.6%' },
-    desc: { en: 'Reconstitution solution for specific compounds.', es: 'Solución de reconstitución para compuestos específicos.' },
-    mech: { en: 'Acidic pH reconstitution solution, required for peptides with low solubility in neutral water.', es: 'Solución de reconstitución de pH ácido, requerida para péptidos con baja solubilidad en agua neutra.' } },
+    desc: { en: 'Reconstitution solution for specific research compounds.', es: 'Solución de reconstitución para compuestos de investigación específicos.' },
+    mech: { en: 'Acidic pH reconstitution solution required for research peptides with low solubility in neutral water.', es: 'Solución de reconstitución de pH ácido, requerida para péptidos de investigación con baja solubilidad en agua neutra.' } },
 ];
 
 function nameOf(p) { return typeof p.name === 'string' ? p.name : p.name[CURRENT_LANG]; }
@@ -243,312 +230,151 @@ function nameOf(p) { return typeof p.name === 'string' ? p.name : p.name[CURRENT
 // ============================================================================
 const I18N = {
   en: {
-    'nav.inicio': 'Home', 'nav.ecosistema': 'Ecosystem', 'nav.productos': 'Products',
-    'nav.historia': 'History', 'nav.filosofia': 'Philosophy', 'nav.contacto': 'Contact',
+    'nav.home': 'Home', 'nav.products': 'Research Peptides', 'nav.science': 'Our Science', 'nav.contact': 'Contact',
+    'disclaimer.text': 'For laboratory research use only. Not for human consumption.',
 
-    'hero.eyebrow': 'Science · Performance · Longevity · Evolution',
-    'hero.lede': 'Applied science for human optimization. An ecosystem of biohacking, research and education for performance, recovery and longevity.',
-    'hero.cta1': 'View Products', 'hero.cta2': 'Explore Ecosystem', 'hero.scroll': 'Scroll',
+    'hero.eyebrow': 'Research-Grade Compounds · Est. 2024',
+    'hero.h1_pre': 'Precision Peptides for ', 'hero.h1_em': 'Serious Research',
+    'hero.lede': 'PEPTORA supplies research institutions, laboratories and biohacking researchers with rigorously sourced peptides for in-vitro and preclinical study.',
+    'hero.cta1': 'Browse Research Catalog', 'hero.cta2': 'Research Collaborations',
+    'hero.stat1n': '65+', 'hero.stat1l': 'Research Compounds',
+    'hero.stat2n': '9', 'hero.stat2l': 'Research Categories',
+    'hero.stat3n': '100%', 'hero.stat3l': 'RUO Compliant',
 
-    'intro.eyebrow': 'Introduction',
-    'intro.h2': 'Applied science for a better version of you.',
-    'intro.p1': 'We bring scientific innovation and human optimization to those seeking to responsibly improve their quality of life.',
-    'intro.p2': 'We integrate science, biohacking, technology and education into one ecosystem, focused on performance, recovery, body composition and longevity.',
-
-    'eco.eyebrow': 'Brand Divisions',
-    'eco.h2': 'An ecosystem designed for human evolution',
-    'eco.lede': 'Four specialized divisions, one identity: innovation, excellence and applied science.',
-    'eco1.sub': 'Core brand', 'eco1.p': 'Responsible biohacking and scientific education in service of wellness and longevity.',
-    'eco1.tag1': 'Biohacking', 'eco1.tag2': 'Longevity', 'eco1.tag3': 'Cognitive Performance',
-    'eco2.sub': 'Research & Development', 'eco2.p': 'Scientific research and emerging technologies for the future of human optimization.',
-    'eco2.tag1': 'Research', 'eco2.tag2': 'RUO Products',
-    'eco3.sub': 'Peak Physical Performance', 'eco3.p': 'Athletic performance, recovery and body composition based on evidence.',
-    'eco3.tag1': 'Performance', 'eco3.tag2': 'Recovery',
-    'eco4.sub': 'Athletic Lifestyle', 'eco4.p': 'Technical apparel and accessories for a lifestyle focused on movement.',
-    'eco4.tag1': 'Gym Wear', 'eco4.tag2': 'Athleisure',
-
-    'products.eyebrow': 'Catalog',
-    'products.h2': 'Scientific innovation for human optimization',
-    'products.lede': 'Specialized portfolio, organized by research lines.',
-    'products.notice_pre': 'Products', 'products.notice_strong': 'Research Use Only (RUO)',
-    'products.notice_post': 'where applicable. For educational and informational purposes. Not medical advice and not a substitute for professional consultation.',
+    'products.eyebrow': 'Research Catalog',
+    'products.h2': 'Compounds Organized by Research Area',
+    'products.lede': 'Every compound is supplied strictly for laboratory and preclinical research.',
+    'products.notice': 'For laboratory research use only. Not for human consumption, diagnostic or therapeutic use.',
     'filters.all': 'All',
-    'catalog.note_pre': 'For information on our full available catalog, please request it via WhatsApp',
+    'catalog.note_pre': 'For the complete catalog or technical data sheets, contact our research line at',
+    'modal.mech_label': 'Mechanism of Action',
+    'modal.cat_label': 'Research Area',
 
-    'why.eyebrow': 'Why PEPTORA?',
-    'why.h2_pre': 'The human body holds ', 'why.h2_em': 'extraordinary potential', 'why.h2_post': ' with the right tools.',
-    'why.lede': "We bring together modern science on metabolism, recovery and performance in an ecosystem built to evolve constantly.",
-    'why.punch1': "We don't follow trends.", 'why.punch2': 'We bring science to people.',
-    'pillar1.h': 'Applied Science', 'pillar1.p': 'Information based on available evidence.',
-    'pillar2.h': 'Human Optimization', 'pillar2.p': 'Wellness, recovery and metabolism.',
-    'pillar3.h': 'Innovation', 'pillar3.p': 'Emerging technologies in biohacking and longevity.',
-    'pillar4.h': 'Education', 'pillar4.p': 'Clear and responsible content.',
-    'pillar5.h': 'Performance', 'pillar5.p': 'Peak physical and cognitive potential.',
-    'pillar6.h': 'Evolution', 'pillar6.p': 'Continuous improvement as identity.',
+    'trust.eyebrow': 'The PEPTORA Ecosystem',
+    'trust.h2': 'A research-first infrastructure',
+    'trust1.h': 'PEPTORA LABS™', 'trust1.p': 'Research & development, emerging compounds.',
+    'trust2.h': 'PEPTORA PERFORMANCE™', 'trust2.p': 'Cellular & metabolic research models.',
+    'trust3.h': 'PEPTORA ACTIVE™', 'trust3.p': 'Applied research technical gear.',
+    'trust4.h': 'Quality Assurance', 'trust4.p': 'Certificates of Analysis available on request.',
 
-    'manifesto.eyebrow': 'Manifesto',
-    'manifesto.h2_1': 'Evolving is not an option.', 'manifesto.h2_2': "It's a decision.",
-    'manifesto.p1': 'Science is advancing faster than ever — and with it, our understanding of metabolism, aging and human performance.',
-    'manifesto.p2': 'We believe in knowledge before promises.<br>In discipline backed by correct information.<br>In technology in service of quality of life.<br>In longevity as living with energy and purpose.',
-    'manifesto.p3': "We don't sell promises. We build a community that values education and continuous improvement.",
+    'compliance.eyebrow': 'Research Use Only',
+    'compliance.h2': 'Every compound, strictly for research',
+    'compliance.p': 'All PEPTORA compounds are classified <strong>Research Use Only (RUO)</strong>. They are not drugs, dietary supplements, or cosmetics, and are not intended for human or veterinary use, diagnosis, treatment, cure, or prevention of any disease. Products are sold exclusively to qualified researchers, laboratories and institutions for in-vitro and preclinical study, in accordance with the applicable regulations of the purchaser\'s jurisdiction.',
+    'compliance.note': 'By purchasing, the buyer confirms they are a qualified researcher or institution and assumes full responsibility for legal, compliant handling and use.',
 
-    'historia.eyebrow': 'Our History',
-    'historia.h2': 'Where science drives evolution',
-    'historia.lede': 'PEPTORA was born to bring cutting-edge science and biohacking to those seeking more health, energy and performance.',
-    'historia.li1': 'Sleep better.', 'historia.li2': 'Train smarter.', 'historia.li3': 'Understand metabolism.',
-    'historia.li4': 'Support recovery.', 'historia.li5': 'Keep learning.',
-    'tl1.h': 'The Origin', 'tl1.p': 'Human evolution also depends on daily decisions. With that philosophy, PEPTORA — Research Peptide Labs was born.',
-    'tl2.h': 'Ecosystem Growth', 'tl2.p': 'New divisions emerge: PEPTORA LABS™, PERFORMANCE™ and ACTIVE™.',
-    'tl3.h': 'One Shared Purpose', 'tl3.p': 'Each division drives a community that values science and constant evolution.',
-    'tl4.h': 'More Than a Company', 'tl4.p': 'A philosophy of life where science drives evolution.',
+    'about.eyebrow': 'Our Science',
+    'about.h2': 'Behind the research',
+    'about.lede': 'A closer look at the lab, the philosophy and the team — for those who want the full picture.',
+    'acc1.trigger': 'Our Story',
+    'acc1.p1': 'PEPTORA — Research Peptide Labs was founded in 2024 to supply serious researchers with reliably sourced peptides for laboratory study.',
+    'acc1.p2': 'What began as a focused research-supply operation has grown into a multi-division ecosystem spanning compound research, cellular-performance models and applied research gear — always anchored in one principle: rigorous science, transparently sourced.',
+    'acc2.trigger': 'Research Philosophy',
+    'acc2.p1': 'Evidence before claims. Every compound listing reflects published research on mechanism of action — never therapeutic promises.',
+    'acc2.p2': 'We hold ourselves to strict RUO standards: no compound is marketed, described, or sold in a way that implies human application.',
+    'acc3.trigger': 'Mission & Values',
+    'acc3.p1': '<strong>Mission:</strong> to be the most trustworthy supplier of research-grade peptides for laboratories across the Americas.',
+    'acc3.p2': '<strong>Values:</strong> scientific rigor, regulatory transparency, technical accuracy, and responsible research collaboration.',
 
-    'quienes.eyebrow': 'Who We Are',
-    'quienes.h2': 'An ecosystem dedicated to human optimization',
-    'quienes.p1': 'A company focused on human optimization through applied science, education and technological innovation.',
-    'quienes.p2': "We don't replace medical care or promote miracle solutions. We foster continuous learning about how the body works.",
-    'quienes.tag1': 'Responsible Biohacking', 'quienes.tag2': 'Scientific Education', 'quienes.tag3': 'Body Composition',
-    'quienes.tag4': 'Recovery', 'quienes.tag5': 'Longevity',
+    'contact.eyebrow': 'Research & Collaboration',
+    'contact.h2': 'Contact our research line',
+    'contact.lede': 'For research inquiries, technical data sheets, feedback or collaboration opportunities — reach our team directly.',
+    'contact.name': 'Name', 'contact.email': 'Institutional email', 'contact.message': 'Describe your research inquiry',
+    'contact.send': 'Send Inquiry',
+    'contact.phone_us': 'Research Line — USA', 'contact.phone_mx': 'Research Line — Mexico',
+    'contact.address_label': 'Facility Address',
+    'contact.side_note': 'For research, feedback and collaboration purposes only.',
 
-    'filosofia.eyebrow': 'Philosophy',
-    'filosofia.h2': 'Evolution begins with knowledge',
-    'filosofia.lede': 'Six principles support the way we understand human optimization.',
-    'philo1.h': 'Science', 'philo1.p': 'Grounded in evidence and critical thinking.',
-    'philo2.h': 'Education', 'philo2.p': 'Understanding the body to decide better.',
-    'philo3.h': 'Prevention', 'philo3.p': "Investing today in tomorrow's health.",
-    'philo4.h': 'Innovation', 'philo4.p': 'We evolve alongside science.',
-    'philo5.h': 'Responsibility', 'philo5.p': 'Ethical and transparent communication.',
-    'philo6.h': 'Continuous Evolution', 'philo6.p': "There's always room to improve.",
-    'filosofia.closer': "Real biohacking isn't just technology: it's better habits, constant learning and responsibility.",
-
-    'hacemos.eyebrow': 'What We Do',
-    'hacemos.h2': 'Applied science for human potential',
-    'hacemos.lede': 'Four integrated areas serving performance, metabolic health and longevity.',
-    'tab1.label': 'Human Optimization', 'tab1.h': 'Human Optimization',
-    'tab1.desc': 'Evidence-based strategies for overall wellness and sustainable habits.',
-    'tab1.li1': 'Overall Wellness', 'tab1.li2': 'Body Composition', 'tab1.li3': 'Muscle Recovery',
-    'tab1.li4': 'Cognitive Performance', 'tab1.li5': 'Longevity', 'tab1.li6': 'Scientific Education',
-    'tab2.label': 'Biohacking & Technology', 'tab2.h': 'Biohacking and Technology',
-    'tab2.desc': 'Tools to understand physiological status and support optimization with objective data.',
-    'tab2.li1': 'Performance Monitoring', 'tab2.li2': 'Evidence-Based Protocols',
-    'tab2.li3': 'Scientific Innovation', 'tab2.li4': 'Wellness Technology',
-    'tab3.label': 'Research & Development', 'tab3.h': 'Research and Development',
-    'tab3.desc': 'PEPTORA LABS™ explores new technologies and scientific outreach, with RUO products.',
-    'tab3.li1': 'Research Products', 'tab3.li2': 'Scientific Outreach',
-    'tab3.li3': 'Biotech Innovation', 'tab3.li4': 'Emerging Technologies',
-    'tab4.label': 'Apparel & Lifestyle', 'tab4.h': 'Apparel & Lifestyle',
-    'tab4.desc': 'PEPTORA ACTIVE™ accompanies those who live with discipline and peak performance.',
-    'tab4.li1': 'Gym Wear', 'tab4.li2': 'Technical Apparel', 'tab4.li3': 'Premium Athleisure', 'tab4.li4': 'Sports Accessories',
-
-    'valores.eyebrow': 'Values', 'valores.h2': 'The principles that define us',
-    'val1.h': 'Science', 'val1.p': 'The foundation of everything we build.',
-    'val2.h': 'Integrity', 'val2.p': 'Honesty and transparency.',
-    'val3.h': 'Innovation', 'val3.p': 'New ways to optimize the body.',
-    'val4.h': 'Excellence', 'val4.p': 'High standards in everything we do.',
-    'val5.h': 'Education', 'val5.p': 'Informed decisions about wellness.',
-    'val6.h': 'Continuous Evolution', 'val6.p': 'Learning and pushing limits every day.',
-    'val7.h': 'Scientific Responsibility', 'val7.p': 'Ethics and objectivity above all.',
-
-    'mission.eyebrow': 'Mission', 'mission.h': 'Democratizing science applied to wellness',
-    'mission.p': "Building the leading biohacking ecosystem in Latin America, bringing innovation and evidence-based knowledge closer.",
-    'vision.eyebrow': 'Vision', 'vision.h': 'Building the future of human optimization',
-    'vision.p': 'Connecting research, education, technology and lifestyle under one philosophy of continuous evolution.',
-
-    'compliance.eyebrow': 'Commitment to Science',
-    'compliance.h2': 'Ethics, transparency and evidence',
-    'compliance.lede_pre': 'Many molecules and peptides in our ecosystem are',
-    'compliance.lede_em': 'Research Use Only (RUO)',
-    'compliance.lede_post': ', intended exclusively for research, in accordance with applicable jurisdiction.',
-    'comp1.h': 'Evidence-Based Education', 'comp1.p': 'Information grounded in scientific literature.',
-    'comp2.h': 'Transparency', 'comp2.p': 'We distinguish established evidence from emerging research.',
-    'comp3.h': 'Scientific Responsibility', 'comp3.p': 'We discourage unrealistic expectations.',
-    'comp4.h': 'Ongoing Research', 'comp4.p': 'Continuous updates as evidence evolves.',
-    'notice.strong': 'Important notice:',
-    'notice.text': 'information for educational purposes. Does not constitute medical advice or replace professional consultation. RUO products are intended exclusively for research and must be used in accordance with applicable law.',
-
-    'contact.eyebrow': 'Contact', 'contact.h2': "We're here to help",
-    'contact.lede': 'Reach out to learn more about our products and divisions.',
-    'contact.name': 'Name', 'contact.email': 'Your email', 'contact.message': 'What information do you need?',
-    'contact.send': 'Send Message', 'contact.whatsapp': 'WhatsApp',
-    'contact.side_note': 'Direct, personal response — no intermediaries.',
-
-    'footer.tag': 'Science · Performance · Longevity · Evolution',
+    'footer.tag': 'Research-Grade Peptides Since 2024',
     'footer.rights': 'All rights reserved.',
+    'footer.disclaimer': 'All products are sold strictly for laboratory research use. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.',
 
-    'form.sending': 'Sending…', 'form.ok': "Message sent! We'll get back to you soon.",
-    'form.err': "Couldn't send. Please message us on WhatsApp.",
-    'mech.label': 'Mechanism of Action',
+    'form.sending': 'Sending…', 'form.ok': "Inquiry sent. Our research team will follow up shortly.",
+    'form.err': "Couldn't send. Please contact us via phone.",
   },
   es: {
-    'nav.inicio': 'Inicio', 'nav.ecosistema': 'Ecosistema', 'nav.productos': 'Productos',
-    'nav.historia': 'Historia', 'nav.filosofia': 'Filosofía', 'nav.contacto': 'Contacto',
+    'nav.home': 'Inicio', 'nav.products': 'Péptidos de Investigación', 'nav.science': 'Nuestra Ciencia', 'nav.contact': 'Contacto',
+    'disclaimer.text': 'Uso exclusivo de laboratorio e investigación. No apto para consumo humano.',
 
-    'hero.eyebrow': 'Ciencia · Rendimiento · Longevidad · Evolución',
-    'hero.lede': 'Ciencia aplicada a la optimización humana. Un ecosistema de biohacking, investigación y educación para el rendimiento, la recuperación y la longevidad.',
-    'hero.cta1': 'Ver productos', 'hero.cta2': 'Explorar ecosistema', 'hero.scroll': 'Desplázate',
+    'hero.eyebrow': 'Compuestos de Grado Investigación · Fundada en 2024',
+    'hero.h1_pre': 'Péptidos de Precisión para ', 'hero.h1_em': 'Investigación Seria',
+    'hero.lede': 'PEPTORA abastece a instituciones de investigación, laboratorios e investigadores de biohacking con péptidos rigurosamente obtenidos para estudios in vitro y preclínicos.',
+    'hero.cta1': 'Ver Catálogo de Investigación', 'hero.cta2': 'Colaboraciones de Investigación',
+    'hero.stat1n': '65+', 'hero.stat1l': 'Compuestos de Investigación',
+    'hero.stat2n': '9', 'hero.stat2l': 'Categorías de Investigación',
+    'hero.stat3n': '100%', 'hero.stat3l': 'Cumplimiento RUO',
 
-    'intro.eyebrow': 'Introducción',
-    'intro.h2': 'Ciencia aplicada para una mejor versión de ti.',
-    'intro.p1': 'Acercamos la innovación científica y la optimización humana a quienes buscan mejorar su calidad de vida con responsabilidad.',
-    'intro.p2': 'Integramos ciencia, biohacking, tecnología y educación en un mismo ecosistema, enfocado en rendimiento, recuperación, composición corporal y longevidad.',
-
-    'eco.eyebrow': 'Divisiones de marca',
-    'eco.h2': 'Un ecosistema diseñado para la evolución humana',
-    'eco.lede': 'Cuatro divisiones especializadas, una misma identidad: innovación, excelencia y ciencia aplicada.',
-    'eco1.sub': 'Núcleo de marca', 'eco1.p': 'Biohacking responsable y educación científica al servicio del bienestar y la longevidad.',
-    'eco1.tag1': 'Biohacking', 'eco1.tag2': 'Longevidad', 'eco1.tag3': 'Rendimiento cognitivo',
-    'eco2.sub': 'Investigación & desarrollo', 'eco2.p': 'Investigación científica y tecnologías emergentes para el futuro de la optimización humana.',
-    'eco2.tag1': 'Investigación', 'eco2.tag2': 'Productos RUO',
-    'eco3.sub': 'Máximo rendimiento físico', 'eco3.p': 'Desempeño deportivo, recuperación y composición corporal basados en evidencia.',
-    'eco3.tag1': 'Rendimiento', 'eco3.tag2': 'Recuperación',
-    'eco4.sub': 'Lifestyle deportivo', 'eco4.p': 'Apparel técnico y accesorios para un estilo de vida enfocado en el movimiento.',
-    'eco4.tag1': 'Gym Wear', 'eco4.tag2': 'Athleisure',
-
-    'products.eyebrow': 'Catálogo',
-    'products.h2': 'Innovación científica para la optimización humana',
-    'products.lede': 'Portafolio especializado, organizado por líneas de investigación.',
-    'products.notice_pre': 'Productos', 'products.notice_strong': 'Research Use Only (RUO)',
-    'products.notice_post': 'cuando corresponda. Fines educativos e informativos. No constituyen asesoría médica ni sustituyen consulta profesional.',
+    'products.eyebrow': 'Catálogo de Investigación',
+    'products.h2': 'Compuestos Organizados por Área de Investigación',
+    'products.lede': 'Cada compuesto se suministra estrictamente para investigación de laboratorio y preclínica.',
+    'products.notice': 'Uso exclusivo de laboratorio e investigación. No apto para consumo humano, uso diagnóstico ni terapéutico.',
     'filters.all': 'Todos',
-    'catalog.note_pre': 'Si deseas obtener información sobre el catálogo disponible, favor de solicitarlo al número de WhatsApp',
+    'catalog.note_pre': 'Para el catálogo completo o fichas técnicas, contacta nuestra línea de investigación al',
+    'modal.mech_label': 'Mecanismo de Acción',
+    'modal.cat_label': 'Área de Investigación',
 
-    'why.eyebrow': '¿Por qué PEPTORA?',
-    'why.h2_pre': 'El cuerpo humano tiene un ', 'why.h2_em': 'potencial extraordinario', 'why.h2_post': ' con las herramientas adecuadas.',
-    'why.lede': 'Reunimos ciencia moderna sobre metabolismo, recuperación y rendimiento en un ecosistema pensado para evolucionar constantemente.',
-    'why.punch1': 'No seguimos tendencias.', 'why.punch2': 'Acercamos la ciencia a las personas.',
-    'pillar1.h': 'Ciencia Aplicada', 'pillar1.p': 'Información basada en evidencia disponible.',
-    'pillar2.h': 'Optimización Humana', 'pillar2.p': 'Bienestar, recuperación y metabolismo.',
-    'pillar3.h': 'Innovación', 'pillar3.p': 'Tecnologías emergentes en biohacking y longevidad.',
-    'pillar4.h': 'Educación', 'pillar4.p': 'Contenido claro y responsable.',
-    'pillar5.h': 'Rendimiento', 'pillar5.p': 'Máximo potencial físico y cognitivo.',
-    'pillar6.h': 'Evolución', 'pillar6.p': 'Mejora continua como identidad.',
+    'trust.eyebrow': 'El Ecosistema PEPTORA',
+    'trust.h2': 'Una infraestructura orientada a la investigación',
+    'trust1.h': 'PEPTORA LABS™', 'trust1.p': 'Investigación y desarrollo, compuestos emergentes.',
+    'trust2.h': 'PEPTORA PERFORMANCE™', 'trust2.p': 'Modelos de investigación celular y metabólica.',
+    'trust3.h': 'PEPTORA ACTIVE™', 'trust3.p': 'Equipo técnico para investigación aplicada.',
+    'trust4.h': 'Control de Calidad', 'trust4.p': 'Certificados de Análisis disponibles a solicitud.',
 
-    'manifesto.eyebrow': 'Manifiesto',
-    'manifesto.h2_1': 'Evolucionar no es una opción.', 'manifesto.h2_2': 'Es una decisión.',
-    'manifesto.p1': 'La ciencia avanza más rápido que nunca — y con ella, nuestra comprensión del metabolismo, el envejecimiento y el rendimiento humano.',
-    'manifesto.p2': 'Creemos en el conocimiento antes que en la promesa.<br>En la disciplina respaldada por información correcta.<br>En la tecnología al servicio de la calidad de vida.<br>En la longevidad como vivir con energía y propósito.',
-    'manifesto.p3': 'No vendemos promesas. Construimos una comunidad que valora la educación y la mejora continua.',
+    'compliance.eyebrow': 'Uso Exclusivo de Investigación',
+    'compliance.h2': 'Cada compuesto, estrictamente para investigación',
+    'compliance.p': 'Todos los compuestos de PEPTORA están clasificados como <strong>Research Use Only (RUO)</strong>. No son medicamentos, suplementos alimenticios ni cosméticos, y no están destinados al uso humano o veterinario, diagnóstico, tratamiento, cura o prevención de ninguna enfermedad. Los productos se venden exclusivamente a investigadores, laboratorios e instituciones calificadas para estudio in vitro y preclínico, conforme a la normativa aplicable en la jurisdicción del comprador.',
+    'compliance.note': 'Al realizar la compra, el comprador confirma ser un investigador o institución calificada y asume total responsabilidad por el manejo y uso legal y conforme a la normativa.',
 
-    'historia.eyebrow': 'Nuestra Historia',
-    'historia.h2': 'Donde la ciencia impulsa la evolución',
-    'historia.lede': 'PEPTORA nace para acercar la ciencia de vanguardia y el biohacking a quienes buscan más salud, energía y rendimiento.',
-    'historia.li1': 'Dormir mejor.', 'historia.li2': 'Entrenar con inteligencia.', 'historia.li3': 'Comprender el metabolismo.',
-    'historia.li4': 'Favorecer la recuperación.', 'historia.li5': 'Aprender continuamente.',
-    'tl1.h': 'El origen', 'tl1.p': 'La evolución humana depende también de las decisiones diarias. Con esa filosofía nace PEPTORA — Research Peptide Labs.',
-    'tl2.h': 'Crecimiento del ecosistema', 'tl2.p': 'Surgen nuevas divisiones: PEPTORA LABS™, PERFORMANCE™ y ACTIVE™.',
-    'tl3.h': 'Un mismo propósito', 'tl3.p': 'Cada división impulsa una comunidad que valora la ciencia y la evolución constante.',
-    'tl4.h': 'Más que una empresa', 'tl4.p': 'Una filosofía de vida donde la ciencia impulsa la evolución.',
+    'about.eyebrow': 'Nuestra Ciencia',
+    'about.h2': 'Detrás de la investigación',
+    'about.lede': 'Un vistazo más de cerca al laboratorio, la filosofía y el equipo — para quienes quieren el panorama completo.',
+    'acc1.trigger': 'Nuestra Historia',
+    'acc1.p1': 'PEPTORA — Research Peptide Labs se fundó en 2024 para abastecer a investigadores serios con péptidos confiables para estudio de laboratorio.',
+    'acc1.p2': 'Lo que comenzó como una operación enfocada en el suministro para investigación ha crecido hasta convertirse en un ecosistema multidivisional que abarca investigación de compuestos, modelos de rendimiento celular y equipo de investigación aplicada — siempre anclado en un principio: ciencia rigurosa, obtenida con transparencia.',
+    'acc2.trigger': 'Filosofía de Investigación',
+    'acc2.p1': 'Evidencia antes que afirmaciones. Cada ficha de compuesto refleja investigación publicada sobre su mecanismo de acción — nunca promesas terapéuticas.',
+    'acc2.p2': 'Nos sujetamos a estándares RUO estrictos: ningún compuesto se comercializa, describe o vende de forma que implique aplicación humana.',
+    'acc3.trigger': 'Misión y Valores',
+    'acc3.p1': '<strong>Misión:</strong> ser el proveedor más confiable de péptidos de grado investigación para laboratorios en toda América.',
+    'acc3.p2': '<strong>Valores:</strong> rigor científico, transparencia regulatoria, precisión técnica y colaboración responsable en investigación.',
 
-    'quienes.eyebrow': 'Quiénes Somos',
-    'quienes.h2': 'Un ecosistema dedicado a la optimización humana',
-    'quienes.p1': 'Empresa orientada a la optimización humana mediante ciencia aplicada, educación e innovación tecnológica.',
-    'quienes.p2': 'No reemplazamos la atención médica ni promovemos soluciones milagrosas. Fomentamos el aprendizaje continuo sobre cómo funciona el organismo.',
-    'quienes.tag1': 'Biohacking responsable', 'quienes.tag2': 'Educación científica', 'quienes.tag3': 'Composición corporal',
-    'quienes.tag4': 'Recuperación', 'quienes.tag5': 'Longevidad',
+    'contact.eyebrow': 'Investigación y Colaboración',
+    'contact.h2': 'Contacta nuestra línea de investigación',
+    'contact.lede': 'Para consultas de investigación, fichas técnicas, retroalimentación u oportunidades de colaboración — contacta directamente a nuestro equipo.',
+    'contact.name': 'Nombre', 'contact.email': 'Correo institucional', 'contact.message': 'Describe tu consulta de investigación',
+    'contact.send': 'Enviar Consulta',
+    'contact.phone_us': 'Línea de Investigación — EE.UU.', 'contact.phone_mx': 'Línea de Investigación — México',
+    'contact.address_label': 'Dirección de la Instalación',
+    'contact.side_note': 'Solo para fines de investigación, retroalimentación y colaboración.',
 
-    'filosofia.eyebrow': 'Filosofía',
-    'filosofia.h2': 'La evolución comienza con el conocimiento',
-    'filosofia.lede': 'Seis principios sostienen nuestra manera de entender la optimización humana.',
-    'philo1.h': 'Ciencia', 'philo1.p': 'Sustentada en evidencia y pensamiento crítico.',
-    'philo2.h': 'Educación', 'philo2.p': 'Comprender el cuerpo para decidir mejor.',
-    'philo3.h': 'Prevención', 'philo3.p': 'Invertir hoy en la salud del futuro.',
-    'philo4.h': 'Innovación', 'philo4.p': 'Evolucionamos junto con la ciencia.',
-    'philo5.h': 'Responsabilidad', 'philo5.p': 'Comunicación ética y transparente.',
-    'philo6.h': 'Evolución Continua', 'philo6.p': 'Siempre hay una oportunidad de mejora.',
-    'filosofia.closer': 'El biohacking real no es solo tecnología: es mejores hábitos, aprendizaje constante y responsabilidad.',
-
-    'hacemos.eyebrow': 'Qué Hacemos',
-    'hacemos.h2': 'Ciencia aplicada al potencial humano',
-    'hacemos.lede': 'Cuatro áreas integradas al servicio del rendimiento, la salud metabólica y la longevidad.',
-    'tab1.label': 'Optimización Humana', 'tab1.h': 'Optimización Humana',
-    'tab1.desc': 'Estrategias respaldadas por evidencia para el bienestar integral y hábitos sostenibles.',
-    'tab1.li1': 'Bienestar integral', 'tab1.li2': 'Composición corporal', 'tab1.li3': 'Recuperación muscular',
-    'tab1.li4': 'Rendimiento cognitivo', 'tab1.li5': 'Longevidad', 'tab1.li6': 'Educación científica',
-    'tab2.label': 'Biohacking & Tecnología', 'tab2.h': 'Biohacking y Tecnología',
-    'tab2.desc': 'Herramientas para conocer el estado fisiológico y apoyar la optimización con datos objetivos.',
-    'tab2.li1': 'Monitoreo del rendimiento', 'tab2.li2': 'Protocolos basados en evidencia',
-    'tab2.li3': 'Innovación científica', 'tab2.li4': 'Tecnología aplicada al bienestar',
-    'tab3.label': 'Investigación & Desarrollo', 'tab3.h': 'Investigación y Desarrollo',
-    'tab3.desc': 'PEPTORA LABS™ explora nuevas tecnologías y divulgación científica, con productos RUO.',
-    'tab3.li1': 'Productos para investigación', 'tab3.li2': 'Divulgación científica',
-    'tab3.li3': 'Innovación biotecnológica', 'tab3.li4': 'Tecnologías emergentes',
-    'tab4.label': 'Apparel & Lifestyle', 'tab4.h': 'Apparel & Lifestyle',
-    'tab4.desc': 'PEPTORA ACTIVE™ acompaña a quienes viven con disciplina y alto rendimiento.',
-    'tab4.li1': 'Gym Wear', 'tab4.li2': 'Apparel técnico', 'tab4.li3': 'Athleisure Premium', 'tab4.li4': 'Accesorios deportivos',
-
-    'valores.eyebrow': 'Valores', 'valores.h2': 'Los principios que nos definen',
-    'val1.h': 'Ciencia', 'val1.p': 'Base de todo lo que construimos.',
-    'val2.h': 'Integridad', 'val2.p': 'Honestidad y transparencia.',
-    'val3.h': 'Innovación', 'val3.p': 'Nuevas formas de optimizar el organismo.',
-    'val4.h': 'Excelencia', 'val4.p': 'Altos estándares en todo lo que hacemos.',
-    'val5.h': 'Educación', 'val5.p': 'Decisiones informadas sobre bienestar.',
-    'val6.h': 'Evolución Continua', 'val6.p': 'Aprender y superar límites cada día.',
-    'val7.h': 'Responsabilidad Científica', 'val7.p': 'Ética y objetividad ante todo.',
-
-    'mission.eyebrow': 'Misión', 'mission.h': 'Democratizar la ciencia aplicada al bienestar',
-    'mission.p': 'Construir el ecosistema líder de biohacking en Latinoamérica, acercando innovación y conocimiento respaldado por evidencia.',
-    'vision.eyebrow': 'Visión', 'vision.h': 'Construir el futuro de la optimización humana',
-    'vision.p': 'Conectar investigación, educación, tecnología y estilo de vida bajo una misma filosofía de evolución continua.',
-
-    'compliance.eyebrow': 'Compromiso con la ciencia',
-    'compliance.h2': 'Ética, transparencia y evidencia',
-    'compliance.lede_pre': 'Muchas moléculas y péptidos de nuestro ecosistema son',
-    'compliance.lede_em': 'Research Use Only (RUO)',
-    'compliance.lede_post': ', exclusivamente para investigación, conforme a la jurisdicción correspondiente.',
-    'comp1.h': 'Educación basada en evidencia', 'comp1.p': 'Información fundamentada en literatura científica.',
-    'comp2.h': 'Transparencia', 'comp2.p': 'Diferenciamos evidencia consolidada de investigación emergente.',
-    'comp3.h': 'Responsabilidad científica', 'comp3.p': 'Desalentamos expectativas poco realistas.',
-    'comp4.h': 'Investigación continua', 'comp4.p': 'Actualización permanente con la evidencia disponible.',
-    'notice.strong': 'Aviso importante:',
-    'notice.text': 'información con fines educativos. No constituye asesoría médica ni sustituye consulta profesional. Los productos RUO están destinados exclusivamente a investigación y deben usarse conforme a la legislación vigente.',
-
-    'contact.eyebrow': 'Contacto', 'contact.h2': 'Estamos para ayudarte',
-    'contact.lede': 'Escríbenos para conocer más sobre nuestros productos y divisiones.',
-    'contact.name': 'Nombre', 'contact.email': 'Tu correo', 'contact.message': '¿Qué información necesitas?',
-    'contact.send': 'Enviar mensaje', 'contact.whatsapp': 'WhatsApp',
-    'contact.side_note': 'Respuesta directa y personalizada, sin intermediarios.',
-
-    'footer.tag': 'Ciencia · Rendimiento · Longevidad · Evolución',
+    'footer.tag': 'Péptidos de Grado Investigación Desde 2024',
     'footer.rights': 'Todos los derechos reservados.',
+    'footer.disclaimer': 'Todos los productos se venden estrictamente para uso de investigación de laboratorio. No aptos para uso humano o veterinario, consumo, diagnóstico, tratamiento, cura o prevención de enfermedades.',
 
-    'form.sending': 'Enviando…', 'form.ok': '¡Mensaje enviado! Te responderemos pronto.',
-    'form.err': 'No se pudo enviar. Escríbenos por WhatsApp.',
-    'mech.label': 'Mecanismo de acción',
+    'form.sending': 'Enviando…', 'form.ok': 'Consulta enviada. Nuestro equipo de investigación dará seguimiento pronto.',
+    'form.err': 'No se pudo enviar. Contáctanos por teléfono.',
   },
 };
 
 let CURRENT_LANG = 'en';
-
-function t(key) {
-  return (I18N[CURRENT_LANG] && I18N[CURRENT_LANG][key]) || (I18N.en[key] || key);
-}
+function t(key) { return (I18N[CURRENT_LANG] && I18N[CURRENT_LANG][key]) || I18N.en[key] || key; }
 
 function applyTranslations() {
   document.documentElement.lang = CURRENT_LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder'))); });
 
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    el.textContent = t(key);
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    el.innerHTML = t(key);
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    el.setAttribute('placeholder', t(key));
-  });
-
-  // Category filter pill labels (category id lives in data-filter)
   document.querySelectorAll('.filter-pill').forEach(pill => {
     const filter = pill.getAttribute('data-filter');
-    if (filter === 'all') { pill.textContent = t('filters.all'); }
-    else if (CAT_LABELS[CURRENT_LANG][filter]) { pill.textContent = CAT_LABELS[CURRENT_LANG][filter]; }
+    if (filter === 'all') pill.textContent = t('filters.all');
+    else if (CAT_LABELS[CURRENT_LANG][filter]) pill.textContent = CAT_LABELS[CURRENT_LANG][filter];
   });
 
   const langLabel = document.getElementById('langLabel');
   if (langLabel) langLabel.textContent = CURRENT_LANG === 'en' ? 'ES' : 'EN';
 
   renderProducts();
+  buildMarquee();
 }
 
 function setLanguage(lang) {
@@ -560,97 +386,132 @@ function setLanguage(lang) {
 function initLanguage() {
   let saved = null;
   try { saved = localStorage.getItem('peptora_lang'); } catch (e) {}
-  CURRENT_LANG = saved === 'es' ? 'es' : 'en'; // English default
-
+  CURRENT_LANG = saved === 'es' ? 'es' : 'en';
   const toggle = document.getElementById('langToggle');
-  if (toggle) {
-    toggle.addEventListener('click', () => setLanguage(CURRENT_LANG === 'en' ? 'es' : 'en'));
-  }
+  if (toggle) toggle.addEventListener('click', () => setLanguage(CURRENT_LANG === 'en' ? 'es' : 'en'));
   applyTranslations();
 }
 
 // ============================================================================
-// Product catalog rendering
+// Hero marquee — scrolling compound names for immediate visual dynamism
+// ============================================================================
+function buildMarquee() {
+  const track = document.getElementById('marqueeTrack');
+  if (!track) return;
+  const names = PEPTORA_PRODUCTS.filter(p => p.cat !== 'supplies').map(nameOf);
+  const row = names.join(' &nbsp;·&nbsp; ') + ' &nbsp;·&nbsp; ';
+  track.innerHTML = row + row; // duplicate for seamless loop
+}
+
+// ============================================================================
+// Product catalog rendering — grid + modal (mobile-safe, no inline reflow)
 // ============================================================================
 function renderProducts() {
   const grid = document.getElementById('productGrid');
   const countEl = document.getElementById('productCount');
   if (!grid) return;
-
   const lang = CURRENT_LANG;
-  const productWord = lang === 'es' ? 'producto' : 'product';
 
   grid.innerHTML = PEPTORA_PRODUCTS.map((p, i) => {
     const name = nameOf(p);
     const catLabel = CAT_LABELS[lang][p.cat] || p.cat;
     return `
-    <div class="product-card show" data-cat="${p.cat}" data-idx="${i}">
+    <button class="product-card" data-cat="${p.cat}" data-idx="${i}" type="button">
       <span class="pc-cat">${catLabel}</span>
-      <h4>${name}<svg class="pc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></h4>
+      <h4>${name}</h4>
       <p>${p.desc[lang]}</p>
-      <div class="pc-mech"><div class="pc-mech-inner"><span class="pc-mech-label">${t('mech.label')}</span><p>${p.mech[lang]}</p></div></div>
-    </div>
-  `;
+      <span class="pc-more">${lang === 'es' ? 'Ver detalles' : 'View details'} →</span>
+    </button>`;
   }).join('');
 
   const total = PEPTORA_PRODUCTS.length;
-  countEl && (countEl.textContent = lang === 'es' ? `${total} productos` : `${total} products`);
+  countEl && (countEl.textContent = lang === 'es' ? `${total} compuestos` : `${total} compounds`);
 
   grid.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('expanded'));
+    card.addEventListener('click', () => openProductModal(parseInt(card.getAttribute('data-idx'), 10)));
   });
 
   const pills = document.querySelectorAll('.filter-pill');
-  const cards = () => document.querySelectorAll('.product-card');
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       const filter = pill.getAttribute('data-filter');
       let visible = 0;
-      cards().forEach(card => {
+      grid.querySelectorAll('.product-card').forEach(card => {
         const match = filter === 'all' || card.getAttribute('data-cat') === filter;
-        card.classList.toggle('show', match);
+        card.style.display = match ? '' : 'none';
         if (match) visible++;
       });
-      if (countEl) countEl.textContent = `${visible} ${productWord}${visible === 1 ? '' : (lang === 'es' ? 's' : 's')}`;
+      if (countEl) countEl.textContent = lang === 'es' ? `${visible} compuestos` : `${visible} compounds`;
     });
-  }, { once: false });
+  });
+}
+
+// ---- Product detail modal ----
+function openProductModal(idx) {
+  const p = PEPTORA_PRODUCTS[idx];
+  if (!p) return;
+  const lang = CURRENT_LANG;
+  document.getElementById('pmCat').textContent = CAT_LABELS[lang][p.cat] || p.cat;
+  document.getElementById('pmName').textContent = nameOf(p);
+  document.getElementById('pmDesc').textContent = p.desc[lang];
+  document.getElementById('pmMechLabel').textContent = t('modal.mech_label');
+  document.getElementById('pmMech').textContent = p.mech[lang];
+
+  const modal = document.getElementById('productModal');
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function initModal() {
+  const modal = document.getElementById('productModal');
+  if (!modal) return;
+  modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeProductModal));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProductModal(); });
 }
 
 // ============================================================================
-// Contact form — destination address assembled at runtime, never in plain
-// text in the page source, and sent via FormSubmit's AJAX endpoint so the
-// static site never needs a backend of its own.
+// Accordion (About / Our Science section)
+// ============================================================================
+function initAccordion() {
+  document.querySelectorAll('.acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.acc-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+}
+
+// ============================================================================
+// Contact form — destination assembled at runtime, sent via FormSubmit AJAX
 // ============================================================================
 function initContactForm() {
   const form = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');
   if (!form) return;
-
   const u = ['p','e','p','t','o','r','a','m','x'].join('');
   const d = ['g','m','a','i','l','.','c','o','m'].join('');
   const dest = u + String.fromCharCode(64) + d;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (form.querySelector('.hp-field').value) return; // honeypot
-
+    if (form.querySelector('.hp-field').value) return;
     status.textContent = t('form.sending');
     status.className = 'form-status';
-
     const data = new FormData(form);
-    data.append('_subject', 'New contact — PEPTORA');
+    data.append('_subject', 'New research inquiry — PEPTORA');
     data.append('_template', 'table');
     data.append('_captcha', 'false');
-
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${dest}`, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
-      });
-      if (!res.ok) throw new Error('request failed');
+      const res = await fetch(`https://formsubmit.co/ajax/${dest}`, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      if (!res.ok) throw new Error('failed');
       status.textContent = t('form.ok');
       status.className = 'form-status ok';
       form.reset();
@@ -665,8 +526,10 @@ function initContactForm() {
 // Init
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  initLanguage();       // sets CURRENT_LANG, applies translations, renders products
+  initLanguage();
   initContactForm();
+  initModal();
+  initAccordion();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -675,42 +538,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainNav = document.getElementById('mainNav');
   if (navToggle && mainNav) {
     navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
-    mainNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mainNav.classList.remove('open'));
-    });
+    mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mainNav.classList.remove('open')));
   }
 
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('in'));
   }
 
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabPanels = document.querySelectorAll('.tab-panel');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-tab');
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      const panel = document.getElementById(target);
-      if (panel) panel.classList.add('active');
-    });
-  });
-
   const header = document.querySelector('.site-header');
   const onScroll = () => {
-    header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(191,160,84,.45)' : 'rgba(0,0,0,.08)';
+    header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(180,186,194,.35)' : 'rgba(255,255,255,.08)';
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
