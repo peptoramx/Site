@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const header = document.querySelector('.site-header');
   const onScroll = () => {
-    header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(180,186,194,.35)' : 'rgba(255,255,255,.08)';
+    header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(191,160,84,.4)' : 'rgba(0,0,0,.08)';
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
