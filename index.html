@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>PEPTORA — Research Peptide Labs | Research-Grade Peptides</title>
-<meta name="description" content="PEPTORA — Research Peptide Labs. Research-grade peptides for laboratory and preclinical study. For research use only. Not for human consumption.">
+<title>PEPTORA — Research Peptide Labs | Research Reference, Not for Sale</title>
+<meta name="description" content="PEPTORA — an independent research-reference resource on peptide compounds for laboratories and biohacking researchers. Not for sale. For research use only.">
 
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#111315">
+<meta name="theme-color" content="#101214">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -28,7 +28,7 @@
 <body>
 
 <!-- ============ DISCLAIMER STRIP ============ -->
-<div class="disclaimer-strip" data-i18n="disclaimer.text">For laboratory research use only. Not for human consumption.</div>
+<div class="disclaimer-strip" data-i18n="disclaimer.text">Reference information only — not for sale. Laboratory research use only. Not for human consumption.</div>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header">
@@ -59,20 +59,20 @@
 <section class="hero" id="inicio">
   <div class="hero-glow"></div>
   <div class="wrap hero-wrap">
-    <div class="eyebrow" data-i18n="hero.eyebrow">Research-Grade Compounds · Est. 2024</div>
+    <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Research Reference · Est. 2024</div>
     <h1><span data-i18n="hero.h1_pre">Precision Peptides for </span><em data-i18n="hero.h1_em">Serious Research</em></h1>
-    <p class="lede" data-i18n="hero.lede">PEPTORA supplies research institutions, laboratories and biohacking researchers with rigorously sourced peptides for in-vitro and preclinical study.</p>
+    <p class="lede" data-i18n="hero.lede">PEPTORA is an independent research-reference resource for laboratories, institutions and biohacking researchers studying peptide compounds in vitro and preclinically. This site does not sell products.</p>
     <div class="hero-actions">
       <a href="#productos" class="btn btn-primary">
-        <span data-i18n="hero.cta1">Browse Research Catalog</span>
+        <span data-i18n="hero.cta1">Browse Research Reference</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="#contacto" class="btn btn-ghost" data-i18n="hero.cta2">Research Collaborations</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-n" data-i18n="hero.stat1n">65+</span><span class="stat-l" data-i18n="hero.stat1l">Research Compounds</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat1n">65+</span><span class="stat-l" data-i18n="hero.stat1l">Compounds Referenced</span></div>
       <div class="stat"><span class="stat-n" data-i18n="hero.stat2n">9</span><span class="stat-l" data-i18n="hero.stat2l">Research Categories</span></div>
-      <div class="stat"><span class="stat-n" data-i18n="hero.stat3n">100%</span><span class="stat-l" data-i18n="hero.stat3l">RUO Compliant</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat3n">100%</span><span class="stat-l" data-i18n="hero.stat3l">RUO Framing</span></div>
     </div>
   </div>
   <div class="marquee">
@@ -80,13 +80,13 @@
   </div>
 </section>
 
-<!-- ============ PRODUCTS — promoted to top ============ -->
+<!-- ============ PRODUCTS — static reference grid, no click/expand ============ -->
 <section class="section-pad products-section" id="productos">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow" data-i18n="products.eyebrow">Research Catalog</div>
+      <div class="eyebrow" data-i18n="products.eyebrow">Research Reference</div>
       <h2 data-i18n="products.h2">Compounds Organized by Research Area</h2>
-      <p class="lede" data-i18n="products.lede">Every compound is supplied strictly for laboratory and preclinical research.</p>
+      <p class="lede" data-i18n="products.lede">A reference library for laboratory and preclinical research — not a storefront.</p>
     </div>
 
     <div class="filter-row reveal" id="filterRow">
@@ -105,27 +105,10 @@
     <div class="product-grid reveal" id="productGrid"></div>
     <div class="product-count" id="productCount"></div>
 
-    <p class="catalog-note reveal"><span data-i18n="catalog.note_pre">For the complete catalog or technical data sheets, contact our research line at</span> <a href="tel:+526621381401">+52 662 138 1401</a>.</p>
-    <p class="products-notice reveal" data-i18n="products.notice">For laboratory research use only. Not for human consumption, diagnostic or therapeutic use.</p>
+    <p class="catalog-note reveal"><span data-i18n="catalog.note_pre">For technical data sheets or research collaboration, contact our line at</span> <a href="tel:+17316665112">+1 731-666-5112</a>.</p>
+    <p class="products-notice reveal" data-i18n="products.notice">For laboratory research reference only. Not for human consumption, diagnostic or therapeutic use. Not for sale.</p>
   </div>
 </section>
-
-<!-- ============ PRODUCT DETAIL MODAL ============ -->
-<div class="product-modal" id="productModal" aria-hidden="true">
-  <div class="product-modal-backdrop" data-close></div>
-  <div class="product-modal-panel" role="dialog" aria-modal="true">
-    <button class="product-modal-close" data-close aria-label="Close">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <span class="pc-cat" id="pmCat"></span>
-    <h3 id="pmName"></h3>
-    <p id="pmDesc"></p>
-    <div class="pm-mech">
-      <span class="pm-mech-label" id="pmMechLabel"></span>
-      <p id="pmMech"></p>
-    </div>
-  </div>
-</div>
 
 <!-- ============ TRUST / ECOSYSTEM STRIP ============ -->
 <section class="section-pad trust-strip">
@@ -149,22 +132,22 @@
       </div>
       <div class="trust-item">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4 27 8v8c0 7-5 11-11 12C10 27 5 23 5 16V8Z"/><path d="M12 16l3 3 5-6"/></svg>
-        <h4 data-i18n="trust4.h">Quality Assurance</h4><p data-i18n="trust4.p">Certificates of Analysis available on request.</p>
+        <h4 data-i18n="trust4.h">Quality Reference</h4><p data-i18n="trust4.p">Certificate of Analysis data referenced on request.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ COMPLIANCE / RUO NOTICE ============ -->
+<!-- ============ COMPLIANCE — NOT FOR SALE ============ -->
 <section class="section-pad compliance">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow" data-i18n="compliance.eyebrow">Research Use Only</div>
-      <h2 data-i18n="compliance.h2">Every compound, strictly for research</h2>
-      <p class="lede" data-i18n-html="compliance.p">All PEPTORA compounds are classified <strong>Research Use Only (RUO)</strong>. They are not drugs, dietary supplements, or cosmetics, and are not intended for human or veterinary use, diagnosis, treatment, cure, or prevention of any disease. Products are sold exclusively to qualified researchers, laboratories and institutions for in-vitro and preclinical study, in accordance with the applicable regulations of the purchaser's jurisdiction.</p>
+      <div class="eyebrow" data-i18n="compliance.eyebrow">Research Use Only — Not for Sale</div>
+      <h2 data-i18n="compliance.h2">A reference resource, not a store</h2>
+      <p class="lede" data-i18n-html="compliance.p">PEPTORA does not sell peptides or research compounds. This website is an independent <strong>informational and educational reference</strong> for the research and biohacking community. All compounds referenced are classified <strong>Research Use Only (RUO)</strong>: they are not drugs, dietary supplements, or cosmetics, and none of the information here is intended for human or veterinary use, diagnosis, treatment, cure, or prevention of any disease.</p>
     </div>
     <div class="notice-box reveal">
-      <span data-i18n="compliance.note">By purchasing, the buyer confirms they are a qualified researcher or institution and assumes full responsibility for legal, compliant handling and use.</span>
+      <span data-i18n="compliance.note">Access to detailed compound information is intended for researchers, laboratories and institutions, who assume full responsibility for the legal and compliant use of any research they conduct.</span>
     </div>
   </div>
 </section>
@@ -175,27 +158,27 @@
     <div class="section-head reveal">
       <div class="eyebrow" data-i18n="about.eyebrow">Our Science</div>
       <h2 data-i18n="about.h2">Behind the research</h2>
-      <p class="lede" data-i18n="about.lede">A closer look at the lab, the philosophy and the team — for those who want the full picture.</p>
+      <p class="lede" data-i18n="about.lede">A closer look at the philosophy and the team — for those who want the full picture.</p>
     </div>
     <div class="accordion reveal">
       <div class="acc-item">
         <button class="acc-trigger"><span data-i18n="acc1.trigger">Our Story</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="acc-panel"><div class="acc-panel-inner">
-          <p data-i18n="acc1.p1">PEPTORA — Research Peptide Labs was founded in 2024 to supply serious researchers with reliably sourced peptides for laboratory study.</p>
-          <p data-i18n="acc1.p2">What began as a focused research-supply operation has grown into a multi-division ecosystem spanning compound research, cellular-performance models and applied research gear — always anchored in one principle: rigorous science, transparently sourced.</p>
+          <p data-i18n="acc1.p1">PEPTORA — Research Peptide Labs was founded in 2024 as a reference resource for the research community studying peptide compounds.</p>
+          <p data-i18n="acc1.p2">What began as a focused research-reference project has grown into a multi-division ecosystem spanning compound research, cellular-performance models and applied research gear — anchored in one principle: rigorous science, transparently referenced.</p>
         </div></div>
       </div>
       <div class="acc-item">
         <button class="acc-trigger"><span data-i18n="acc2.trigger">Research Philosophy</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="acc-panel"><div class="acc-panel-inner">
-          <p data-i18n="acc2.p1">Evidence before claims. Every compound listing reflects published research on mechanism of action — never therapeutic promises.</p>
-          <p data-i18n="acc2.p2">We hold ourselves to strict RUO standards: no compound is marketed, described, or sold in a way that implies human application.</p>
+          <p data-i18n="acc2.p1">Evidence before claims. Every compound entry reflects published research on mechanism of action — never therapeutic promises.</p>
+          <p data-i18n="acc2.p2">We hold ourselves to strict RUO standards: no compound is described in a way that implies human application.</p>
         </div></div>
       </div>
       <div class="acc-item">
         <button class="acc-trigger"><span data-i18n="acc3.trigger">Mission & Values</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="acc-panel"><div class="acc-panel-inner">
-          <p data-i18n-html="acc3.p1"><strong>Mission:</strong> to be the most trustworthy supplier of research-grade peptides for laboratories across the Americas.</p>
+          <p data-i18n-html="acc3.p1"><strong>Mission:</strong> to be the most trustworthy reference for research-grade peptide information for laboratories across the Americas.</p>
           <p data-i18n-html="acc3.p2"><strong>Values:</strong> scientific rigor, regulatory transparency, technical accuracy, and responsible research collaboration.</p>
         </div></div>
       </div>
@@ -208,7 +191,7 @@
   <div class="wrap">
     <div class="eyebrow" style="justify-content:center;" data-i18n="contact.eyebrow">Research & Collaboration</div>
     <h2 class="reveal" data-i18n="contact.h2">Contact our research line</h2>
-    <p class="lede reveal" data-i18n="contact.lede">For research inquiries, technical data sheets, feedback or collaboration opportunities — reach our team directly.</p>
+    <p class="lede reveal" data-i18n="contact.lede">This line is for research inquiries, technical data sheets, feedback and collaboration opportunities only — not for sales or purchase requests.</p>
 
     <div class="contact-grid reveal">
       <form class="contact-form" id="contactForm">
@@ -224,18 +207,15 @@
 
       <div class="contact-info">
         <div class="contact-info-item">
-          <span class="eyebrow" data-i18n="contact.phone_us">Research Line — USA</span>
-          <a href="tel:+13235220535">+1 323 522 0535</a>
-        </div>
-        <div class="contact-info-item">
-          <span class="eyebrow" data-i18n="contact.phone_mx">Research Line — Mexico</span>
-          <a href="tel:+526621381401">+52 662 138 1401</a>
+          <span class="eyebrow" data-i18n="contact.phone_us">Research & Collaboration Line</span>
+          <a href="tel:+17316665112">+1 731-666-5112</a>
+          <p class="contact-info-note" data-i18n="contact.phone_note">Direct, personalized attention for research collaboration — United States and Mexico, in English and Spanish.</p>
         </div>
         <div class="contact-info-item">
           <span class="eyebrow" data-i18n="contact.address_label">Facility Address</span>
           <address>5704 S. Eastern Avenue<br>Commerce, California 90040<br>United States</address>
         </div>
-        <p class="contact-side-note" data-i18n="contact.side_note">For research, feedback and collaboration purposes only.</p>
+        <p class="contact-side-note" data-i18n="contact.side_note">For research, feedback and collaboration purposes only. Not a sales line.</p>
       </div>
     </div>
   </div>
@@ -247,7 +227,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
-        <div class="fb-tag" data-i18n="footer.tag">Research-Grade Peptides Since 2024</div>
+        <div class="fb-tag" data-i18n="footer.tag">Independent Research Reference Since 2024</div>
       </div>
       <nav class="footer-nav">
         <a href="#inicio" data-i18n="nav.home">Home</a>
@@ -257,7 +237,7 @@
       </nav>
     </div>
     <div class="divider-line"></div>
-    <p class="footer-disclaimer" data-i18n="footer.disclaimer">All products are sold strictly for laboratory research use. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p>
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">PEPTORA does not sell products. This website is an independent informational reference for laboratory research purposes only. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p>
     <div class="footer-bottom">
       <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
     </div>

@@ -42,7 +42,6 @@ body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-body.modal-open{ overflow:hidden; }
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 h1,h2,h3,h4{ font-family:var(--f-display); color:var(--white); margin:0; letter-spacing:-0.01em; }
@@ -218,58 +217,36 @@ nav.main-nav a:hover::after{ width:100%; }
   background:var(--hairline); border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden;
 }
 @media (max-width:900px){ .product-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:600px){ .product-grid{ grid-template-columns:1fr; } }
+/* Below 600px we drop CSS Grid entirely in favor of plain block/flex stacking.
+   All card content is static (no expand/collapse), so this is purely a
+   belt-and-braces choice: ordinary block flow can never mis-measure or
+   overlap adjacent sections the way a grid with dynamic row-sizing could
+   on some mobile browser engines. */
+@media (max-width:600px){
+  .product-grid{ display:flex; flex-direction:column; }
+}
 
 .product-card{
-  background:var(--bg-card); border:0; text-align:left; cursor:pointer;
-  padding:24px 22px; display:flex; flex-direction:column; align-items:flex-start; gap:8px;
-  transition:background .2s ease, transform .2s ease;
-  color:inherit; width:100%;
+  background:var(--bg-card);
+  padding:26px 24px;
+  display:flex; flex-direction:column; gap:10px;
 }
-.product-card:hover{ background:var(--bg-elevated); transform:translateY(-2px); }
 .product-card .pc-cat{
   font-family:var(--f-mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--metal-2);
 }
-.product-card h4{ font-size:16px; font-weight:600; line-height:1.3; }
-.product-card p{ font-size:13px; color:var(--ink-dim); line-height:1.6; }
-.pc-more{
-  margin-top:auto; padding-top:10px; font-family:var(--f-mono); font-size:11px;
-  letter-spacing:.04em; color:var(--ink-faint); transition:color .2s ease;
+.product-card h4{ font-size:17px; font-weight:600; line-height:1.3; }
+.pc-desc{ font-size:13.5px; color:var(--ink); line-height:1.6; }
+.pc-block{ padding-top:10px; border-top:1px solid var(--hairline); }
+.pc-label{
+  display:block; font-family:var(--f-mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:5px;
 }
-.product-card:hover .pc-more{ color:var(--metal-1); }
+.pc-block p{ font-size:12.5px; color:var(--ink-dim); line-height:1.6; }
 
 .product-count{ font-family:var(--f-mono); font-size:12px; color:var(--ink-faint); margin-top:24px; text-align:center; }
 .catalog-note{ margin-top:36px; text-align:center; font-size:14px; color:var(--ink-dim); padding-top:28px; border-top:1px solid var(--hairline); }
 .catalog-note a{ color:var(--metal-2); font-weight:600; border-bottom:1px solid var(--hairline-accent); }
 .products-notice{ margin-top:16px; text-align:center; font-size:12px; color:var(--ink-faint); font-family:var(--f-mono); letter-spacing:.02em; }
-
-/* ---- Product detail modal ---- */
-.product-modal{ position:fixed; inset:0; z-index:200; display:none; }
-.product-modal.open{ display:block; }
-.product-modal-backdrop{ position:absolute; inset:0; background:rgba(8,9,10,.72); backdrop-filter:blur(4px); animation:fadeIn .2s ease; }
-.product-modal-panel{
-  position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:min(560px, 92vw); max-height:min(600px, 85vh); overflow-y:auto;
-  background:var(--bg-elevated); border:1px solid var(--hairline-accent); border-radius:var(--radius);
-  padding:36px 32px; animation:modalPop .25s ease;
-}
-@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
-@keyframes modalPop{ from{ opacity:0; transform:translate(-50%,-46%) scale(.97); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
-.product-modal-close{
-  position:absolute; top:20px; right:20px; background:var(--bg-card); border:1px solid var(--hairline);
-  border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center;
-  color:var(--ink-dim); cursor:pointer; transition:color .2s ease, border-color .2s ease;
-}
-.product-modal-close:hover{ color:var(--white); border-color:var(--metal-3); }
-.product-modal-panel .pc-cat{ font-family:var(--f-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--metal-2); }
-.product-modal-panel h3{ font-size:24px; font-weight:600; margin-top:10px; padding-right:40px; }
-.product-modal-panel > p{ margin-top:14px; font-size:15px; color:var(--ink); line-height:1.7; }
-.pm-mech{ margin-top:24px; padding-top:20px; border-top:1px solid var(--hairline); }
-.pm-mech-label{ font-family:var(--f-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--metal-2); display:block; margin-bottom:8px; }
-.pm-mech p{ font-size:14px; color:var(--ink-dim); line-height:1.75; }
-@media (max-width:600px){
-  .product-modal-panel{ width:94vw; padding:28px 22px; max-height:80vh; }
-}
 
 /* ==========================================================================
    TRUST STRIP
@@ -305,9 +282,12 @@ nav.main-nav a:hover::after{ width:100%; }
 }
 .acc-chev{ width:18px; height:18px; color:var(--ink-faint); transition:transform .3s ease; flex-shrink:0; }
 .acc-item.open .acc-chev{ transform:rotate(180deg); color:var(--metal-2); }
-.acc-panel{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
-.acc-item.open .acc-panel{ max-height:400px; }
-.acc-panel-inner{ padding:0 4px 24px; }
+.acc-panel{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .35s ease;
+}
+.acc-item.open .acc-panel{ grid-template-rows:1fr; }
+.acc-panel-inner{ overflow:hidden; padding:0 4px 24px; min-height:0; }
 .acc-panel-inner p{ font-size:14.5px; color:var(--ink-dim); line-height:1.75; }
 .acc-panel-inner p + p{ margin-top:12px; }
 .acc-panel-inner strong{ color:var(--ink); }
@@ -345,6 +325,7 @@ nav.main-nav a:hover::after{ width:100%; }
   font-family:var(--f-display); font-size:16px; font-weight:600; color:var(--white); line-height:1.5;
 }
 .contact-info-item a:hover{ color:var(--metal-1); }
+.contact-info-note{ margin-top:6px; font-size:12.5px; color:var(--ink-dim); line-height:1.6; font-family:var(--f-body); font-weight:400; }
 .contact-side-note{ margin-top:auto; font-size:12px; color:var(--ink-faint); line-height:1.6; }
 
 /* ==========================================================================
