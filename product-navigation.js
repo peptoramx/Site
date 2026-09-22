@@ -18,17 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
-  document.querySelectorAll('.objective-list a').forEach((link, index) => {
-    const target = objectiveTargets[index];
-    if (!target) return;
-    link.addEventListener('click', event => { event.preventDefault(); focusReference(target); });
-  });
-
-  document.getElementById('featuredGrid')?.addEventListener('click', event => {
+  document.addEventListener('click', event => {
+    const objective = event.target.closest('.objective-list a');
+    if (objective) {
+      const target = objectiveTargets[[...document.querySelectorAll('.objective-list a')].indexOf(objective)];
+      if (target) { event.preventDefault(); event.stopImmediatePropagation(); focusReference(target); }
+      return;
+    }
     const link = event.target.closest('.featured-card a');
-    if (!link) return;
-    event.preventDefault();
-    const name = link.closest('.featured-card')?.querySelector('h3')?.textContent.trim();
-    if (name) focusReference(name);
-  });
+    if (link) {
+      event.preventDefault(); event.stopImmediatePropagation();
+      const name = link.closest('.featured-card')?.querySelector('h3')?.textContent.trim();
+      if (name) focusReference(name);
+    }
+  }, true);
 });
