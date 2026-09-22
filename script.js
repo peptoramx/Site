@@ -438,7 +438,7 @@ function applyTranslations() {
   if (langLabel) langLabel.textContent = CURRENT_LANG === 'en' ? 'ES' : 'EN';
 
   renderProducts();
-  buildMarquee();
+  buildTicker();
 }
 
 function setLanguage(lang) {
@@ -457,21 +457,145 @@ function initLanguage() {
 }
 
 // ============================================================================
-// Hero marquee — scrolling compound names
+// Hero ticker — instrument-style live readout of referenced compounds
 // ============================================================================
-function buildMarquee() {
-  const track = document.getElementById('marqueeTrack');
+function buildTicker() {
+  const track = document.getElementById('tickerTrack');
   if (!track) return;
-  const names = PEPTORA_PRODUCTS.filter(p => p.cat !== 'supplies').map(nameOf);
-  const row = names.join(' &nbsp;·&nbsp; ') + ' &nbsp;·&nbsp; ';
+  const items = PEPTORA_PRODUCTS.filter(p => p.cat !== 'supplies');
+  const lang = CURRENT_LANG;
+  const row = items.map(p => {
+    const catLabel = CAT_LABELS[lang][p.cat] || p.cat;
+    return `<span class="tk-item"><strong>${nameOf(p)}</strong> — ${catLabel}</span><span class="tk-sep">/</span>`;
+  }).join('');
   track.innerHTML = row + row;
 }
 
 // ============================================================================
-// Product reference grid — fully static cards, NO click/expand/modal.
-// Every field (name, category, description, mechanism, research interest)
-// is always visible. This removes any possibility of the mobile overlap
-// bug that affected earlier expand/collapse and modal approaches.
+// Hero canvas — generative peptide-chain network, reacts to cursor
+// ============================================================================
+function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  const hero = canvas ? canvas.closest('.hero') : null;
+  if (!canvas || !hero) return;
+  const ctx = canvas.getContext('2d');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let w = 0, h = 0, dpr = 1, nodes = [];
+  const mouse = { x: null, y: null };
+
+  function resize() {
+    const rect = hero.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = rect.width; h = rect.height;
+    canvas.width = Math.max(1, Math.round(w * dpr));
+    canvas.height = Math.max(1, Math.round(h * dpr));
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.max(14, Math.min(36, Math.floor(w / 55)));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: 1.3 + Math.random() * 1.6,
+    }));
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    const maxDist = Math.min(150, w / 5);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          ctx.strokeStyle = `rgba(191,160,84,${(1 - dist / maxDist) * 0.32})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+      if (mouse.x !== null) {
+        const dx = a.x - mouse.x, dy = a.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.strokeStyle = `rgba(212,175,55,${(1 - dist / 140) * 0.5})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = 'rgba(140,115,40,0.55)';
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    if (!prefersReduced) requestAnimationFrame(step);
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  }, { passive: true });
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  hero.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+  resize();
+  step();
+}
+
+// ============================================================================
+// Hero stats — count up on load instead of appearing as static numbers
+// ============================================================================
+function animateStats() {
+  const els = document.querySelectorAll('.stat-n[data-count]');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  els.forEach(el => {
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    if (prefersReduced || !Number.isFinite(target)) {
+      el.textContent = target + suffix;
+      return;
+    }
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// ============================================================================
+// Product reference grid — fully static cards (content never expands/collapses).
+// The FILTER interaction, however, animates: cards that remain visible glide
+// to their new position (FLIP technique) and newly shown cards enter with a
+// staggered fade, instead of an instant display:none toggle.
 // ============================================================================
 function renderProducts() {
   const grid = document.getElementById('productGrid');
@@ -499,23 +623,100 @@ function renderProducts() {
   }).join('');
 
   const total = PEPTORA_PRODUCTS.length;
-  countEl && (countEl.textContent = lang === 'es' ? `${total} compuestos` : `${total} compounds`);
+  updateProductCount(total);
 
   const pills = document.querySelectorAll('.filter-pill');
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      const filter = pill.getAttribute('data-filter');
-      let visible = 0;
-      grid.querySelectorAll('.product-card').forEach(card => {
-        const match = filter === 'all' || card.getAttribute('data-cat') === filter;
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
-      });
-      if (countEl) countEl.textContent = lang === 'es' ? `${visible} compuestos` : `${visible} compounds`;
+      applyFilter(pill.getAttribute('data-filter'));
     });
   });
+
+  function updateProductCount(visible) {
+    if (countEl) countEl.textContent = CURRENT_LANG === 'es' ? `${visible} compuestos` : `${visible} compounds`;
+  }
+
+  function applyFilter(filter) {
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+    const willShow = (card) => filter === 'all' || card.getAttribute('data-cat') === filter;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      let visible = 0;
+      cards.forEach(card => {
+        const show = willShow(card);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      updateProductCount(visible);
+      return;
+    }
+
+    // FIRST — record positions of cards that are visible now and will stay visible
+    const firstRects = new Map();
+    cards.forEach(card => {
+      if (card.style.display !== 'none' && willShow(card)) {
+        firstRects.set(card, card.getBoundingClientRect());
+      }
+    });
+
+    // Cards leaving the filter fade out first, so the reflow below is calm
+    const leaving = cards.filter(card => card.style.display !== 'none' && !willShow(card));
+    leaving.forEach(card => card.classList.add('fx-hide'));
+
+    const commit = () => {
+      let visible = 0;
+      let enterIndex = 0;
+      cards.forEach(card => {
+        const show = willShow(card);
+        const wasHidden = card.style.display === 'none';
+        card.style.display = show ? '' : 'none';
+        card.classList.remove('fx-hide');
+        if (show) {
+          visible++;
+          if (wasHidden) {
+            card.classList.add('fx-enter');
+            card.style.transitionDelay = (enterIndex * 28) + 'ms';
+            enterIndex++;
+          }
+        }
+      });
+      updateProductCount(visible);
+
+      // LAST + INVERT + PLAY — reposition cards that stayed visible
+      firstRects.forEach((firstRect, card) => {
+        if (card.style.display === 'none') return;
+        const lastRect = card.getBoundingClientRect();
+        const dx = firstRect.left - lastRect.left;
+        const dy = firstRect.top - lastRect.top;
+        if (dx || dy) {
+          card.style.transition = 'none';
+          card.style.transform = `translate(${dx}px, ${dy}px)`;
+          card.getBoundingClientRect(); // force reflow
+          card.style.transition = '';
+          card.style.transform = '';
+        }
+      });
+
+      requestAnimationFrame(() => {
+        cards.forEach(card => {
+          if (card.classList.contains('fx-enter')) {
+            card.getBoundingClientRect(); // force reflow
+            card.classList.remove('fx-enter');
+            card.style.transitionDelay = '';
+          }
+        });
+      });
+    };
+
+    if (leaving.length) {
+      setTimeout(commit, 200);
+    } else {
+      commit();
+    }
+  }
 }
 
 // ============================================================================
@@ -574,6 +775,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguage();
   initContactForm();
   initAccordion();
+  initHeroCanvas();
+  animateStats();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

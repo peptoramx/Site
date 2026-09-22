@@ -57,6 +57,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
   <div class="hero-glow"></div>
   <div class="wrap hero-wrap">
     <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Research Reference · Est. 2024</div>
@@ -70,13 +71,16 @@
       <a href="#contacto" class="btn btn-ghost" data-i18n="hero.cta2">Research Collaborations</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-n" data-i18n="hero.stat1n">65+</span><span class="stat-l" data-i18n="hero.stat1l">Compounds Referenced</span></div>
-      <div class="stat"><span class="stat-n" data-i18n="hero.stat2n">9</span><span class="stat-l" data-i18n="hero.stat2l">Research Categories</span></div>
-      <div class="stat"><span class="stat-n" data-i18n="hero.stat3n">100%</span><span class="stat-l" data-i18n="hero.stat3l">RUO Framing</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat1n" data-count="65" data-suffix="+">65+</span><span class="stat-l" data-i18n="hero.stat1l">Compounds Referenced</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat2n" data-count="9" data-suffix="">9</span><span class="stat-l" data-i18n="hero.stat2l">Research Categories</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat3n" data-count="100" data-suffix="%">100%</span><span class="stat-l" data-i18n="hero.stat3l">RUO Framing</span></div>
     </div>
   </div>
-  <div class="marquee">
-    <div class="marquee-track" id="marqueeTrack"></div>
+  <div class="ticker-strip">
+    <span class="ticker-label">Live Index</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
   </div>
 </section>
 
@@ -113,24 +117,24 @@
 <!-- ============ TRUST / ECOSYSTEM — numbered ledger, not a card grid ============ -->
 <section class="section-pad trust-strip">
   <div class="wrap">
-    <h2 class="ledger-heading reveal" data-i18n="trust.h2">A research-first infrastructure</h2>
-    <div class="ledger reveal">
-      <div class="ledger-row">
+    <h2 class="ledger-heading reveal reveal-left" data-i18n="trust.h2">A research-first infrastructure</h2>
+    <div class="ledger">
+      <div class="ledger-row reveal reveal-left">
         <span class="ledger-index">01</span>
         <h4 data-i18n="trust1.h">PEPTORA LABS™</h4>
         <p data-i18n="trust1.p">Research & development, emerging compounds.</p>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row reveal reveal-left">
         <span class="ledger-index">02</span>
         <h4 data-i18n="trust2.h">PEPTORA PERFORMANCE™</h4>
         <p data-i18n="trust2.p">Cellular & metabolic research models.</p>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row reveal reveal-left">
         <span class="ledger-index">03</span>
         <h4 data-i18n="trust3.h">PEPTORA ACTIVE™</h4>
         <p data-i18n="trust3.p">Applied research technical gear.</p>
       </div>
-      <div class="ledger-row">
+      <div class="ledger-row reveal reveal-left">
         <span class="ledger-index">04</span>
         <h4 data-i18n="trust4.h">Quality Reference</h4>
         <p data-i18n="trust4.p">Certificate of Analysis data referenced on request.</p>
@@ -142,7 +146,7 @@
 <!-- ============ COMPLIANCE — certificate/stamp treatment, not a lede block ============ -->
 <section class="section-pad compliance">
   <div class="wrap">
-    <div class="cert-block reveal">
+    <div class="cert-block reveal reveal-stamp">
       <div class="cert-mark">
         <span>RUO</span>
       </div>
