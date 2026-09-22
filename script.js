@@ -1,11 +1,48 @@
-best-established compounds on this list, backed by decades of published research on fat metabolism. A foundational reference compound throughout fatty-acid metabolism research literature.', es: 'Uno de los compuestos mejor establecidos de esta lista, respaldado por dÃ©cadas de investigaciÃ³n publicada sobre el metabolismo de grasas. Un compuesto de referencia fundamental en la literatura de investigaciÃ³n del metabolismo de Ã¡cidos grasos.' } },
-  { cat: 'performance', name: 'AOD-9604',
-    desc: { en: 'GH-fragment studied in lipolysis-pathway research models.', es: 'Fragmento de GH estudiado en modelos de investigaciÃ³n de vÃ­as de lipÃ³lisis.' },
-    mech: { en: 'GH fragment (176-191) studied for lipolysis-pathway activity without IGF-1-receptor research interference.', es: 'Fragmento de GH (176-191) estudiado por su actividad en vÃ­as de lipÃ³lisis sin interferencia en el receptor de IGF-1.' },
-    interest: { en: 'Developed specifically to isolate the fat-related portion of the GH molecule without its other hormonal effects. Studied specifically for its isolated lipolytic research profile.', es: 'Desarrollado especÃ­ficamente para aislar la porciÃ³n relacionada con la grasa de la molÃ©cula de GH, sin sus otros efectos hormonales. Estudiado especÃ­ficamente por su perfil lipolÃ­tico aislado.' } },
-  { cat: 'performance', name: 'Epitalon',
-    desc: { en: 'Tetrapeptide studied in telomerase-activity and pineal-function research.', es: 'TetrapÃ©ptido estudiado en investigaciÃ³n de actividad de telomerasa y funciÃ³n pineal.' },
-    mech: { en: 'Tetrapeptide studied for its action on the pineal gland, melatonin-production and telomerase-activity research models.', es: 'TetrapÃ©ptido estudiado por su acciÃ³n sobre la glÃ¡ndula pineal y modelos de investigaciÃ³n de producciÃ³n de melatonina y actividad de la telomerasa.' },
+// ============================================================================
+// PEPTORA â€” Research Peptide Labs
+// Research-grade compound reference, i18n, interactions
+// ============================================================================
+
+const CAT_LABELS = {
+  en: {
+    metabolic: 'Metabolic Research', 'gh-igf': 'GH / IGF Research', 'brain-sleep': 'Neuroscience Research',
+    performance: 'Cellular & Longevity Research', immune: 'Immune Research', hormonal: 'Endocrine Research',
+    aesthetic: 'Dermal Research', stacks: 'Research Combinations', supplies: 'Lab Supplies',
+  },
+  es: {
+    metabolic: 'InvestigaciÃ³n MetabÃ³lica', 'gh-igf': 'InvestigaciÃ³n GH / IGF', 'brain-sleep': 'InvestigaciÃ³n NeurocientÃ­fica',
+    performance: 'InvestigaciÃ³n Celular y Longevidad', immune: 'InvestigaciÃ³n Inmune', hormonal: 'InvestigaciÃ³n Endocrina',
+    aesthetic: 'InvestigaciÃ³n DÃ©rmica', stacks: 'Combinaciones de InvestigaciÃ³n', supplies: 'Insumos de Laboratorio',
+  },
+};
+
+// ---- Research compound reference (bilingual). Not for sale â€” reference only. ----
+const PEPTORA_PRODUCTS = [
+  // ---- Metabolic Research ----
+  { cat: 'metabolic', name: 'Semaglutide',
+    desc: { en: 'Studied for GLP-1 receptor-mediated appetite-regulation pathways.', es: 'Estudiado por su acciÃ³n sobre las vÃ­as de regulaciÃ³n del apetito mediadas por el receptor GLP-1.' },
+    mech: { en: 'GLP-1 receptor agonist that mimics the incretin hormone, used in models studying gastric emptying and hypothalamic appetite signaling.', es: 'Agonista del receptor GLP-1 que imita la incretina, utilizado en modelos de investigaciÃ³n sobre vaciado gÃ¡strico y seÃ±alizaciÃ³n hipotalÃ¡mica del apetito.' },
+    interest: { en: 'In plain terms, this is one of the GLP-1 compounds behind the recent wave of weight-management research â€” the same hormone class found in some prescription medications, studied here strictly as a research compound. Widely referenced in independent metabolic-research and biohacking literature studying GLP-1 pathway modulation.', es: 'En tÃ©rminos simples, es uno de los compuestos GLP-1 detrÃ¡s de la ola reciente de investigaciÃ³n sobre el peso â€” la misma familia hormonal presente en algunos medicamentos recetados, estudiada aquÃ­ estrictamente como compuesto de investigaciÃ³n. Ampliamente referenciado en literatura de investigaciÃ³n metabÃ³lica independiente y biohacking sobre modulaciÃ³n de la vÃ­a GLP-1.' } },
+  { cat: 'metabolic', name: 'Tirzepatide',
+    desc: { en: 'Investigated as a dual GLP-1/GIP receptor agonist in metabolic research models.', es: 'Investigado como agonista dual de los receptores GLP-1/GIP en modelos de investigaciÃ³n metabÃ³lica.' },
+    mech: { en: 'Dual GLP-1 and GIP receptor agonist studied for its combined effect on insulin-sensitivity research pathways.', es: 'Agonista dual de los receptores GLP-1 y GIP, estudiado por su efecto combinado en vÃ­as de investigaciÃ³n de sensibilidad a la insulina.' },
+    interest: { en: 'This one acts on two appetite-related hormone systems at the same time, which is why it draws so much interest from researchers comparing it to single-pathway compounds. Frequently discussed in independent research communities examining dual-incretin receptor pathways.', es: 'Este actÃºa sobre dos sistemas hormonales del apetito al mismo tiempo, por lo que atrae mucho interÃ©s de investigadores que lo comparan con compuestos de una sola vÃ­a. Frecuentemente discutido en comunidades de investigaciÃ³n independiente sobre vÃ­as de doble incretina.' } },
+  { cat: 'metabolic', name: 'Retatrutide',
+    desc: { en: 'Under investigation as a triple GLP-1/GIP/glucagon receptor agonist.', es: 'En investigaciÃ³n como agonista triple de los receptores GLP-1/GIP/glucagÃ³n.' },
+    mech: { en: 'Triple agonist of the GLP-1, GIP and glucagon receptors, studied for combined thermogenic and appetite-pathway research.', es: 'Agonista triple de los receptores GLP-1, GIP y glucagÃ³n, estudiado por su efecto combinado en vÃ­as termogÃ©nicas y de apetito.' },
+    interest: { en: 'Sometimes called a â€œtriple agonistâ€ because it engages three separate metabolic hormone pathways at once â€” a newer research direction closely watched by the biohacking community. An emerging compound tracked closely in independent triple-agonist research literature.', es: 'A veces se le llama â€œagonista tripleâ€ porque activa tres vÃ­as hormonales metabÃ³licas a la vez â€” una lÃ­nea de investigaciÃ³n mÃ¡s nueva, seguida de cerca por la comunidad de biohacking. Un compuesto emergente seguido de cerca en la literatura de investigaciÃ³n de agonistas triples.' } },
+  { cat: 'metabolic', name: 'Cagrilintide',
+    desc: { en: 'Studied for amylin-receptor-mediated satiety-signaling research.', es: 'Estudiado por su acciÃ³n en la seÃ±alizaciÃ³n de saciedad mediada por el receptor de amilina.' },
+    mech: { en: 'Long-acting amylin analog used in central-nervous-system research models studying satiety signaling.', es: 'AnÃ¡logo de amilina de acciÃ³n prolongada utilizado en modelos de investigaciÃ³n del sistema nervioso central sobre seÃ±alizaciÃ³n de saciedad.' },
+    interest: { en: 'Works on a different hormone pathway than the GLP-1 compounds, which is why researchers often study it paired with them rather than on its own. Studied within independent research groups examining amylin-pathway combination protocols.', es: 'ActÃºa sobre una vÃ­a hormonal distinta a la de los compuestos GLP-1, por lo que suele estudiarse combinado con ellos en lugar de solo. Estudiado en grupos de investigaciÃ³n independiente sobre protocolos combinados de la vÃ­a de amilina.' } },
+  { cat: 'metabolic', name: 'Mazdutide',
+    desc: { en: 'Investigated as a dual GLP-1/glucagon receptor agonist in energy-expenditure research.', es: 'Investigado como agonista dual de los receptores GLP-1/glucagÃ³n en investigaciÃ³n de gasto energÃ©tico.' },
+    mech: { en: 'Dual GLP-1 and glucagon receptor agonist studied for combined appetite and energy-expenditure pathway research.', es: 'Agonista dual de los receptores GLP-1 y glucagÃ³n, estudiado en vÃ­as combinadas de apetito y gasto energÃ©tico.' },
+    interest: { en: 'Sits in the same research family as Tirzepatide, but pairs GLP-1 with a different second hormone pathway. Referenced in metabolic-research discussions examining dual-receptor pathway activity.', es: 'Pertenece a la misma familia de investigaciÃ³n que Tirzepatide, pero combina GLP-1 con una segunda vÃ­a hormonal distinta. Referenciado en discusiones de investigaciÃ³n metabÃ³lica sobre actividad de vÃ­as de doble receptor.' } },
+  { cat: 'metabolic', name: 'Survodutide',
+    desc: { en: 'Studied for dual GLP-1/glucagon receptor activity in metabolic research models.', es: 'Estudiado por su actividad dual en los receptores GLP-1/glucagÃ³n en modelos de investigaciÃ³n metabÃ³lica.' },
+    mech: { en: 'Dual GLP-1/glucagon agonist used in research models examining fat-oxidation pathways.', es: 'Agonista dual GLP-1/glucagÃ³n utilizado en modelos de investigaciÃ³n sobre vÃ­as de oxidaciÃ³n de grasas.' },
+    interest: { en: 'Combines two metabolic hormone pathways, placing it in the same emerging research category as Tirzepatide and Mazdutide. Of research interest for its dual-pathway metabolic activity, tracked in independent literature.', es: 'Combina dos vÃ­as hormonales metabÃ³licas, ubicÃ¡ndolo en la misma catego producciÃ³n de melatonina y actividad de la telomerasa.' },
     interest: { en: 'Studied for decades in Russian aging research, particularly around its relationship to telomeres â€” the protective caps on chromosomes tied to cellular aging. Referenced in longevity-research literature for telomerase-pathway studies originating from Russian gerontological research.', es: 'Estudiado durante dÃ©cadas en investigaciÃ³n rusa sobre el envejecimiento, particularmente en relaciÃ³n con los telÃ³meros â€” las protecciones de los cromosomas ligadas al envejecimiento celular. Referenciado en literatura de investigaciÃ³n de longevidad por estudios de la vÃ­a de telomerasa, originados en la investigaciÃ³n gerontolÃ³gica rusa.' } },
 
   // ---- Immune Research ----
@@ -805,4 +842,7 @@ Object.assign(I18N.es, {
   'tools.result.clicks':'Clics de pluma segun especificacion ingresada',
   'tools.converter_note':'Solo aritmetica de referencia. Las marcas U-100 equivalen a 100 marcas por mL; los mecanismos de pluma no estan estandarizados. Verifica las especificaciones oficiales del dispositivo antes de usar cualquier conversion.'
 });
+
+Object.assign(I18N.en,{"intro.eyebrow":"WHO WE ARE","intro.h2":"SCIENCE-LED CONTEXT FOR BETTER BIOHACKING.","intro.copy":"PEPTORA is an independent education and research-reference platform for people exploring peptide science, longevity and human performance. We organize complex research into clear, responsible context - never medical promises or dosing advice.","intro.fact1":"Research-first reference","intro.fact2":"Bilingual education","intro.fact3":"Responsible RUO framing"});
+Object.assign(I18N.es,{"intro.eyebrow":"QUIENES SOMOS","intro.h2":"CONTEXTO CIENTIFICO PARA UN BIOHACKING MEJOR.","intro.copy":"PEPTORA es una plataforma independiente de educacion y referencia de investigacion para quienes exploran ciencia de peptidos, longevidad y rendimiento humano. Organizamos investigacion compleja en un contexto claro y responsable, sin promesas medicas ni recomendaciones de dosificacion.","intro.fact1":"Referencia centrada en investigacion","intro.fact2":"Educacion bilingue","intro.fact3":"Enfoque RUO responsable"});
 
