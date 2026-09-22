@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=peptora-audit-3">
-  <link rel="stylesheet" href="editorial.css?v=peptora-audit-11">
+  <link rel="stylesheet" href="editorial.css?v=peptora-audit-12">
 </head>
 <body>
   <div class="disclaimer-strip" data-i18n="disclaimer.text">For laboratory research use only. Not for human consumption.</div>
@@ -117,6 +117,7 @@
       <div class="wrap">
         <div class="catalog-heading"><div><p class="eyebrow"><span>04</span><span data-i18n="products.eyebrow">The PEPTORA index</span></p><h2 data-i18n="products.h2">COMPOUNDS, <em>IN CONTEXT.</em></h2></div><div><p data-i18n="products.lede">Explore research references by biological objective, pathway or peptide category.</p><a href="tel:+17316665112" class="catalog-phone">+1 731-666-5112</a></div></div>
         <details class="catalog-details"><summary data-i18n="catalog.open">Open complete research index <b>+</b></summary><div class="filter-row" id="filterRow"><button class="filter-pill active" data-filter="all" data-i18n="filters.all">All</button><button class="filter-pill" data-filter="metabolic">Metabolic Research</button><button class="filter-pill" data-filter="gh-igf">GH / IGF Research</button><button class="filter-pill" data-filter="brain-sleep">Neuroscience Research</button><button class="filter-pill" data-filter="performance">Cellular &amp; Longevity Research</button><button class="filter-pill" data-filter="immune">Immune Research</button><button class="filter-pill" data-filter="hormonal">Endocrine Research</button><button class="filter-pill" data-filter="aesthetic">Dermal Research</button><button class="filter-pill" data-filter="stacks">Research Combinations</button><button class="filter-pill" data-filter="supplies">Lab Supplies</button></div>
+        <label class="catalog-search" for="productSearch"><span>⌕</span><input id="productSearch" type="search" autocomplete="off" placeholder="Search compound, pathway or category"></label>
         <div class="product-grid" id="productGrid"></div><div class="product-count" id="productCount"></div>
         <p class="products-notice" data-i18n="products.notice">For laboratory research reference only. Not for human consumption, diagnostic or therapeutic use.</p></details>
       </div>
@@ -141,5 +142,6 @@
   <script src="section-numbers.js?v=1"></script>
   <script src="product-navigation.js?v=2"></script>
   <script src="language-session.js?v=2"></script>
+  <script src="catalog-search.js?v=1"></script>
 </body>
 </html>
