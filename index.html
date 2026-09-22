@@ -1,25 +1,258 @@
-<!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>PEPTORA | Peptide Science for the Biohacking Era</title>
-<meta name="description" content="PEPTORA is a modern platform for peptide science, biohacking education and research reference.">
-<link rel="icon" href="assets/favicon.ico" sizes="any"><link rel="manifest" href="site.webmanifest"><meta name="theme-color" content="#f7f9fc">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20260922-4">
-</head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PEPTORA — Research Peptide Labs | Research-Grade Compound Reference</title>
+<meta name="description" content="PEPTORA — an independent research-reference resource on peptide compounds for laboratories, institutions and biohacking researchers. For research use only.">
+
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#f8f6f1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PEPTORA">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="PEPTORA">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ DISCLAIMER STRIP ============ -->
 <div class="disclaimer-strip" data-i18n="disclaimer.text">For laboratory research use only. Not for human consumption.</div>
-<header class="site-header"><div class="wrap nav-wrap"><a href="#inicio" class="brand"><img src="assets/logo-peptora.png" alt="Peptora logo"></a><nav class="main-nav" id="mainNav"><a href="#inicio" data-i18n="nav.home">Home</a><a href="#objectives" data-i18n="nav.objectives">Objectives</a><a href="#lab" data-i18n="nav.science">Our Science</a><a href="#productos" data-i18n="nav.products">Research Peptides</a><a href="tools.html" data-i18n="nav.tools">Reference Tools</a><a href="#contacto" data-i18n="nav.contact">Contact</a></nav><div class="header-cta"><button class="lang-toggle" id="langToggle" aria-label="Switch language"><span>◎</span><span id="langLabel">ES</span></button><a href="#productos" class="btn btn-primary btn-sm" data-i18n="hero.cta1">Explore the reference</a><button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span></button></div></div></header>
-<main>
-<section class="hero" id="inicio"><canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas><div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div><div class="wrap hero-layout"><div class="hero-copy"><p class="eyebrow" data-i18n="hero.eyebrow">PEPTORA / BIOHACKING REFERENCE</p><h1 data-i18n="hero.h1">PEPTIDE SCIENCE <em>FOR THE BIOHACKING ERA</em></h1><p class="lede" data-i18n="hero.lede">A modern platform for peptide science, intelligent biohacking education and research-led exploration of human performance.</p><div class="hero-actions"><a href="#objectives" class="btn btn-primary" data-i18n="hero.cta1">Explore the reference <span>→</span></a><a href="#lab" class="text-link" data-i18n="hero.cta2">Enter the Biohacking Lab</a></div><div class="hero-proof"><div><strong data-count="62" data-suffix="+">62+</strong><span data-i18n="hero.stat1l">Compounds referenced</span></div><div><strong data-count="9">9</strong><span data-i18n="hero.stat2l">Research objectives</span></div><div><strong>RUO</strong><span data-i18n="hero.stat3l">Research-first framing</span></div></div></div><div class="hero-visual"><div class="hero-image"></div><div class="hero-card hero-card-top"><span>01</span><p data-i18n="hero.card1">Performance starts with better questions.</p></div><div class="hero-card hero-card-bottom"><span class="pulse-dot"></span><p>PEPTORA<br><b data-i18n="hero.card2">Biohacking intelligence</b></p></div></div></div><div class="ticker-strip"><span class="ticker-label">LIVE REFERENCE INDEX</span><div class="ticker-viewport"><div class="ticker-track" id="tickerTrack"></div></div></div></section>
-<section class="intro-section section-pad" id="ciencia"><div class="wrap intro-layout"><p class="eyebrow" data-i18n="intro.eyebrow">WHO WE ARE</p><div><h2 data-i18n="intro.h2">SCIENCE-LED CONTEXT FOR <em>BETTER BIOHACKING.</em></h2><p class="intro-copy" data-i18n="intro.copy">PEPTORA is an independent education and research-reference platform for people exploring peptide science, longevity and human performance. We organize complex research into clear, responsible context - never medical promises or dosing advice.</p></div><div class="intro-facts"><div><b>01</b><span data-i18n="intro.fact1">Research-first reference</span></div><div><b>02</b><span data-i18n="intro.fact2">Bilingual education</span></div><div><b>03</b><span data-i18n="intro.fact3">Responsible RUO framing</span></div></div></div></section><section class="objective-section section-pad" id="objectives"><div class="wrap"><div class="section-intro"><p class="eyebrow" data-i18n="objectives.eyebrow">DEFINE THE QUESTION</p><h2 data-i18n="objectives.h2">EXPLORE BY <em>OBJECTIVE</em></h2><p data-i18n="objectives.lede">A clearer way to navigate the research areas shaping today's performance and longevity conversations.</p></div><div class="objective-grid"><a href="#productos" class="objective-card objective-metabolic"><b>01</b><span data-i18n="objective.metabolic">METABOLIC</span><i>↗</i></a><a href="#productos" class="objective-card"><b>02</b><span data-i18n="objective.performance">PERFORMANCE</span><i>↗</i></a><a href="#productos" class="objective-card"><b>03</b><span data-i18n="objective.recovery">RECOVERY</span><i>↗</i></a><a href="#productos" class="objective-card objective-cognition"><b>04</b><span data-i18n="objective.cognition">COGNITION</span><i>↗</i></a><a href="#productos" class="objective-card"><b>05</b><span data-i18n="objective.longevity">LONGEVITY</span><i>↗</i></a><a href="#productos" class="objective-card"><b>06</b><span data-i18n="objective.cellular">CELLULAR HEALTH</span><i>↗</i></a><a href="#productos" class="objective-card"><b>07</b><span data-i18n="objective.composition">BODY COMPOSITION</span><i>↗</i></a><a href="#productos" class="objective-card"><b>08</b><span data-i18n="objective.skin">SKIN &amp; TISSUE</span><i>↗</i></a><a href="tools.html" class="objective-card objective-tools"><b>09</b><span data-i18n="objective.tools">RESEARCH TOOLS</span><i>↗</i></a></div></div></section>
-<section class="lab-section" id="lab"><div class="wrap lab-layout"><div class="lab-image"><img loading="lazy" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Scientific laboratory research"><span class="image-caption">PEPTORA / 01. SCIENCE</span></div><div class="lab-copy"><p class="eyebrow light" data-i18n="lab.eyebrow">THE BIOHACKING LAB</p><h2 data-i18n="lab.h2">LEARN THE <em>SIGNAL</em><br>BEHIND THE NOISE.</h2><p data-i18n="lab.lede">The Biohacking Lab translates peptide research into clear, responsible context - connecting molecular pathways with the questions performance-minded researchers are asking.</p><div class="lab-points"><div><b>01</b><span data-i18n="lab.point1">Research-led reference</span></div><div><b>02</b><span data-i18n="lab.point2">Mechanisms before claims</span></div><div><b>03</b><span data-i18n="lab.point3">A sharper lens on longevity</span></div></div><a href="#ciencia" class="text-link light" data-i18n="lab.cta">Discover our philosophy</a></div></div></section>
-<section class="feature-section section-pad"><div class="wrap split-feature"><div class="feature-copy"><p class="eyebrow">01 / PERFORMANCE</p><h2 data-i18n="performance.h2">HUMAN <em>PERFORMANCE</em></h2><p data-i18n="performance.p">From metabolic signaling to recovery pathways, explore the research landscape around resilient output and adaptive capacity.</p><a href="#productos" class="btn btn-outline" data-i18n="performance.cta">Explore performance research <span>→</span></a></div><div class="feature-image"><img loading="lazy" src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Athlete training"><div class="image-stat"><strong>ADAPT</strong><span data-i18n="performance.stat">Research the pathways of capacity.</span></div></div></div></section>
-<section class="feature-section feature-reverse section-pad"><div class="wrap split-feature"><div class="feature-image"><img loading="lazy" src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Cellular science laboratory"><div class="molecule-mark">P</div></div><div class="feature-copy"><p class="eyebrow">02 / LONGEVITY</p><h2 data-i18n="longevity.h2">LONGEVITY &amp;<br><em>CELLULAR SCIENCE</em></h2><p data-i18n="longevity.p">A research-first view of the systems that inform cellular energy, tissue signaling, metabolic resilience and healthy aging.</p><a href="#productos" class="btn btn-outline" data-i18n="longevity.cta">Explore cellular research <span>→</span></a></div></div></section>
-<section class="section-pad products-section" id="productos"><div class="wrap"><div class="catalog-head"><div><p class="eyebrow" data-i18n="products.eyebrow">THE PEPTORA INDEX</p><h2 data-i18n="products.h2">THE RESEARCH <em>REFERENCE</em></h2></div><p data-i18n="products.lede">A living library of research compounds, organized to move from curiosity to clearer context.</p></div><div class="filter-row" id="filterRow"><button class="filter-pill active" data-filter="all" data-i18n="filters.all">All</button><button class="filter-pill" data-filter="metabolic">Metabolic Research</button><button class="filter-pill" data-filter="gh-igf">GH / IGF Research</button><button class="filter-pill" data-filter="brain-sleep">Neuroscience Research</button><button class="filter-pill" data-filter="performance">Cellular &amp; Longevity Research</button><button class="filter-pill" data-filter="immune">Immune Research</button><button class="filter-pill" data-filter="hormonal">Endocrine Research</button><button class="filter-pill" data-filter="aesthetic">Dermal Research</button><button class="filter-pill" data-filter="stacks">Research Combinations</button><button class="filter-pill" data-filter="supplies">Lab Supplies</button></div><div class="product-grid" id="productGrid"></div><div class="product-count" id="productCount"></div><p class="products-notice" data-i18n="products.notice">For laboratory research reference only. Not for human consumption, diagnostic or therapeutic use.</p></div></section>
-<section class="section-pad about-section" id="science-details"><div class="wrap"><div class="science-head"><p class="eyebrow" data-i18n="about.eyebrow">OUR SCIENCE</p><h2 data-i18n="about.h2">A PLATFORM FOR <em>BETTER QUESTIONS.</em></h2></div><div class="accordion"><div class="acc-item"><button class="acc-trigger"><span data-i18n="acc1.trigger">Our Story</span><b>+</b></button><div class="acc-panel"><div class="acc-panel-inner"><p data-i18n="acc1.p1"></p><p data-i18n="acc1.p2"></p></div></div></div><div class="acc-item"><button class="acc-trigger"><span data-i18n="acc2.trigger">Research Philosophy</span><b>+</b></button><div class="acc-panel"><div class="acc-panel-inner"><p data-i18n="acc2.p1"></p><p data-i18n="acc2.p2"></p></div></div></div><div class="acc-item"><button class="acc-trigger"><span data-i18n="acc3.trigger">Mission &amp; Values</span><b>+</b></button><div class="acc-panel"><div class="acc-panel-inner"><p data-i18n-html="acc3.p1"></p><p data-i18n-html="acc3.p2"></p></div></div></div></div></div></section>
-<section class="section-pad contact" id="contacto"><div class="wrap contact-shell"><div class="contact-intro"><p class="eyebrow" data-i18n="contact.eyebrow">RESEARCH &amp; COLLABORATION</p><h2 data-i18n="contact.h2">START A <em>CONVERSATION.</em></h2><p data-i18n="contact.lede">For research inquiries, technical data sheets, feedback and collaboration opportunities.</p><a href="tel:+17316665112" class="contact-phone">+1 731-666-5112</a></div><form class="contact-form" id="contactForm"><div class="form-row"><input type="text" name="name" data-i18n-placeholder="contact.name" placeholder="Name" required><input type="email" name="email" data-i18n-placeholder="contact.email" placeholder="Institutional email" required></div><textarea name="message" data-i18n-placeholder="contact.message" placeholder="Describe your research inquiry" rows="5" required></textarea><input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off"><button type="submit" class="btn btn-primary" data-i18n="contact.send">Send inquiry <span>→</span></button><p class="form-status" id="formStatus"></p></form></div></section>
-</main><footer class="site-footer"><div class="wrap"><div class="footer-top"><img src="assets/logo-peptora.png" alt="Peptora logo"><nav class="footer-nav"><a href="#objectives" data-i18n="nav.objectives">Objectives</a><a href="#productos" data-i18n="nav.products">Research Peptides</a><a href="tools.html" data-i18n="nav.tools">Reference Tools</a><a href="#contacto" data-i18n="nav.contact">Contact</a></nav></div><p class="footer-disclaimer" data-i18n="footer.disclaimer">This website is an independent informational reference for laboratory research purposes. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p><div class="footer-bottom">© <span id="year"></span> PEPTORA <span data-i18n="footer.rights">All rights reserved.</span></div></div></footer><script src="script.js?v=20260922-4"></script></body></html>
 
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="#inicio" class="brand">
+      <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#inicio" data-i18n="nav.home">Home</a>
+      <a href="#productos" data-i18n="nav.products">Research Peptides</a>
+      <a href="#ciencia" data-i18n="nav.science">Our Science</a>
+      <a href="tools.html" data-i18n="nav.tools">Reference Tools</a>
+      <a href="#contacto" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language / Cambiar idioma">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9Z"/></svg>
+        <span id="langLabel">ES</span>
+      </button>
+      <a href="#productos" class="btn btn-primary btn-sm" data-i18n="nav.products">Research Peptides</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
 
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-glow"></div>
+  <div class="wrap hero-wrap">
+    <div class="eyebrow" style="justify-content:center;" data-i18n="hero.eyebrow">Research Reference · Est. 2024</div>
+    <h1><span data-i18n="hero.h1_pre">Precision Peptides for </span><em data-i18n="hero.h1_em">Serious Research</em></h1>
+    <p class="lede" data-i18n="hero.lede">PEPTORA is an independent research-reference resource for laboratories, institutions and biohacking researchers studying peptide compounds in vitro and preclinically.</p>
+    <div class="hero-actions">
+      <a href="#productos" class="btn btn-primary">
+        <span data-i18n="hero.cta1">Browse Research Reference</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#contacto" class="btn btn-ghost" data-i18n="hero.cta2">Research Collaborations</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat1n" data-count="65" data-suffix="+">65+</span><span class="stat-l" data-i18n="hero.stat1l">Compounds Referenced</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat2n" data-count="9" data-suffix="">9</span><span class="stat-l" data-i18n="hero.stat2l">Research Categories</span></div>
+      <div class="stat"><span class="stat-n" data-i18n="hero.stat3n" data-count="100" data-suffix="%">100%</span><span class="stat-l" data-i18n="hero.stat3l">RUO Framing</span></div>
+    </div>
+  </div>
+  <div class="ticker-strip">
+    <span class="ticker-label">Live Index</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </div>
+</section>
 
+<!-- ============ PRODUCTS — static reference grid, no click/expand ============ -->
+<section class="section-pad products-section" id="productos">
+  <div class="wrap">
+    <div class="products-header reveal">
+      <h2 data-i18n="products.h2">Compounds Organized by Research Area</h2>
+      <a href="tel:+17316665112" class="products-header-contact">
+        <span data-i18n="catalog.note_pre">Technical data sheets & research collaboration</span>
+        <strong>+1 731-666-5112</strong>
+      </a>
+    </div>
 
+    <div class="filter-row reveal" id="filterRow">
+      <button class="filter-pill active" data-filter="all" data-i18n="filters.all">All</button>
+      <button class="filter-pill" data-filter="metabolic">Metabolic Research</button>
+      <button class="filter-pill" data-filter="gh-igf">GH / IGF Research</button>
+      <button class="filter-pill" data-filter="brain-sleep">Neuroscience Research</button>
+      <button class="filter-pill" data-filter="performance">Cellular & Longevity Research</button>
+      <button class="filter-pill" data-filter="immune">Immune Research</button>
+      <button class="filter-pill" data-filter="hormonal">Endocrine Research</button>
+      <button class="filter-pill" data-filter="aesthetic">Dermal Research</button>
+      <button class="filter-pill" data-filter="stacks">Research Combinations</button>
+      <button class="filter-pill" data-filter="supplies">Lab Supplies</button>
+    </div>
+
+    <div class="product-grid reveal" id="productGrid"></div>
+    <div class="product-count" id="productCount"></div>
+    <p class="products-notice reveal" data-i18n="products.notice">For laboratory research reference only. Not for human consumption, diagnostic or therapeutic use.</p>
+  </div>
+</section>
+
+<!-- ============ TRUST / ECOSYSTEM — numbered ledger, not a card grid ============ -->
+<section class="section-pad trust-strip">
+  <div class="wrap">
+    <h2 class="ledger-heading reveal reveal-left" data-i18n="trust.h2">A research-first infrastructure</h2>
+    <div class="ledger">
+      <div class="ledger-row reveal reveal-left">
+        <span class="ledger-index">01</span>
+        <h4 data-i18n="trust1.h">PEPTORA LABS™</h4>
+        <p data-i18n="trust1.p">Research & development, emerging compounds.</p>
+      </div>
+      <div class="ledger-row reveal reveal-left">
+        <span class="ledger-index">02</span>
+        <h4 data-i18n="trust2.h">PEPTORA PERFORMANCE™</h4>
+        <p data-i18n="trust2.p">Cellular & metabolic research models.</p>
+      </div>
+      <div class="ledger-row reveal reveal-left">
+        <span class="ledger-index">03</span>
+        <h4 data-i18n="trust3.h">PEPTORA ACTIVE™</h4>
+        <p data-i18n="trust3.p">Applied research technical gear.</p>
+      </div>
+      <div class="ledger-row reveal reveal-left">
+        <span class="ledger-index">04</span>
+        <h4 data-i18n="trust4.h">Quality Reference</h4>
+        <p data-i18n="trust4.p">Certificate of Analysis data referenced on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPLIANCE — certificate/stamp treatment, not a lede block ============ -->
+<section class="section-pad compliance">
+  <div class="wrap">
+    <div class="cert-block reveal reveal-stamp">
+      <div class="cert-mark">
+        <span>RUO</span>
+      </div>
+      <div class="cert-text">
+        <div class="eyebrow" data-i18n="compliance.eyebrow">Research Use Only</div>
+        <p data-i18n-html="compliance.p">All compounds referenced are classified <strong>Research Use Only (RUO)</strong>: intended exclusively for laboratory and preclinical research. None of the information on this site is intended for human or veterinary use, diagnosis, treatment, cure, or prevention of any disease.</p>
+        <p class="cert-note" data-i18n="compliance.note">Access to detailed compound information is intended for researchers, laboratories and institutions, who assume full responsibility for the legal and compliant use of any research they conduct.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR SCIENCE (collapsed / secondary) ============ -->
+<section class="section-pad about-section" id="ciencia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="about.eyebrow">Our Science</div>
+      <h2 data-i18n="about.h2">Behind the research</h2>
+      <p class="lede" data-i18n="about.lede">A closer look at the philosophy and the team — for those who want the full picture.</p>
+    </div>
+    <div class="accordion reveal">
+      <div class="acc-item">
+        <button class="acc-trigger"><span data-i18n="acc1.trigger">Our Story</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="acc-panel"><div class="acc-panel-inner">
+          <p data-i18n="acc1.p1">PEPTORA — Research Peptide Labs was founded in 2024 as a reference resource for the research community studying peptide compounds.</p>
+          <p data-i18n="acc1.p2">What began as a focused research-reference project has grown into a multi-division ecosystem spanning compound research, cellular-performance models and applied research gear — anchored in one principle: rigorous science, transparently referenced.</p>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger"><span data-i18n="acc2.trigger">Research Philosophy</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="acc-panel"><div class="acc-panel-inner">
+          <p data-i18n="acc2.p1">Evidence before claims. Every compound entry reflects published research on mechanism of action — never therapeutic promises.</p>
+          <p data-i18n="acc2.p2">We hold ourselves to strict RUO standards: no compound is described in a way that implies human application.</p>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger"><span data-i18n="acc3.trigger">Mission & Values</span><svg class="acc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="acc-panel"><div class="acc-panel-inner">
+          <p data-i18n-html="acc3.p1"><strong>Mission:</strong> to be the most trustworthy reference for research-grade peptide information for laboratories across the Americas.</p>
+          <p data-i18n-html="acc3.p2"><strong>Values:</strong> scientific rigor, regulatory transparency, technical accuracy, and responsible research collaboration.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section-pad contact" id="contacto">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;" data-i18n="contact.eyebrow">Research & Collaboration</div>
+    <h2 class="reveal" data-i18n="contact.h2">Contact our research line</h2>
+    <p class="lede reveal" data-i18n="contact.lede">This line is for research inquiries, technical data sheets, feedback and collaboration opportunities.</p>
+
+    <div class="contact-grid reveal">
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <input type="text" name="name" data-i18n-placeholder="contact.name" placeholder="Name" required>
+          <input type="email" name="email" data-i18n-placeholder="contact.email" placeholder="Institutional email" required>
+        </div>
+        <textarea name="message" data-i18n-placeholder="contact.message" placeholder="Describe your research inquiry" rows="4" required></textarea>
+        <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn btn-primary" data-i18n="contact.send">Send Inquiry</button>
+        <p class="form-status" id="formStatus"></p>
+      </form>
+
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <span class="eyebrow" data-i18n="contact.phone_us">Research & Collaboration Line</span>
+          <a href="tel:+17316665112">+1 731-666-5112</a>
+          <p class="contact-info-note" data-i18n="contact.phone_note">Direct, personalized attention for research collaboration — United States and Mexico, in English and Spanish.</p>
+        </div>
+        <div class="contact-info-item">
+          <span class="eyebrow" data-i18n="contact.address_label">Facility Address</span>
+          <address>5704 S. Eastern Avenue<br>Commerce, California 90040<br>United States</address>
+        </div>
+        <p class="contact-side-note" data-i18n="contact.side_note">For research, feedback and collaboration purposes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
+        <div class="fb-tag" data-i18n="footer.tag">Independent Research Reference Since 2024</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#inicio" data-i18n="nav.home">Home</a>
+        <a href="#productos" data-i18n="nav.products">Research Peptides</a>
+        <a href="#ciencia" data-i18n="nav.science">Our Science</a>
+        <a href="tools.html" data-i18n="nav.tools">Reference Tools</a>
+        <a href="#contacto" data-i18n="nav.contact">Contact</a>
+      </nav>
+    </div>
+    <div class="divider-line"></div>
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">This website is an independent informational reference for laboratory research purposes. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
