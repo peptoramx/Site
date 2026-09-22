@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) { event.preventDefault(); event.stopImmediatePropagation(); focusReference(target); }
       return;
     }
-    const link = event.target.closest('.featured-card a');
-    if (link) {
+    const featured = event.target.closest('.featured-card');
+    if (featured) {
       event.preventDefault(); event.stopImmediatePropagation();
-      const name = link.closest('.featured-card')?.querySelector('h3')?.textContent.trim();
+      const name = featured.querySelector('h3')?.textContent.trim();
       if (name) focusReference(name);
     }
   }, true);
