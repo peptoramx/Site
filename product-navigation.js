@@ -32,4 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (name) focusReference(name);
     }
   }, true);
+
+  const requestedCompound = new URLSearchParams(window.location.search).get('compound');
+  if (requestedCompound) window.setTimeout(() => focusReference(requestedCompound), 80);
 });
+
