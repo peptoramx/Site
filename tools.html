@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>PEPTORA â€” Reconstitution Concentration Reference</title>
+<title>PEPTORA — Reconstitution Concentration Reference</title>
 <meta name="description" content="Laboratory reference tool for calculating research-peptide solution concentration after reconstitution. For research use only.">
 
 <link rel="icon" href="assets/favicon.ico" sizes="any">
@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#f7f9fc">
+<meta name="theme-color" content="#f8f6f1">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -22,8 +22,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260922-4">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -61,7 +61,7 @@
   <div class="wrap">
     <div class="eyebrow" data-i18n="tools.eyebrow">Laboratory Reference Tool</div>
     <h1 class="tools-h1" data-i18n="tools.h1">Reconstitution Concentration Reference</h1>
-    <p class="lede tools-lede" data-i18n="tools.lede">A reference calculator for laboratory solution preparation. It computes the resulting concentration of a reconstituted research compound, or the diluent volume required to reach a target concentration â€” nothing more.</p>
+    <p class="lede tools-lede" data-i18n="tools.lede">A reference calculator for laboratory solution preparation. It computes the resulting concentration of a reconstituted research compound, or the diluent volume required to reach a target concentration — nothing more.</p>
     <p class="tools-scope-note" data-i18n="tools.scope_note">This tool performs solution-concentration arithmetic only. It does not calculate, suggest, or reference amounts for administration or use in any living organism.</p>
   </div>
 </section>
@@ -88,11 +88,11 @@
         <div class="tool-result">
           <div class="tool-result-row">
             <span data-i18n="tools.result.mgml">Concentration</span>
-            <strong id="c1-out-mgml">â€”</strong>
+            <strong id="c1-out-mgml">—</strong>
           </div>
           <div class="tool-result-row tool-result-row-sub">
             <span data-i18n="tools.result.mcgml">Equivalent</span>
-            <strong id="c1-out-mcgml">â€”</strong>
+            <strong id="c1-out-mcgml">—</strong>
           </div>
         </div>
       </div>
@@ -114,39 +114,13 @@
         <div class="tool-result">
           <div class="tool-result-row">
             <span data-i18n="tools.result.ml">Diluent volume required</span>
-            <strong id="c2-out-ml">â€”</strong>
+            <strong id="c2-out-ml">—</strong>
           </div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal tool-card-reference">
-        <span class="eyebrow" data-i18n="tools.calc3.eyebrow">Reference converter</span>
-        <h3 data-i18n="tools.calc3.h">Volume &amp; Device-Scale Reference</h3>
-        <p class="tool-desc" data-i18n="tools.calc3.desc">Convert a user-specified reference amount to solution volume. U-100 markings and pen clicks are shown only from the values entered below.</p>
-
-        <div class="tool-field">
-          <label for="c3-mg" data-i18n="tools.field.refmg">Reference amount (mg)</label>
-          <input type="number" id="c3-mg" min="0" step="0.001" inputmode="decimal" placeholder="1">
-        </div>
-        <div class="tool-field">
-          <label for="c3-conc" data-i18n="tools.field.target">Concentration (mg/mL)</label>
-          <input type="number" id="c3-conc" min="0" step="0.001" inputmode="decimal" placeholder="2.5">
-        </div>
-        <div class="tool-field">
-          <label for="c3-click-ml" data-i18n="tools.field.clickml">mL per pen click (manufacturer specification)</label>
-          <input type="number" id="c3-click-ml" min="0" step="0.001" inputmode="decimal" placeholder="Enter verified mL/click">
-        </div>
-
-        <div class="tool-result">
-          <div class="tool-result-row"><span data-i18n="tools.result.refml">Reference volume</span><strong id="c3-out-ml">—</strong></div>
-          <div class="tool-result-row tool-result-row-sub"><span data-i18n="tools.result.u100">U-100 syringe scale</span><strong id="c3-out-u100">—</strong></div>
-          <div class="tool-result-row tool-result-row-sub"><span data-i18n="tools.result.clicks">Pen clicks from entered specification</span><strong id="c3-out-clicks">—</strong></div>
         </div>
       </div>
 
     </div>
 
-    <p class="tools-scope-note" data-i18n="tools.converter_note">Reference arithmetic only. U-100 markings equal 100 markings per mL; pen mechanisms are not standardized. Verify the device's official specifications before relying on any conversion.</p>
     <p class="products-notice reveal" data-i18n="tools.footnote">For laboratory research reference only. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease. This calculator does not provide administration, dosing, or usage guidance of any kind.</p>
   </div>
 </section>
@@ -170,15 +144,11 @@
     <div class="divider-line"></div>
     <p class="footer-disclaimer" data-i18n="footer.disclaimer">This website is an independent informational reference for laboratory research purposes. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p>
     <div class="footer-bottom">
-      <span>Â© <span id="year"></span> PEPTORA â€” RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
     </div>
   </div>
 </footer>
 
-<script src="script.js?v=20260922-4"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
