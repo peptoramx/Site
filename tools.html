@@ -23,7 +23,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=peptora-editorial-1">
+<link rel="stylesheet" href="editorial.css?v=peptora-editorial-1">
 </head>
 <body>
 
@@ -69,57 +70,29 @@
 <!-- ============ CALCULATORS ============ -->
 <section class="section-pad tools-section">
   <div class="wrap">
-    <div class="tools-grid">
-
-      <div class="tool-card reveal">
-        <span class="eyebrow" data-i18n="tools.calc1.eyebrow">Calculator 01</span>
-        <h3 data-i18n="tools.calc1.h">Concentration From Reconstitution</h3>
-        <p class="tool-desc" data-i18n="tools.calc1.desc">Enter the peptide mass and the diluent volume used to reconstitute it to find the resulting solution concentration.</p>
-
-        <div class="tool-field">
-          <label for="c1-mg" data-i18n="tools.field.mg">Peptide mass (mg)</label>
-          <input type="number" id="c1-mg" min="0" step="0.01" inputmode="decimal" placeholder="5">
+    <div class="tools-grid unified-tools-grid">
+      <div class="tool-card unified-calculator reveal">
+        <span class="eyebrow" data-i18n="tools.unified.eyebrow">One reference calculator</span>
+        <h3 data-i18n="tools.unified.h">ALL VALUES, ONE VIEW.</h3>
+        <p class="tool-desc" data-i18n="tools.unified.desc">Enter the laboratory mass, reconstitution volume, reference amount and device specification once. Every reference value updates together.</p>
+        <div class="unified-inputs">
+          <div class="tool-field"><label for="u-mass-mg" data-i18n="tools.unified.mass">Laboratory mass (mg)</label><input type="number" id="u-mass-mg" min="0" step="0.001" inputmode="decimal" placeholder="5"></div>
+          <div class="tool-field"><label for="u-diluent-ml" data-i18n="tools.unified.diluent">Reconstitution volume (mL)</label><input type="number" id="u-diluent-ml" min="0" step="0.001" inputmode="decimal" placeholder="2"></div>
+          <div class="tool-field"><label for="u-reference-mg" data-i18n="tools.unified.reference">Reference amount (mg)</label><input type="number" id="u-reference-mg" min="0" step="0.001" inputmode="decimal" placeholder="1"></div>
+          <div class="tool-field"><label for="u-click-ml" data-i18n="tools.unified.clickml">Manufacturer-stated mL per click</label><input type="number" id="u-click-ml" min="0" step="0.0001" inputmode="decimal" placeholder="0.01"></div>
         </div>
-        <div class="tool-field">
-          <label for="c1-ml" data-i18n="tools.field.ml">Diluent volume added (mL)</label>
-          <input type="number" id="c1-ml" min="0" step="0.01" inputmode="decimal" placeholder="2">
+        <div class="unified-results">
+          <div><span data-i18n="tools.unified.mgml">Concentration</span><strong id="u-out-mgml">—</strong></div>
+          <div><span data-i18n="tools.unified.mcgml">Microgram equivalent</span><strong id="u-out-mcgml">—</strong></div>
+          <div><span data-i18n="tools.unified.volume">Reference volume</span><strong id="u-out-ml">—</strong></div>
+          <div><span data-i18n="tools.unified.u100">U-100 scale markings</span><strong id="u-out-u100">—</strong></div>
+          <div><span data-i18n="tools.unified.clicks">Device clicks</span><strong id="u-out-clicks">—</strong></div>
         </div>
-
-        <div class="tool-result">
-          <div class="tool-result-row">
-            <span data-i18n="tools.result.mgml">Concentration</span>
-            <strong id="c1-out-mgml">—</strong>
-          </div>
-          <div class="tool-result-row tool-result-row-sub">
-            <span data-i18n="tools.result.mcgml">Equivalent</span>
-            <strong id="c1-out-mcgml">—</strong>
-          </div>
-        </div>
+        <p class="tool-note" data-i18n="tools.unified.note">U-100 is a 100-marking-per-mL volume scale. Click output only applies to the exact device specification entered above.</p>
       </div>
-
-      <div class="tool-card reveal">
-        <span class="eyebrow" data-i18n="tools.calc2.eyebrow">Calculator 02</span>
-        <h3 data-i18n="tools.calc2.h">Diluent Volume For Target Concentration</h3>
-        <p class="tool-desc" data-i18n="tools.calc2.desc">Enter the peptide mass and the concentration you want the solution to reach to find the required diluent volume.</p>
-
-        <div class="tool-field">
-          <label for="c2-mg" data-i18n="tools.field.mg">Peptide mass (mg)</label>
-          <input type="number" id="c2-mg" min="0" step="0.01" inputmode="decimal" placeholder="5">
-        </div>
-        <div class="tool-field">
-          <label for="c2-target" data-i18n="tools.field.target">Target concentration (mg/mL)</label>
-          <input type="number" id="c2-target" min="0" step="0.01" inputmode="decimal" placeholder="2.5">
-        </div>
-
-        <div class="tool-result">
-          <div class="tool-result-row">
-            <span data-i18n="tools.result.ml">Diluent volume required</span>
-            <strong id="c2-out-ml">—</strong>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <p class="tools-scope" data-i18n="tools.unified.scope">Reference only: confirm concentration and device documentation independently. PEPTORA does not provide dosing, administration or device-use guidance.</p>
 
     <p class="products-notice reveal" data-i18n="tools.footnote">For laboratory research reference only. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease. This calculator does not provide administration, dosing, or usage guidance of any kind.</p>
   </div>
@@ -149,6 +122,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=peptora-editorial-1"></script>
 </body>
 </html>

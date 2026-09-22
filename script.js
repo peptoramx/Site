@@ -470,6 +470,18 @@ function applyTranslations() {
     else if (CAT_LABELS[CURRENT_LANG][filter]) pill.textContent = CAT_LABELS[CURRENT_LANG][filter];
   });
 
+  document.querySelectorAll('.objective-list a i').forEach((detail, index) => {
+    detail.textContent = t(`objective.detail.${index + 1}`);
+  });
+
+  const footerNav = document.querySelector('.footer-nav');
+  if (footerNav && document.body.contains(document.getElementById('inicio'))) {
+    footerNav.innerHTML = [
+      ['#inicio', 'nav.biohacking'], ['#peptides', 'nav.peptides'], ['#performance', 'nav.performance'],
+      ['#longevity', 'nav.longevity'], ['#lab', 'nav.lab'], ['tools.html', 'nav.tools'], ['#contacto', 'nav.contact']
+    ].map(([href, key]) => `<a href="${href}">${t(key)}</a>`).join('');
+  }
+
   const langLabel = document.getElementById('langLabel');
   if (langLabel) langLabel.textContent = CURRENT_LANG === 'en' ? 'ES' : 'EN';
 
@@ -636,8 +648,23 @@ function animateStats() {
 function renderProducts() {
   const grid = document.getElementById('productGrid');
   const countEl = document.getElementById('productCount');
-  if (!grid) return;
+  const featuredGrid = document.getElementById('featuredGrid');
+  if (!grid && !featuredGrid) return;
   const lang = CURRENT_LANG;
+
+  if (featuredGrid) {
+    const featuredCategories = ['metabolic', 'gh-igf', 'brain-sleep'];
+    const featured = featuredCategories.map(category => PEPTORA_PRODUCTS.find(product => product.cat === category)).filter(Boolean);
+    featuredGrid.innerHTML = featured.map((p, index) => `
+      <article class="featured-card">
+        <span>${String(index + 1).padStart(2, '0')} / ${CAT_LABELS[lang][p.cat] || p.cat}</span>
+        <h3>${nameOf(p)}</h3>
+        <p>${p.desc[lang]}</p>
+        <a href="#productos">${t('featured.view')} <b>→</b></a>
+      </article>`).join('');
+  }
+
+  if (!grid) return;
 
   grid.innerHTML = PEPTORA_PRODUCTS.map((p) => {
     const name = nameOf(p);
@@ -806,53 +833,49 @@ function initContactForm() {
 
 // ============================================================================
 // Reconstitution concentration reference (tools.html only).
-// Pure solution-concentration arithmetic: mg + mL -> mg/mL, or
-// mg + target mg/mL -> mL. No syringe, pen, click, IU, or per-body-weight
-// units anywhere in this function — deliberately out of scope.
+// Pure solution-concentration arithmetic. The optional device-scale converter
+// reports volume equivalents only from values explicitly entered by the user;
+// it never derives or recommends an amount, schedule, or route of use.
 // ============================================================================
 function initConcentrationCalc() {
-  const mg1 = document.getElementById('c1-mg');
-  const ml1 = document.getElementById('c1-ml');
-  const outMgMl = document.getElementById('c1-out-mgml');
-  const outMcgMl = document.getElementById('c1-out-mcgml');
+  const mass = document.getElementById('u-mass-mg');
+  const diluent = document.getElementById('u-diluent-ml');
+  const reference = document.getElementById('u-reference-mg');
+  const mlPerClick = document.getElementById('u-click-ml');
+  const outMgMl = document.getElementById('u-out-mgml');
+  const outMcgMl = document.getElementById('u-out-mcgml');
+  const outMl = document.getElementById('u-out-ml');
+  const outU100 = document.getElementById('u-out-u100');
+  const outClicks = document.getElementById('u-out-clicks');
 
-  const mg2 = document.getElementById('c2-mg');
-  const target2 = document.getElementById('c2-target');
-  const outMl2 = document.getElementById('c2-out-ml');
-
-  if (!mg1 && !mg2) return; // not on this page
+  if (!mass || !diluent || !reference || !mlPerClick) return;
 
   function fmt(n) {
     if (!Number.isFinite(n)) return '—';
     return (Math.round(n * 1000) / 1000).toString();
   }
 
-  function calc1() {
-    const mg = parseFloat(mg1.value);
-    const ml = parseFloat(ml1.value);
-    if (!Number.isFinite(mg) || !Number.isFinite(ml) || ml <= 0 || mg < 0) {
-      outMgMl.textContent = '—';
-      outMcgMl.textContent = '—';
-      return;
-    }
-    const mgPerMl = mg / ml;
-    outMgMl.textContent = `${fmt(mgPerMl)} mg/mL`;
-    outMcgMl.textContent = `${fmt(mgPerMl * 1000)} mcg/mL`;
+  function clear() {
+    [outMgMl, outMcgMl, outMl, outU100, outClicks].forEach(output => { output.textContent = '—'; });
   }
 
-  function calc2() {
-    const mg = parseFloat(mg2.value);
-    const target = parseFloat(target2.value);
-    if (!Number.isFinite(mg) || !Number.isFinite(target) || target <= 0 || mg < 0) {
-      outMl2.textContent = '—';
-      return;
-    }
-    const ml = mg / target;
-    outMl2.textContent = `${fmt(ml)} mL`;
+  function calculate() {
+    const massMg = parseFloat(mass.value);
+    const diluentMl = parseFloat(diluent.value);
+    const referenceMg = parseFloat(reference.value);
+    const clickVolumeMl = parseFloat(mlPerClick.value);
+    if (!Number.isFinite(massMg) || !Number.isFinite(diluentMl) || massMg < 0 || diluentMl <= 0) { clear(); return; }
+    const concentration = massMg / diluentMl;
+    outMgMl.textContent = `${fmt(concentration)} mg/mL`;
+    outMcgMl.textContent = `${fmt(concentration * 1000)} mcg/mL`;
+    if (!Number.isFinite(referenceMg) || referenceMg < 0 || concentration <= 0) { outMl.textContent = '—'; outU100.textContent = '—'; outClicks.textContent = '—'; return; }
+    const referenceMl = referenceMg / concentration;
+    outMl.textContent = `${fmt(referenceMl)} mL`;
+    outU100.textContent = `${fmt(referenceMl * 100)} ${t('tools.calc3.markings')}`;
+    outClicks.textContent = Number.isFinite(clickVolumeMl) && clickVolumeMl > 0 ? `${fmt(referenceMl / clickVolumeMl)} ${t('tools.calc3.click_unit')}` : '—';
   }
 
-  if (mg1 && ml1) { mg1.addEventListener('input', calc1); ml1.addEventListener('input', calc1); }
-  if (mg2 && target2) { mg2.addEventListener('input', calc2); target2.addEventListener('input', calc2); }
+  [mass, diluent, reference, mlPerClick].forEach(input => input.addEventListener('input', calculate));
 }
 
 // ============================================================================
@@ -876,6 +899,44 @@ document.addEventListener('DOMContentLoaded', () => {
     mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mainNav.classList.remove('open')));
   }
 
+  document.querySelectorAll('a[href="#productos"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const catalog = document.querySelector('.catalog-details');
+      if (catalog) catalog.open = true;
+    });
+  });
+
+  // Objectives are real entry points into the reference index, not decorative links.
+  const objectiveFilters = ['metabolic', 'gh-igf', 'performance', 'brain-sleep', 'performance', 'immune', 'metabolic', 'aesthetic', null];
+  document.querySelectorAll('.objective-list a').forEach((link, index) => {
+    const filter = objectiveFilters[index];
+    if (!filter) return;
+    link.addEventListener('click', () => {
+      const catalog = document.querySelector('.catalog-details');
+      if (catalog) catalog.open = true;
+      const pill = document.querySelector(`.filter-pill[data-filter="${filter}"]`);
+      if (pill) pill.click();
+    });
+  });
+
+  document.querySelectorAll('[data-system-filter]').forEach(link => {
+    link.addEventListener('click', () => {
+      const catalog = document.querySelector('.catalog-details');
+      if (catalog) catalog.open = true;
+      const filter = link.getAttribute('data-system-filter');
+      const pill = document.querySelector(`.filter-pill[data-filter="${filter}"]`);
+      if (pill) pill.click();
+    });
+  });
+
+  const performanceCatalogLink = document.querySelector('.performance-copy a[href="#productos"]');
+  if (performanceCatalogLink) {
+    performanceCatalogLink.addEventListener('click', () => {
+      const pill = document.querySelector('.filter-pill[data-filter="gh-igf"]');
+      if (pill) pill.click();
+    });
+  }
+
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -892,4 +953,174 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  const navLinks = Array.from(document.querySelectorAll('.main-nav a[href^="#"]'));
+  if ('IntersectionObserver' in window && navLinks.length) {
+    const byId = new Map(navLinks.map(link => [link.getAttribute('href').slice(1), link]));
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = byId.get(entry.target.id);
+        if (active) active.classList.add('active');
+      });
+    }, { rootMargin: '-25% 0px -62% 0px', threshold: 0 });
+    byId.forEach((link, id) => {
+      const section = document.getElementById(id);
+      if (section) navObserver.observe(section);
+    });
+  }
 });
+
+// Editorial platform copy. Kept in the same localization registry as the
+// original reference content so language switching remains one coherent system.
+Object.assign(I18N.en, {
+  'nav.objectives': 'Objectives',
+  'hero.eyebrow': 'PEPTORA / BIOHACKING PLATFORM',
+  'hero.h1_pre': 'PEPTIDE SCIENCE', 'hero.h1_em': 'FOR THE BIOHACKING ERA',
+  'hero.lede': 'Explore the intersection of peptide science, human performance, recovery, metabolism, cognition and longevity.',
+  'hero.cta1': 'Explore biohacking', 'hero.cta2': 'Explore peptides',
+  'hero.rail': 'SCIENCE', 'hero.rail2': 'PERFORMANCE', 'hero.rail3': 'LONGEVITY / BIOHACKING',
+  'manifesto.h2': 'BIOHACKING BEGINS WITH <em>UNDERSTANDING THE SYSTEM.</em>',
+  'manifesto.p': 'Human optimization is not a collection of isolated compounds. It is an evolving system of metabolism, recovery, sleep, cognition, performance, cellular health and longevity.',
+  'manifesto.cta': 'Read our research philosophy <b>→</b>',
+  'manifesto.note1': 'Mechanisms before marketing.', 'manifesto.note2': 'Systems before shortcuts.', 'manifesto.note3': 'Responsible research framing.',
+  'objectives.eyebrow': 'PEPTORA / OPERATING SYSTEM', 'objectives.h2': 'EXPLORE BY <em>OBJECTIVE.</em>', 'objectives.p': 'Nine research pathways for a more connected view of performance and longevity.',
+  'objective.1': 'METABOLIC', 'objective.2': 'PERFORMANCE', 'objective.3': 'RECOVERY', 'objective.4': 'COGNITION', 'objective.5': 'LONGEVITY', 'objective.6': 'CELLULAR HEALTH', 'objective.7': 'BODY COMPOSITION', 'objective.8': 'SKIN & TISSUE', 'objective.9': 'RESEARCH TOOLS',
+  'performance.eyebrow': 'Human performance', 'performance.h2': 'ENGINEER<br>HUMAN<br><em>PERFORMANCE.</em>', 'performance.p': 'Energy, recovery, adaptation, body composition and metabolic efficiency are connected variables. Study the system, not the shortcut.', 'performance.cta': 'Explore performance <b>↗</b>',
+  'peptides.eyebrow': 'Peptide science', 'peptides.h2': 'SMALL MOLECULES.<br><em>PRECISE SIGNALS.</em><br>COMPLEX SYSTEMS.', 'peptides.p': 'Peptides are biological signaling molecules and research tools. Their value is not in hype; it is in the questions they let researchers ask about mechanisms, pathways and biological context.', 'peptides.cta': 'Explore peptides <b>→</b>',
+  'longevity.eyebrow': 'Longevity & cellular science', 'longevity.h2': 'LONGEVITY<br>IS A<br><em>CELLULAR<br>PROBLEM.</em>', 'longevity.p': 'Mitochondria, cellular signaling, metabolic health and repair are not isolated subjects. They are the biological infrastructure of how systems age and adapt.', 'longevity.cta': 'Explore longevity', 'ecosystem.eyebrow': 'The PEPTORA ecosystem',
+  'longevity.visual': 'Mitochondria • Signaling • Repair',
+  'products.eyebrow': 'Peptide science', 'products.h2': 'COMPOUNDS, <em>IN CONTEXT.</em>', 'products.lede': 'The bilingual research index remains complete, filterable and accessible.',
+  'lab.eyebrow': 'The biohacking lab', 'lab.h2': 'THE SIGNAL<br><em>BEHIND THE NOISE.</em>', 'lab.p': 'Education should make science more legible, not make bigger promises. The Biohacking Lab connects mechanisms, pathways and reference tools in one system.', 'lab.cta': 'Open reference tools <b>↗</b>', 'lab.note': 'A reference system, not a prescription.',
+  'about.h2': 'RIGOR BEFORE <em>RECOMMENDATION.</em>', 'contact.h2': 'START WITH A <em>BETTER QUESTION.</em>',
+  'tools.calc3.eyebrow': 'Reference converter', 'tools.calc3.h': 'Volume & Device-Scale Reference', 'tools.calc3.desc': 'Convert a known laboratory volume using an explicitly supplied device scale. This is arithmetic only; it does not recommend an amount, route, schedule, or use.', 'tools.calc3.mg': 'Reference amount (mg)', 'tools.calc3.conc': 'Known concentration (mg/mL)', 'tools.calc3.clickml': 'Manufacturer-stated mL per click', 'tools.calc3.mlout': 'Calculated volume', 'tools.calc3.u100': 'U-100 scale markings', 'tools.calc3.clicks': 'Device clicks', 'tools.calc3.note': 'U-100 markings are a volume scale of 100 markings per mL, not an amount of active material. Click output only applies to the exact device specification entered above.', 'tools.calc3.scope': 'Reference only: confirm the concentration and the device documentation independently. PEPTORA does not provide dosing, administration, or device-use guidance.'
+  ,'tools.calc3.markings': 'markings', 'tools.calc3.click_unit': 'clicks'
+});
+Object.assign(I18N.es, {
+  'nav.objectives': 'Objetivos',
+  'hero.eyebrow': 'PEPTORA / PLATAFORMA DE BIOHACKING',
+  'hero.h1_pre': 'CIENCIA DE P\u00c9PTIDOS', 'hero.h1_em': 'PARA LA ERA DEL BIOHACKING',
+  'hero.lede': 'Explora la intersecci\u00f3n entre ciencia de p\u00e9ptidos, rendimiento humano, recuperaci\u00f3n, metabolismo, cognici\u00f3n y longevidad.',
+  'hero.cta1': 'Explorar biohacking', 'hero.cta2': 'Explorar p\u00e9ptidos',
+  'hero.rail': 'CIENCIA', 'hero.rail2': 'RENDIMIENTO', 'hero.rail3': 'LONGEVIDAD / BIOHACKING',
+  'manifesto.h2': 'EL BIOHACKING COMIENZA POR <em>ENTENDER EL SISTEMA.</em>',
+  'manifesto.p': 'La optimizaci\u00f3n humana no es una colecci\u00f3n de compuestos aislados. Es un sistema en evoluci\u00f3n de metabolismo, recuperaci\u00f3n, sue\u00f1o, cognici\u00f3n, rendimiento, salud celular y longevidad.',
+  'manifesto.cta': 'Leer nuestra filosof\u00eda de investigaci\u00f3n <b>→</b>',
+  'manifesto.note1': 'Mecanismos antes que marketing.', 'manifesto.note2': 'Sistemas antes que atajos.', 'manifesto.note3': 'Marco de investigaci\u00f3n responsable.',
+  'objectives.eyebrow': 'PEPTORA / SISTEMA OPERATIVO', 'objectives.h2': 'EXPLORA POR <em>OBJETIVO.</em>', 'objectives.p': 'Nueve rutas de investigaci\u00f3n para entender mejor el rendimiento y la longevidad.',
+  'objective.1': 'METAB\u00d3LICO', 'objective.2': 'RENDIMIENTO', 'objective.3': 'RECUPERACI\u00d3N', 'objective.4': 'COGNICI\u00d3N', 'objective.5': 'LONGEVIDAD', 'objective.6': 'SALUD CELULAR', 'objective.7': 'COMPOSICI\u00d3N CORPORAL', 'objective.8': 'PIEL Y TEJIDO', 'objective.9': 'HERRAMIENTAS DE INVESTIGACI\u00d3N',
+  'performance.eyebrow': 'Rendimiento humano', 'performance.h2': 'DISE\u00d1A EL<br>RENDIMIENTO<br><em>HUMANO.</em>', 'performance.p': 'Energ\u00eda, recuperaci\u00f3n, adaptaci\u00f3n, composici\u00f3n corporal y eficiencia metab\u00f3lica son variables conectadas. Estudia el sistema, no el atajo.', 'performance.cta': 'Explorar rendimiento <b>↗</b>',
+  'peptides.eyebrow': 'Ciencia de p\u00e9ptidos', 'peptides.h2': 'MOL\u00c9CULAS PEQUE\u00d1AS.<br><em>SE\u00d1ALES PRECISAS.</em><br>SISTEMAS COMPLEJOS.', 'peptides.p': 'Los p\u00e9ptidos son mol\u00e9culas de se\u00f1alizaci\u00f3n biol\u00f3gica y herramientas de investigaci\u00f3n. Su valor no est\u00e1 en el ruido, sino en las preguntas que permiten hacer sobre mecanismos, rutas y contexto biol\u00f3gico.', 'peptides.cta': 'Explorar p\u00e9ptidos <b>→</b>',
+  'longevity.eyebrow': 'Longevidad y ciencia celular', 'longevity.h2': 'LA LONGEVIDAD<br>ES UN<br><em>PROBLEMA<br>CELULAR.</em>', 'longevity.p': 'Mitocondrias, se\u00f1alizaci\u00f3n celular, salud metab\u00f3lica y reparaci\u00f3n no son temas aislados. Son la infraestructura biol\u00f3gica de c\u00f3mo los sistemas envejecen y se adaptan.', 'longevity.cta': 'Explorar longevidad', 'ecosystem.eyebrow': 'El ecosistema PEPTORA',
+  'longevity.visual': 'Mitocondrias • Se\u00f1alizaci\u00f3n • Reparaci\u00f3n',
+  'products.eyebrow': 'Ciencia de p\u00e9ptidos', 'products.h2': 'COMPUESTOS, <em>EN CONTEXTO.</em>', 'products.lede': 'El \u00edndice biling\u00fce de investigaci\u00f3n sigue completo, filtrable y accesible.',
+  'lab.eyebrow': 'El laboratorio de biohacking', 'lab.h2': 'LA SE\u00d1AL<br><em>DETR\u00c1S DEL RUIDO.</em>', 'lab.p': 'La educaci\u00f3n debe hacer la ciencia m\u00e1s legible, no hacer promesas m\u00e1s grandes. El Biohacking Lab conecta mecanismos, rutas y herramientas de referencia en un solo sistema.', 'lab.cta': 'Abrir herramientas de referencia <b>↗</b>', 'lab.note': 'Un sistema de referencia, no una prescripci\u00f3n.',
+  'about.h2': 'RIGOR ANTES QUE <em>RECOMENDACI\u00d3N.</em>', 'contact.h2': 'EMPIEZA CON UNA <em>MEJOR PREGUNTA.</em>',
+  'tools.calc3.eyebrow': 'Convertidor de referencia', 'tools.calc3.h': 'Referencia de volumen y escala de dispositivo', 'tools.calc3.desc': 'Convierte un volumen de laboratorio conocido usando una escala de dispositivo indicada expl\u00edcitamente. Es solo aritm\u00e9tica; no recomienda cantidad, v\u00eda, frecuencia ni uso.', 'tools.calc3.mg': 'Cantidad de referencia (mg)', 'tools.calc3.conc': 'Concentraci\u00f3n conocida (mg/mL)', 'tools.calc3.clickml': 'mL por clic indicado por el fabricante', 'tools.calc3.mlout': 'Volumen calculado', 'tools.calc3.u100': 'Marcas de escala U-100', 'tools.calc3.clicks': 'Clics del dispositivo', 'tools.calc3.note': 'Las marcas U-100 son una escala de volumen de 100 marcas por mL, no una cantidad de material activo. El resultado de clics solo aplica a la especificaci\u00f3n exacta indicada arriba.', 'tools.calc3.scope': 'Solo como referencia: confirma de forma independiente la concentraci\u00f3n y la documentaci\u00f3n del dispositivo. PEPTORA no ofrece indicaciones de dosificaci\u00f3n, administraci\u00f3n ni uso de dispositivos.'
+  ,'tools.calc3.markings': 'marcas', 'tools.calc3.click_unit': 'clics'
+});
+
+Object.assign(I18N.en, {
+  'tools.unified.eyebrow': 'One reference calculator', 'tools.unified.h': 'ALL VALUES, ONE VIEW.', 'tools.unified.desc': 'Enter the laboratory mass, reconstitution volume, reference amount and device specification once. Every reference value updates together.', 'tools.unified.mass': 'Laboratory mass (mg)', 'tools.unified.diluent': 'Reconstitution volume (mL)', 'tools.unified.reference': 'Reference amount (mg)', 'tools.unified.clickml': 'Manufacturer-stated mL per click', 'tools.unified.mgml': 'Concentration', 'tools.unified.mcgml': 'Microgram equivalent', 'tools.unified.volume': 'Reference volume', 'tools.unified.u100': 'U-100 scale markings', 'tools.unified.clicks': 'Device clicks', 'tools.unified.note': 'U-100 is a 100-marking-per-mL volume scale. Click output only applies to the exact device specification entered above.', 'tools.unified.scope': 'Reference only: confirm concentration and device documentation independently. PEPTORA does not provide dosing, administration or device-use guidance.'
+});
+Object.assign(I18N.es, {
+  'tools.unified.eyebrow': 'Una sola calculadora de referencia', 'tools.unified.h': 'TODOS LOS VALORES, EN UNA VISTA.', 'tools.unified.desc': 'Ingresa una sola vez la masa de laboratorio, el volumen de reconstituci\u00f3n, la cantidad de referencia y la especificaci\u00f3n del dispositivo. Todos los valores se actualizan juntos.', 'tools.unified.mass': 'Masa de laboratorio (mg)', 'tools.unified.diluent': 'Volumen de reconstituci\u00f3n (mL)', 'tools.unified.reference': 'Cantidad de referencia (mg)', 'tools.unified.clickml': 'mL por clic indicado por el fabricante', 'tools.unified.mgml': 'Concentraci\u00f3n', 'tools.unified.mcgml': 'Equivalente en microgramos', 'tools.unified.volume': 'Volumen de referencia', 'tools.unified.u100': 'Marcas de escala U-100', 'tools.unified.clicks': 'Clics del dispositivo', 'tools.unified.note': 'U-100 es una escala de volumen de 100 marcas por mL. El resultado de clics solo aplica a la especificaci\u00f3n exacta indicada arriba.', 'tools.unified.scope': 'Solo como referencia: confirma de forma independiente la concentraci\u00f3n y la documentaci\u00f3n del dispositivo. PEPTORA no ofrece indicaciones de dosificaci\u00f3n, administraci\u00f3n ni uso de dispositivos.'
+});
+
+Object.assign(I18N.en, {
+  'precision.eyebrow': 'Research tools', 'precision.h2': 'PRECISION MATTERS.', 'precision.p': 'Clear research starts with clear arithmetic. Explore concentration, reconstitution and volume-reference tools designed to keep technical context visible.', 'precision.cta': 'Open precision tools ↗'
+  ,'hero.cap1': 'BIOHACKING', 'hero.cap2': 'PERFORMANCE', 'hero.cap3': 'LONGEVITY', 'performance.visual': 'RECOVERY / ADAPTATION / OUTPUT',
+  'eco.1': 'BIOHACKING', 'eco.2': 'PEPTIDES', 'eco.3': 'PERFORMANCE', 'eco.4': 'RECOVERY', 'eco.5': 'METABOLISM', 'eco.6': 'COGNITION', 'eco.7': 'LONGEVITY', 'eco.8': 'TOOLS', 'eco.9': 'EDUCATION'
+});
+Object.assign(I18N.es, {
+  'precision.eyebrow': 'Herramientas de investigaci\u00f3n', 'precision.h2': 'LA PRECISI\u00d3N IMPORTA.', 'precision.p': 'La investigaci\u00f3n clara comienza con aritm\u00e9tica clara. Explora herramientas de concentraci\u00f3n, reconstituci\u00f3n y referencia de volumen para mantener visible el contexto t\u00e9cnico.', 'precision.cta': 'Abrir herramientas de precisi\u00f3n ↗'
+  ,'hero.cap1': 'BIOHACKING', 'hero.cap2': 'RENDIMIENTO', 'hero.cap3': 'LONGEVIDAD', 'performance.visual': 'RECUPERACI\u00d3N / ADAPTACI\u00d3N / RENDIMIENTO',
+  'eco.1': 'BIOHACKING', 'eco.2': 'P\u00c9PTIDOS', 'eco.3': 'RENDIMIENTO', 'eco.4': 'RECUPERACI\u00d3N', 'eco.5': 'METABOLISMO', 'eco.6': 'COGNICI\u00d3N', 'eco.7': 'LONGEVIDAD', 'eco.8': 'HERRAMIENTAS', 'eco.9': 'EDUCACI\u00d3N'
+});
+
+Object.assign(I18N.en, {
+  'system.metabolism': 'Metabolism', 'system.recovery': 'Recovery', 'system.sleep': 'Sleep', 'system.cognition': 'Cognition', 'system.performance': 'Performance', 'system.cellular': 'Cellular health', 'system.longevity': 'Longevity'
+});
+Object.assign(I18N.es, {
+  'system.metabolism': 'Metabolismo', 'system.recovery': 'Recuperaci\u00f3n', 'system.sleep': 'Sue\u00f1o', 'system.cognition': 'Cognici\u00f3n', 'system.performance': 'Rendimiento', 'system.cellular': 'Salud celular', 'system.longevity': 'Longevidad'
+});
+
+Object.assign(I18N.en, {
+  'footer.tag': 'Biohacking • Peptide Science • Human Performance • Longevity',
+  'contact.eyebrow': 'PEPTORA / CONNECT', 'contact.lede': 'For research questions, platform feedback and collaboration inquiries. Start with the context that matters.'
+});
+Object.assign(I18N.es, {
+  'footer.tag': 'Biohacking • Ciencia de p\u00e9ptidos • Rendimiento humano • Longevidad',
+  'contact.eyebrow': 'PEPTORA / CONEXI\u00d3N', 'contact.lede': 'Para preguntas de investigaci\u00f3n, comentarios sobre la plataforma y consultas de colaboraci\u00f3n. Empieza con el contexto que importa.'
+});
+
+Object.assign(I18N.en, {
+  'tools.eyebrow': 'PEPTORA precision tools', 'tools.h1': 'REFERENCE TOOLS FOR CLEARER RESEARCH.',
+  'tools.lede': 'Precision matters. Use these calculators to review solution concentration and reference-volume arithmetic for laboratory materials.',
+  'tools.scope_note': 'These tools perform reference arithmetic only. They do not calculate, suggest or recommend amounts for administration or use in any living organism.'
+});
+Object.assign(I18N.es, {
+  'tools.eyebrow': 'Herramientas de precisi\u00f3n PEPTORA', 'tools.h1': 'HERRAMIENTAS DE REFERENCIA PARA INVESTIGAR CON MAYOR CLARIDAD.',
+  'tools.lede': 'La precisi\u00f3n importa. Usa estas calculadoras para revisar concentraci\u00f3n de soluciones y aritm\u00e9tica de vol\u00famenes de referencia para materiales de laboratorio.',
+  'tools.scope_note': 'Estas herramientas realizan solo aritm\u00e9tica de referencia. No calculan, sugieren ni recomiendan cantidades para administraci\u00f3n o uso en organismos vivos.'
+});
+
+Object.assign(I18N.en, { 'catalog.open': 'Open complete research index' });
+Object.assign(I18N.es, { 'catalog.open': 'Abrir \u00edndice completo de investigaci\u00f3n' });
+Object.assign(I18N.en, { 'manifesto.index': 'PEPTORA BIOLOGICAL SYSTEMS' });
+Object.assign(I18N.es, { 'manifesto.index': 'PEPTORA SISTEMAS BIOL\u00d3GICOS' });
+Object.assign(I18N.en, {
+  'objective.detail.1': 'Energy • Glucose • Appetite', 'objective.detail.2': 'Strength • Adaptation • Output', 'objective.detail.3': 'Repair • Tissue • Inflammation', 'objective.detail.4': 'Focus • Neural signaling • Sleep', 'objective.detail.5': 'Cellular aging • Mitochondria', 'objective.detail.6': 'Signaling • Regeneration', 'objective.detail.7': 'Metabolic research models', 'objective.detail.8': 'Dermal • Collagen research', 'objective.detail.9': 'Concentration • Reference tools'
+});
+Object.assign(I18N.es, {
+  'objective.detail.1': 'Energ\u00eda • Glucosa • Apetito', 'objective.detail.2': 'Fuerza • Adaptaci\u00f3n • Rendimiento', 'objective.detail.3': 'Reparaci\u00f3n • Tejido • Inflamaci\u00f3n', 'objective.detail.4': 'Enfoque • Se\u00f1alizaci\u00f3n neural • Sue\u00f1o', 'objective.detail.5': 'Envejecimiento celular • Mitocondrias', 'objective.detail.6': 'Se\u00f1alizaci\u00f3n • Regeneraci\u00f3n', 'objective.detail.7': 'Modelos de investigaci\u00f3n metab\u00f3lica', 'objective.detail.8': 'Investigaci\u00f3n d\u00e9rmica • Col\u00e1geno', 'objective.detail.9': 'Concentraci\u00f3n • Herramientas de referencia'
+});
+
+Object.assign(I18N.en, {
+  'featured.eyebrow': 'Selected research references', 'featured.h2': 'FEATURED PEPTIDES.', 'featured.p': 'A focused entry point to the research index. View the complete reference library when you are ready.', 'featured.cta': 'Explore all peptides ↗', 'featured.view': 'View peptide'
+});
+Object.assign(I18N.es, {
+  'featured.eyebrow': 'Referencias de investigaci\u00f3n seleccionadas', 'featured.h2': 'P\u00c9PTIDOS DESTACADOS.', 'featured.p': 'Un punto de entrada enfocado al \u00edndice de investigaci\u00f3n. Consulta la biblioteca de referencia completa cuando lo necesites.', 'featured.cta': 'Explorar todos los p\u00e9ptidos ↗', 'featured.view': 'Ver p\u00e9ptido'
+});
+
+Object.assign(I18N.en, {
+  'lab.h2': 'UNDERSTAND THE SYSTEM.', 'lab.p': 'The Biohacking Lab makes complex science easier to navigate: mechanisms, interconnected pathways, research context and precision tools in one place.',
+  'lab.path1.h': 'MECHANISMS', 'lab.path1.p': 'How biological signaling works.', 'lab.path2.h': 'PATHWAYS', 'lab.path2.p': 'Explore connected biological systems.', 'lab.path3.h': 'RESEARCH', 'lab.path3.p': 'Review context and evidence.', 'lab.path4.h': 'TOOLS', 'lab.path4.p': 'Use precision reference tools.'
+});
+Object.assign(I18N.es, {
+  'lab.h2': 'ENTIENDE EL SISTEMA.', 'lab.p': 'El Biohacking Lab vuelve m\u00e1s navegable la ciencia compleja: mecanismos, rutas interconectadas, contexto de investigaci\u00f3n y herramientas de precisi\u00f3n en un solo lugar.',
+  'lab.path1.h': 'MECANISMOS', 'lab.path1.p': 'C\u00f3mo funciona la se\u00f1alizaci\u00f3n biol\u00f3gica.', 'lab.path2.h': 'RUTAS', 'lab.path2.p': 'Explora sistemas biol\u00f3gicos conectados.', 'lab.path3.h': 'INVESTIGACI\u00d3N', 'lab.path3.p': 'Revisa contexto y evidencia.', 'lab.path4.h': 'HERRAMIENTAS', 'lab.path4.p': 'Usa herramientas de referencia precisas.'
+});
+
+Object.assign(I18N.en, {
+  'nav.biohacking': 'Biohacking', 'nav.peptides': 'Peptides', 'nav.performance': 'Performance', 'nav.longevity': 'Longevity', 'nav.lab': 'Biohacking Lab', 'nav.explore': 'Explore',
+  'tracks.lab.eyebrow': 'Laboratory reference', 'tracks.lab.h': 'RESEARCH PEPTIDES.', 'tracks.lab.p': 'Compound records, categories, mechanisms and bilingual research context for laboratory reference.', 'tracks.lab.cta': 'Open research index →',
+  'tracks.bio.eyebrow': 'Biohacking education', 'tracks.bio.h': 'HUMAN OPTIMIZATION.', 'tracks.bio.p': 'Explore the systems behind performance, recovery, metabolism, cognition and longevity through education and scientific context.', 'tracks.bio.cta': 'Explore objectives →',
+  'tracks.disclaimer': 'Educational biohacking content is not medical advice, a recommendation, or guidance for administration. Product references are for laboratory research only and are not for human or veterinary use.'
+});
+Object.assign(I18N.es, {
+  'nav.biohacking': 'Biohacking', 'nav.peptides': 'P\u00e9ptidos', 'nav.performance': 'Rendimiento', 'nav.longevity': 'Longevidad', 'nav.lab': 'Biohacking Lab', 'nav.explore': 'Explorar',
+  'tracks.lab.eyebrow': 'Referencia de laboratorio', 'tracks.lab.h': 'P\u00c9PTIDOS DE INVESTIGACI\u00d3N.', 'tracks.lab.p': 'Registros de compuestos, categor\u00edas, mecanismos y contexto biling\u00fce para referencia de laboratorio.', 'tracks.lab.cta': 'Abrir \u00edndice de investigaci\u00f3n →',
+  'tracks.bio.eyebrow': 'Educaci\u00f3n de biohacking', 'tracks.bio.h': 'OPTIMIZACI\u00d3N HUMANA.', 'tracks.bio.p': 'Explora los sistemas detr\u00e1s del rendimiento, recuperaci\u00f3n, metabolismo, cognici\u00f3n y longevidad mediante educaci\u00f3n y contexto cient\u00edfico.', 'tracks.bio.cta': 'Explorar objetivos →',
+  'tracks.disclaimer': 'El contenido educativo de biohacking no es consejo m\u00e9dico, una recomendaci\u00f3n ni una gu\u00eda de administraci\u00f3n. Las referencias de productos son solo para investigaci\u00f3n de laboratorio y no son para uso humano ni veterinario.'
+});
+
+// These keys are rendered as text nodes by the existing localization engine.
+// Keep their translated values plain text so no markup is ever exposed.
+for (const locale of ['en', 'es']) {
+  const values = locale === 'en' ? {
+    'manifesto.h2': 'BIOHACKING BEGINS WITH UNDERSTANDING THE SYSTEM.', 'manifesto.cta': 'Read our research philosophy →',
+    'objectives.h2': 'EXPLORE BY OBJECTIVE.', 'performance.h2': 'ENGINEER HUMAN PERFORMANCE.', 'performance.cta': 'Explore performance ↗',
+    'peptides.h2': 'SMALL MOLECULES. PRECISE SIGNALS. COMPLEX SYSTEMS.', 'peptides.cta': 'Explore peptides →',
+    'products.h2': 'COMPOUNDS, IN CONTEXT.', 'lab.h2': 'THE SIGNAL BEHIND THE NOISE.', 'lab.cta': 'Open reference tools ↗',
+    'longevity.h2': 'LONGEVITY IS A CELLULAR PROBLEM.', 'about.h2': 'RIGOR BEFORE RECOMMENDATION.', 'contact.h2': 'START WITH A BETTER QUESTION.'
+  } : {
+    'manifesto.h2': 'EL BIOHACKING COMIENZA POR ENTENDER EL SISTEMA.', 'manifesto.cta': 'Leer nuestra filosof\u00eda de investigaci\u00f3n →',
+    'objectives.h2': 'EXPLORA POR OBJETIVO.', 'performance.h2': 'DISE\u00d1A EL RENDIMIENTO HUMANO.', 'performance.cta': 'Explorar rendimiento ↗',
+    'peptides.h2': 'MOL\u00c9CULAS PEQUE\u00d1AS. SE\u00d1ALES PRECISAS. SISTEMAS COMPLEJOS.', 'peptides.cta': 'Explorar p\u00e9ptidos →',
+    'products.h2': 'COMPUESTOS, EN CONTEXTO.', 'lab.h2': 'LA SE\u00d1AL DETR\u00c1S DEL RUIDO.', 'lab.cta': 'Abrir herramientas de referencia ↗',
+    'longevity.h2': 'LA LONGEVIDAD ES UN PROBLEMA CELULAR.', 'about.h2': 'RIGOR ANTES QUE RECOMENDACI\u00d3N.', 'contact.h2': 'EMPIEZA CON UNA MEJOR PREGUNTA.'
+  };
+  Object.assign(I18N[locale], values);
+}
