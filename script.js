@@ -834,13 +834,19 @@ function renderProducts() {
   if (featuredGrid) {
     const featuredNames = ['Retatrutide', 'MOTS-c', 'Tesamorelin', 'CJC-1295 (No DAC)', 'NAD+', 'BPC-157', 'GLOW', 'KLOW'];
     const featured = featuredNames.map(name => PEPTORA_PRODUCTS.find(product => nameOf(product) === name)).filter(Boolean);
-    featuredGrid.innerHTML = featured.map((p, index) => `
+    featuredGrid.innerHTML = featured.map((p, index) => {
+      const featuredName = nameOf(p);
+      const referenceName = typeof p.name === 'string' ? p.name : p.name.en;
+      const lens = BIOHACKING_LENS_BY_PRODUCT[lang][featuredName] || BIOHACKING_LENS_BY_PRODUCT[lang][referenceName];
+      return `
       <article class="featured-card">
         <span>${String(index + 1).padStart(2, '0')} / ${CAT_LABELS[lang][p.cat] || p.cat}</span>
-        <h3>${nameOf(p)}</h3>
+        <h3>${featuredName}</h3>
         <p>${p.desc[lang]}</p>
+        <p class="featured-why"><b>${lang === 'es' ? 'POR QUÉ IMPORTA' : 'WHY IT MATTERS'}</b>${lens ? lens.objective : p.mech[lang]}</p>
         <a href="#productos">${t('featured.view')} <b>→</b></a>
-      </article>`).join('');
+      </article>`;
+    }).join('');
   }
 
   if (!grid) return;
@@ -1132,6 +1138,17 @@ Object.assign(I18N.es, {
   'about.h2': 'PRIMERO, <em>ENTENDER.</em>', 'contact.h2': 'EMPIEZA CON UNA <em>MEJOR PREGUNTA.</em>',
   'tools.calc3.eyebrow': 'Convertidor de referencia', 'tools.calc3.h': 'Referencia de volumen y escala de dispositivo', 'tools.calc3.desc': 'Convierte un volumen de laboratorio conocido usando una escala de dispositivo indicada expl\u00edcitamente. Es solo aritm\u00e9tica; no recomienda cantidad, v\u00eda, frecuencia ni uso.', 'tools.calc3.mg': 'Cantidad de referencia (mg)', 'tools.calc3.conc': 'Concentraci\u00f3n conocida (mg/mL)', 'tools.calc3.clickml': 'mL por clic indicado por el fabricante', 'tools.calc3.mlout': 'Volumen calculado', 'tools.calc3.u100': 'Marcas de escala U-100', 'tools.calc3.clicks': 'Clics del dispositivo', 'tools.calc3.note': 'Las marcas U-100 son una escala de volumen de 100 marcas por mL, no una cantidad de material activo. El resultado de clics solo aplica a la especificaci\u00f3n exacta indicada arriba.', 'tools.calc3.scope': 'Solo como referencia: confirma de forma independiente la concentraci\u00f3n y la documentaci\u00f3n del dispositivo. PEPTORA no ofrece indicaciones de dosificaci\u00f3n, administraci\u00f3n ni uso de dispositivos.'
   ,'tools.calc3.markings': 'marcas', 'tools.calc3.click_unit': 'clics'
+});
+
+Object.assign(I18N.en, {
+  'learn.eyebrow': 'Essential guides', 'learn.h2': 'LEARN THE <em>SYSTEM.</em>', 'learn.p': 'Start with the biological question, then use the index to compare pathways, mechanisms and evidence boundaries.', 'learn.open': 'Open research path →',
+  'learn.met.h': 'METABOLISM', 'learn.met.p': 'Incretins, appetite signalling, energy balance and metabolic context.', 'learn.rec.h': 'RECOVERY', 'learn.rec.p': 'Tissue response, adaptation and the difference between mechanism and outcome.', 'learn.cog.h': 'COGNITION', 'learn.cog.p': 'Neural signalling, stress context and careful interpretation of evidence.', 'learn.lon.h': 'LONGEVITY', 'learn.lon.p': 'Mitochondria, redox, cellular adaptation and aging biology.', 'learn.body.h': 'BODY COMPOSITION', 'learn.body.p': 'Separate metabolic pathways, clinical evidence and online claims.', 'learn.key.h': 'HOW TO READ A REFERENCE', 'learn.key.p': 'Mechanism: what is being studied. Context: why it is discussed. Evidence boundary: what the research does not establish.',
+  'tools.steps.eyebrow': 'How to read the calculator', 'tools.steps.1h': 'ENTER KNOWN LAB VALUES', 'tools.steps.1p': 'Use only the mass and liquid volume documented for the material in front of you.', 'tools.steps.2h': 'READ THE CONCENTRATION', 'tools.steps.2p': 'The calculator expresses a solution relationship in mg/mL and mcg/mL.', 'tools.steps.3h': 'VERIFY THE DEVICE SCALE', 'tools.steps.3p': 'Any marking or click conversion depends exclusively on manufacturer documentation for that exact device.'
+});
+Object.assign(I18N.es, {
+  'learn.eyebrow': 'Gu\u00edas esenciales', 'learn.h2': 'ENTIENDE EL <em>SISTEMA.</em>', 'learn.p': 'Empieza con la pregunta biol\u00f3gica y usa el \u00edndice para comparar rutas, mecanismos y l\u00edmites de evidencia.', 'learn.open': 'Abrir ruta de investigaci\u00f3n →',
+  'learn.met.h': 'METABOLISMO', 'learn.met.p': 'Incretinas, se\u00f1alizaci\u00f3n del apetito, balance energ\u00e9tico y contexto metab\u00f3lico.', 'learn.rec.h': 'RECUPERACI\u00d3N', 'learn.rec.p': 'Respuesta tisular, adaptaci\u00f3n y la diferencia entre mecanismo y resultado.', 'learn.cog.h': 'COGNICI\u00d3N', 'learn.cog.p': 'Se\u00f1alizaci\u00f3n neural, contexto de estr\u00e9s e interpretaci\u00f3n cuidadosa de evidencia.', 'learn.lon.h': 'LONGEVIDAD', 'learn.lon.p': 'Mitocondrias, redox, adaptaci\u00f3n celular y biolog\u00eda del envejecimiento.', 'learn.body.h': 'COMPOSICI\u00d3N CORPORAL', 'learn.body.p': 'Separa rutas metab\u00f3licas, evidencia cl\u00ednica y afirmaciones en l\u00ednea.', 'learn.key.h': 'C\u00d3MO LEER UNA FICHA', 'learn.key.p': 'Mecanismo: qu\u00e9 se estudia. Contexto: por qu\u00e9 se discute. L\u00edmite de evidencia: qu\u00e9 no establece la investigaci\u00f3n.',
+  'tools.steps.eyebrow': 'C\u00f3mo leer la calculadora', 'tools.steps.1h': 'INGRESA VALORES CONOCIDOS', 'tools.steps.1p': 'Usa \u00fanicamente la masa y el volumen de l\u00edquido documentados para el material.', 'tools.steps.2h': 'LEE LA CONCENTRACI\u00d3N', 'tools.steps.2p': 'La calculadora expresa la relaci\u00f3n de soluci\u00f3n en mg/mL y mcg/mL.', 'tools.steps.3h': 'VERIFICA LA ESCALA DEL DISPOSITIVO', 'tools.steps.3p': 'Cualquier conversi\u00f3n de marcas o clics depende exclusivamente de la documentaci\u00f3n del fabricante de ese dispositivo.'
 });
 
 Object.assign(I18N.en, {
