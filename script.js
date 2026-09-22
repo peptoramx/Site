@@ -657,14 +657,13 @@ function applyTranslations() {
 
 function setLanguage(lang) {
   CURRENT_LANG = lang === 'es' ? 'es' : 'en';
-  try { localStorage.setItem('peptora_lang', CURRENT_LANG); } catch (e) {}
   applyTranslations();
 }
 
 function initLanguage() {
-  let saved = null;
-  try { saved = localStorage.getItem('peptora_lang'); } catch (e) {}
-  CURRENT_LANG = saved === 'es' ? 'es' : 'en';
+  // English is the predictable entry language on every fresh page load.
+  // Spanish remains available immediately through the visible language toggle.
+  CURRENT_LANG = 'en';
   const toggle = document.getElementById('langToggle');
   if (toggle) toggle.addEventListener('click', () => setLanguage(CURRENT_LANG === 'en' ? 'es' : 'en'));
   applyTranslations();
