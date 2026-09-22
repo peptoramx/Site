@@ -16,6 +16,38 @@ const CAT_LABELS = {
   },
 };
 
+// Educational context for the reference cards. It intentionally describes
+// research conversations, not personal use, protocols or administration.
+const BIOHACKING_LENS = {
+  en: {
+    metabolic: { objective: 'Metabolic signalling', community: 'Often discussed in metabolic-health and body-composition conversations.', evidence: 'Evidence varies by compound; some pathways have clinical literature, others remain investigational.', map: 'METABOLIC' },
+    'gh-igf': { objective: 'Adaptation & performance signalling', community: 'Often appears in performance, recovery and physique-oriented discussions.', evidence: 'Performance claims should not be inferred from research context; athlete anti-doping rules may apply.', map: 'PERFORMANCE' },
+    'brain-sleep': { objective: 'Cognitive & sleep pathways', community: 'Often discussed around focus, stress resilience and sleep-related research.', evidence: 'Human evidence and regulatory status vary substantially between compounds.', map: 'COGNITION' },
+    performance: { objective: 'Recovery & cellular adaptation', community: 'Often appears in longevity, recovery and training-adaptation conversations.', evidence: 'Research context is not evidence of a personal outcome or a recommendation.', map: 'LONGEVITY' },
+    immune: { objective: 'Immune & inflammatory signalling', community: 'Often discussed in cellular-health and recovery conversations.', evidence: 'Immune pathways are complex; research interest is not a treatment claim.', map: 'CELLULAR HEALTH' },
+    hormonal: { objective: 'Endocrine signalling', community: 'Often appears in hormone, vitality and performance discussions.', evidence: 'Hormonal pathways require clinical context; this card is not guidance for use.', map: 'PERFORMANCE' },
+    aesthetic: { objective: 'Skin & tissue research', community: 'Often discussed in skin-quality, connective-tissue and recovery conversations.', evidence: 'Mechanistic interest does not establish a cosmetic or therapeutic result.', map: 'SKIN & TISSUE' },
+    stacks: { objective: 'Research comparison', community: 'Often discussed as a way to compare pathways, not as a usage plan.', evidence: 'Combining compounds can add uncertainty; PEPTORA does not publish protocols.', map: 'RESEARCH TOOLS' },
+    supplies: { objective: 'Laboratory workflow', community: 'Appears in conversations about documentation and research workflow.', evidence: 'Equipment context is educational and does not provide administration guidance.', map: 'RESEARCH TOOLS' },
+  },
+  es: {
+    metabolic: { objective: 'Se\u00f1alizaci\u00f3n metab\u00f3lica', community: 'Suele aparecer en conversaciones sobre salud metab\u00f3lica y composici\u00f3n corporal.', evidence: 'La evidencia var\u00eda por compuesto; algunas v\u00edas tienen literatura cl\u00ednica y otras siguen siendo de investigaci\u00f3n.', map: 'METAB\u00d3LICO' },
+    'gh-igf': { objective: 'Se\u00f1alizaci\u00f3n de adaptaci\u00f3n y rendimiento', community: 'Suele aparecer en conversaciones sobre rendimiento, recuperaci\u00f3n y f\u00edsico.', evidence: 'El contexto de investigaci\u00f3n no demuestra rendimiento; pueden aplicar reglas antidopaje.', map: 'RENDIMIENTO' },
+    'brain-sleep': { objective: 'V\u00edas cognitivas y del sue\u00f1o', community: 'Suele aparecer en conversaciones sobre enfoque, estr\u00e9s y sue\u00f1o.', evidence: 'La evidencia humana y el estatus regulatorio var\u00edan de forma importante entre compuestos.', map: 'COGNICI\u00d3N' },
+    performance: { objective: 'Recuperaci\u00f3n y adaptaci\u00f3n celular', community: 'Suele aparecer en conversaciones sobre longevidad, recuperaci\u00f3n y adaptaci\u00f3n al entrenamiento.', evidence: 'El contexto de investigaci\u00f3n no equivale a un resultado personal ni a una recomendaci\u00f3n.', map: 'LONGEVIDAD' },
+    immune: { objective: 'Se\u00f1alizaci\u00f3n inmune e inflamatoria', community: 'Suele aparecer en conversaciones sobre salud celular y recuperaci\u00f3n.', evidence: 'Las v\u00edas inmunes son complejas; el inter\u00e9s de investigaci\u00f3n no es una afirmaci\u00f3n terap\u00e9utica.', map: 'SALUD CELULAR' },
+    hormonal: { objective: 'Se\u00f1alizaci\u00f3n endocrina', community: 'Suele aparecer en conversaciones sobre hormonas, vitalidad y rendimiento.', evidence: 'Las v\u00edas hormonales requieren contexto cl\u00ednico; esta ficha no es una gu\u00eda de uso.', map: 'RENDIMIENTO' },
+    aesthetic: { objective: 'Investigaci\u00f3n de piel y tejido', community: 'Suele aparecer en conversaciones sobre calidad de piel, tejido conectivo y recuperaci\u00f3n.', evidence: 'El inter\u00e9s mecan\u00edstico no establece un resultado est\u00e9tico o terap\u00e9utico.', map: 'PIEL Y TEJIDO' },
+    stacks: { objective: 'Comparaci\u00f3n de investigaci\u00f3n', community: 'Suele aparecer como forma de comparar v\u00edas, no como plan de uso.', evidence: 'Combinar compuestos puede a\u00f1adir incertidumbre; PEPTORA no publica protocolos.', map: 'HERRAMIENTAS' },
+    supplies: { objective: 'Flujo de trabajo de laboratorio', community: 'Aparece en conversaciones sobre documentaci\u00f3n y flujo de trabajo de investigaci\u00f3n.', evidence: 'El contexto de equipo es educativo y no proporciona gu\u00eda de administraci\u00f3n.', map: 'HERRAMIENTAS' },
+  },
+};
+
+const BIOHACKING_LENS_LABELS = {
+  en: { title: 'Biohacking lens', objective: 'Research objective', community: 'Conversation context', evidence: 'Evidence boundary', explore: 'Explore pathway', note: 'Educational context only — not a protocol, recommendation or administration guide.' },
+  es: { title: 'Lente de biohacking', objective: 'Objetivo de investigaci\u00f3n', community: 'Contexto de conversaci\u00f3n', evidence: 'L\u00edmite de evidencia', explore: 'Explorar ruta', note: 'Contexto educativo \u00fanicamente; no es un protocolo, recomendaci\u00f3n ni gu\u00eda de administraci\u00f3n.' },
+};
+
 // ---- Research compound reference (bilingual). Not for sale — reference only. ----
 const PEPTORA_PRODUCTS = [
   // ---- Metabolic Research ----
@@ -669,6 +701,8 @@ function renderProducts() {
   grid.innerHTML = PEPTORA_PRODUCTS.map((p) => {
     const name = nameOf(p);
     const catLabel = CAT_LABELS[lang][p.cat] || p.cat;
+    const lens = BIOHACKING_LENS[lang][p.cat] || BIOHACKING_LENS.en[p.cat];
+    const lensLabels = BIOHACKING_LENS_LABELS[lang];
     return `
     <div class="product-card" data-cat="${p.cat}">
       <span class="pc-cat">${catLabel}</span>
@@ -682,6 +716,16 @@ function renderProducts() {
         <span class="pc-label">${t('card.interest_label')}</span>
         <p>${p.interest[lang]}</p>
       </div>
+      <details class="pc-context">
+        <summary>${lensLabels.title}<span>+</span></summary>
+        <div class="pc-context-body">
+          <div><span>${lensLabels.objective}</span><p>${lens.objective}</p></div>
+          <div><span>${lensLabels.community}</span><p>${lens.community}</p></div>
+          <div><span>${lensLabels.evidence}</span><p>${lens.evidence}</p></div>
+          <a href="#objetivos" class="pc-context-link">${lensLabels.explore} <b>↗</b><em>${lens.map}</em></a>
+          <small>${lensLabels.note}</small>
+        </div>
+      </details>
     </div>`;
   }).join('');
 
