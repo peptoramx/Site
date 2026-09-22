@@ -1066,7 +1066,7 @@ Object.assign(I18N.en, {
   'longevity.visual': 'Mitochondria • Signaling • Repair',
   'products.eyebrow': 'Peptide science', 'products.h2': 'COMPOUNDS, <em>IN CONTEXT.</em>', 'products.lede': 'Explore research references by biological objective, pathway or peptide category.',
   'lab.eyebrow': 'The biohacking lab', 'lab.h2': 'THE SIGNAL<br><em>BEHIND THE NOISE.</em>', 'lab.p': 'Education should make science more legible, not make bigger promises. The Biohacking Lab connects mechanisms, pathways and reference tools in one system.', 'lab.cta': 'Open reference tools <b>↗</b>', 'lab.note': 'A reference system, not a prescription.',
-  'about.h2': 'RIGOR BEFORE <em>RECOMMENDATION.</em>', 'contact.h2': 'START WITH A <em>BETTER QUESTION.</em>',
+  'about.h2': 'UNDERSTAND <em>FIRST.</em>', 'contact.h2': 'START WITH A <em>BETTER QUESTION.</em>',
   'tools.calc3.eyebrow': 'Reference converter', 'tools.calc3.h': 'Volume & Device-Scale Reference', 'tools.calc3.desc': 'Convert a known laboratory volume using an explicitly supplied device scale. This is arithmetic only; it does not recommend an amount, route, schedule, or use.', 'tools.calc3.mg': 'Reference amount (mg)', 'tools.calc3.conc': 'Known concentration (mg/mL)', 'tools.calc3.clickml': 'Manufacturer-stated mL per click', 'tools.calc3.mlout': 'Calculated volume', 'tools.calc3.u100': 'U-100 scale markings', 'tools.calc3.clicks': 'Device clicks', 'tools.calc3.note': 'U-100 markings are a volume scale of 100 markings per mL, not an amount of active material. Click output only applies to the exact device specification entered above.', 'tools.calc3.scope': 'Reference only: confirm the concentration and the device documentation independently. PEPTORA does not provide dosing, administration, or device-use guidance.'
   ,'tools.calc3.markings': 'markings', 'tools.calc3.click_unit': 'clicks'
 });
@@ -1089,7 +1089,7 @@ Object.assign(I18N.es, {
   'longevity.visual': 'Mitocondrias • Se\u00f1alizaci\u00f3n • Reparaci\u00f3n',
   'products.eyebrow': 'Ciencia de p\u00e9ptidos', 'products.h2': 'COMPUESTOS, <em>EN CONTEXTO.</em>', 'products.lede': 'Explora referencias de investigaci\u00f3n por objetivo biol\u00f3gico, v\u00eda o categor\u00eda de p\u00e9ptido.',
   'lab.eyebrow': 'El laboratorio de biohacking', 'lab.h2': 'LA SE\u00d1AL<br><em>DETR\u00c1S DEL RUIDO.</em>', 'lab.p': 'La educaci\u00f3n debe hacer la ciencia m\u00e1s legible, no hacer promesas m\u00e1s grandes. El Biohacking Lab conecta mecanismos, rutas y herramientas de referencia en un solo sistema.', 'lab.cta': 'Abrir herramientas de referencia <b>↗</b>', 'lab.note': 'Un sistema de referencia, no una prescripci\u00f3n.',
-  'about.h2': 'RIGOR ANTES QUE <em>RECOMENDACI\u00d3N.</em>', 'contact.h2': 'EMPIEZA CON UNA <em>MEJOR PREGUNTA.</em>',
+  'about.h2': 'PRIMERO, <em>ENTENDER.</em>', 'contact.h2': 'EMPIEZA CON UNA <em>MEJOR PREGUNTA.</em>',
   'tools.calc3.eyebrow': 'Convertidor de referencia', 'tools.calc3.h': 'Referencia de volumen y escala de dispositivo', 'tools.calc3.desc': 'Convierte un volumen de laboratorio conocido usando una escala de dispositivo indicada expl\u00edcitamente. Es solo aritm\u00e9tica; no recomienda cantidad, v\u00eda, frecuencia ni uso.', 'tools.calc3.mg': 'Cantidad de referencia (mg)', 'tools.calc3.conc': 'Concentraci\u00f3n conocida (mg/mL)', 'tools.calc3.clickml': 'mL por clic indicado por el fabricante', 'tools.calc3.mlout': 'Volumen calculado', 'tools.calc3.u100': 'Marcas de escala U-100', 'tools.calc3.clicks': 'Clics del dispositivo', 'tools.calc3.note': 'Las marcas U-100 son una escala de volumen de 100 marcas por mL, no una cantidad de material activo. El resultado de clics solo aplica a la especificaci\u00f3n exacta indicada arriba.', 'tools.calc3.scope': 'Solo como referencia: confirma de forma independiente la concentraci\u00f3n y la documentaci\u00f3n del dispositivo. PEPTORA no ofrece indicaciones de dosificaci\u00f3n, administraci\u00f3n ni uso de dispositivos.'
   ,'tools.calc3.markings': 'marcas', 'tools.calc3.click_unit': 'clics'
 });
@@ -1187,13 +1187,13 @@ for (const locale of ['en', 'es']) {
     'objectives.h2': 'EXPLORE BY OBJECTIVE.', 'performance.h2': 'ENGINEER HUMAN PERFORMANCE.', 'performance.cta': 'Explore performance ↗',
     'peptides.h2': 'SMALL MOLECULES. PRECISE SIGNALS. COMPLEX SYSTEMS.', 'peptides.cta': 'Explore peptides →',
     'products.h2': 'COMPOUNDS, IN CONTEXT.', 'lab.h2': 'THE SIGNAL BEHIND THE NOISE.', 'lab.cta': 'Open reference tools ↗',
-    'longevity.h2': 'LONGEVITY IS A CELLULAR PROBLEM.', 'about.h2': 'RIGOR BEFORE RECOMMENDATION.', 'contact.h2': 'START WITH A BETTER QUESTION.'
+    'longevity.h2': 'LONGEVITY IS A CELLULAR PROBLEM.', 'about.h2': 'UNDERSTAND FIRST.', 'contact.h2': 'START WITH A BETTER QUESTION.'
   } : {
     'manifesto.h2': 'EL BIOHACKING COMIENZA POR ENTENDER EL SISTEMA.', 'manifesto.cta': 'Leer nuestra filosof\u00eda de investigaci\u00f3n →',
     'objectives.h2': 'EXPLORA POR OBJETIVO.', 'performance.h2': 'DISE\u00d1A EL RENDIMIENTO HUMANO.', 'performance.cta': 'Explorar rendimiento ↗',
     'peptides.h2': 'MOL\u00c9CULAS PEQUE\u00d1AS. SE\u00d1ALES PRECISAS. SISTEMAS COMPLEJOS.', 'peptides.cta': 'Explorar p\u00e9ptidos →',
     'products.h2': 'COMPUESTOS, EN CONTEXTO.', 'lab.h2': 'LA SE\u00d1AL DETR\u00c1S DEL RUIDO.', 'lab.cta': 'Abrir herramientas de referencia ↗',
-    'longevity.h2': 'LA LONGEVIDAD ES UN PROBLEMA CELULAR.', 'about.h2': 'RIGOR ANTES QUE RECOMENDACI\u00d3N.', 'contact.h2': 'EMPIEZA CON UNA MEJOR PREGUNTA.'
+    'longevity.h2': 'LA LONGEVIDAD ES UN PROBLEMA CELULAR.', 'about.h2': 'PRIMERO, ENTENDER.', 'contact.h2': 'EMPIEZA CON UNA MEJOR PREGUNTA.'
   };
   Object.assign(I18N[locale], values);
 }
