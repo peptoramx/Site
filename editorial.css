@@ -55,3 +55,10 @@ main{display:flex;flex-direction:column}#inicio{order:1}#ciencia{order:2}#objeti
 .learning-briefs{display:none}.product-card.product-focus{outline:3px solid #4d9ab3;outline-offset:-3px;box-shadow:0 15px 35px rgba(27,85,108,.16)}
 .catalog-search{display:flex;align-items:center;gap:9px;max-width:430px;margin:-10px 0 22px;border-bottom:1px solid #a9c8d1;color:#397e96}.catalog-search span{font:400 22px/1 var(--body)}.catalog-search input{min-width:0;width:100%;border:0;background:transparent;padding:10px 0;outline:0;color:var(--ink);font:500 13px var(--body)}.catalog-search input::placeholder{color:#738891}.product-card[hidden]{display:none!important}@media(max-width:700px){.catalog-search{max-width:none;margin-top:0}}
 .featured-card{cursor:pointer}.featured-card:focus-within{outline:3px solid #4d9ab3;outline-offset:-3px}
+
+/* Fresh clinical-blue accent system: replaces the inherited warm metallic accent. */
+:root{--gold:#4d9ab3}.art-ring-small{stroke:#4d9ab3}.art-node.gold{fill:#69b8d0}.performance-orbit,.cell-study:after{border-color:#5aa1bb}
+@media(max-width:700px){
+  .hero h1,.manifesto-main h2,.section-heading h2,.catalog-heading h2,.performance-copy h2,.peptide-copy h2,.longevity-copy h2,.contact h2,.dual-track h3{overflow-wrap:anywhere;word-break:normal}
+}
+
