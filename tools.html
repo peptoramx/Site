@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PEPTORA — Reconstitution Concentration Reference</title>
+<meta name="description" content="Laboratory reference tool for calculating research-peptide solution concentration after reconstitution. For research use only.">
+
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#f8f6f1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PEPTORA">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="PEPTORA">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ DISCLAIMER STRIP ============ -->
+<div class="disclaimer-strip" data-i18n="disclaimer.text">For laboratory research use only. Not for human consumption.</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="index.html#productos" data-i18n="nav.products">Research Peptides</a>
+      <a href="index.html#ciencia" data-i18n="nav.science">Our Science</a>
+      <a href="tools.html" class="nav-current" data-i18n="nav.tools">Reference Tools</a>
+      <a href="index.html#contacto" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language / Cambiar idioma">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9Z"/></svg>
+        <span id="langLabel">ES</span>
+      </button>
+      <a href="index.html#productos" class="btn btn-primary btn-sm" data-i18n="nav.products">Research Peptides</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TOOLS PAGE HEADER ============ -->
+<section class="section-pad tools-hero">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="tools.eyebrow">Laboratory Reference Tool</div>
+    <h1 class="tools-h1" data-i18n="tools.h1">Reconstitution Concentration Reference</h1>
+    <p class="lede tools-lede" data-i18n="tools.lede">A reference calculator for laboratory solution preparation. It computes the resulting concentration of a reconstituted research compound, or the diluent volume required to reach a target concentration — nothing more.</p>
+    <p class="tools-scope-note" data-i18n="tools.scope_note">This tool performs solution-concentration arithmetic only. It does not calculate, suggest, or reference amounts for administration or use in any living organism.</p>
+  </div>
+</section>
+
+<!-- ============ CALCULATORS ============ -->
+<section class="section-pad tools-section">
+  <div class="wrap">
+    <div class="tools-grid">
+
+      <div class="tool-card reveal">
+        <span class="eyebrow" data-i18n="tools.calc1.eyebrow">Calculator 01</span>
+        <h3 data-i18n="tools.calc1.h">Concentration From Reconstitution</h3>
+        <p class="tool-desc" data-i18n="tools.calc1.desc">Enter the peptide mass and the diluent volume used to reconstitute it to find the resulting solution concentration.</p>
+
+        <div class="tool-field">
+          <label for="c1-mg" data-i18n="tools.field.mg">Peptide mass (mg)</label>
+          <input type="number" id="c1-mg" min="0" step="0.01" inputmode="decimal" placeholder="5">
+        </div>
+        <div class="tool-field">
+          <label for="c1-ml" data-i18n="tools.field.ml">Diluent volume added (mL)</label>
+          <input type="number" id="c1-ml" min="0" step="0.01" inputmode="decimal" placeholder="2">
+        </div>
+
+        <div class="tool-result">
+          <div class="tool-result-row">
+            <span data-i18n="tools.result.mgml">Concentration</span>
+            <strong id="c1-out-mgml">—</strong>
+          </div>
+          <div class="tool-result-row tool-result-row-sub">
+            <span data-i18n="tools.result.mcgml">Equivalent</span>
+            <strong id="c1-out-mcgml">—</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal">
+        <span class="eyebrow" data-i18n="tools.calc2.eyebrow">Calculator 02</span>
+        <h3 data-i18n="tools.calc2.h">Diluent Volume For Target Concentration</h3>
+        <p class="tool-desc" data-i18n="tools.calc2.desc">Enter the peptide mass and the concentration you want the solution to reach to find the required diluent volume.</p>
+
+        <div class="tool-field">
+          <label for="c2-mg" data-i18n="tools.field.mg">Peptide mass (mg)</label>
+          <input type="number" id="c2-mg" min="0" step="0.01" inputmode="decimal" placeholder="5">
+        </div>
+        <div class="tool-field">
+          <label for="c2-target" data-i18n="tools.field.target">Target concentration (mg/mL)</label>
+          <input type="number" id="c2-target" min="0" step="0.01" inputmode="decimal" placeholder="2.5">
+        </div>
+
+        <div class="tool-result">
+          <div class="tool-result-row">
+            <span data-i18n="tools.result.ml">Diluent volume required</span>
+            <strong id="c2-out-ml">—</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="products-notice reveal" data-i18n="tools.footnote">For laboratory research reference only. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease. This calculator does not provide administration, dosing, or usage guidance of any kind.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo-peptora.png" alt="Peptora Research Peptide Labs logo">
+        <div class="fb-tag" data-i18n="footer.tag">Independent Research Reference Since 2024</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="index.html#productos" data-i18n="nav.products">Research Peptides</a>
+        <a href="index.html#ciencia" data-i18n="nav.science">Our Science</a>
+        <a href="tools.html" data-i18n="nav.tools">Reference Tools</a>
+        <a href="index.html#contacto" data-i18n="nav.contact">Contact</a>
+      </nav>
+    </div>
+    <div class="divider-line"></div>
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer">This website is an independent informational reference for laboratory research purposes. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease.</p>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> PEPTORA — RESEARCH PEPTIDE LABS. <span data-i18n="footer.rights">All rights reserved.</span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

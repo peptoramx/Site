@@ -429,3 +429,46 @@ nav.main-nav a:hover::after{ width:100%; }
 .reveal.reveal-left.in{ transform:translateX(0); }
 .reveal.reveal-stamp{ transform:scale(.9) rotate(-2deg); transition:opacity .5s ease, transform .5s cubic-bezier(.34,1.56,.64,1); }
 .reveal.reveal-stamp.in{ transform:scale(1) rotate(0deg); }
+
+/* ==========================================================================
+   TOOLS PAGE — reconstitution concentration reference
+   ========================================================================== */
+.nav-current{ color:var(--metal-2) !important; }
+.nav-current::after{ width:100% !important; }
+
+.tools-hero{ padding-top:64px; padding-bottom:24px; border-bottom:1px solid var(--hairline); }
+.tools-h1{ font-size:clamp(30px,4.2vw,46px); font-weight:800; line-height:1.14; margin-top:4px; max-width:760px; }
+.tools-lede{ margin-top:18px; max-width:64ch; }
+.tools-scope-note{
+  margin-top:18px; max-width:64ch; font-family:var(--f-mono); font-size:12px; line-height:1.7;
+  color:var(--ink-faint); padding:14px 16px; border-left:2px solid var(--metal-2); background:var(--bg-alt);
+}
+
+.tools-section{ background:var(--bg-alt); }
+.tools-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden; }
+@media (max-width:800px){ .tools-grid{ grid-template-columns:1fr; } }
+
+.tool-card{ background:var(--bg-card); padding:32px; display:flex; flex-direction:column; gap:6px; }
+.tool-card h3{ font-size:19px; font-weight:700; color:var(--card-white); margin-top:2px; }
+.tool-desc{ font-size:13.5px; color:var(--card-ink-dim); line-height:1.65; margin-top:8px; margin-bottom:18px; }
+
+.tool-field{ margin-bottom:14px; }
+.tool-field label{
+  display:block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--metal-2); margin-bottom:7px;
+}
+.tool-field input{
+  width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-sm);
+  padding:12px 14px; color:var(--card-white); font-family:var(--f-mono); font-size:15px;
+  transition:border-color .2s ease;
+}
+.tool-field input::placeholder{ color:var(--card-ink-faint); }
+.tool-field input:focus{ outline:none; border-color:var(--metal-2); }
+
+.tool-result{ margin-top:12px; padding-top:16px; border-top:1px solid rgba(255,255,255,.1); }
+.tool-result-row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.tool-result-row span{ font-family:var(--f-mono); font-size:11.5px; letter-spacing:.03em; color:var(--card-ink-dim); }
+.tool-result-row strong{ font-family:var(--f-display); font-size:20px; font-weight:700; color:var(--card-white); font-variant-numeric:tabular-nums; }
+.tool-result-row-sub{ margin-top:6px; }
+.tool-result-row-sub strong{ font-size:14px; color:var(--metal-2); font-weight:600; }
+

@@ -292,7 +292,7 @@ function nameOf(p) { return typeof p.name === 'string' ? p.name : p.name[CURRENT
 // ============================================================================
 const I18N = {
   en: {
-    'nav.home': 'Home', 'nav.products': 'Research Peptides', 'nav.science': 'Our Science', 'nav.contact': 'Contact',
+    'nav.home': 'Home', 'nav.products': 'Research Peptides', 'nav.science': 'Our Science', 'nav.tools': 'Reference Tools', 'nav.contact': 'Contact',
     'disclaimer.text': 'For laboratory research use only. Not for human consumption.',
 
     'hero.eyebrow': 'Research Reference · Est. 2024',
@@ -353,9 +353,27 @@ const I18N = {
 
     'form.sending': 'Sending…', 'form.ok': "Inquiry sent. Our research team will follow up shortly.",
     'form.err': "Couldn't send. Please contact us via phone.",
+
+    'tools.eyebrow': 'Laboratory Reference Tool',
+    'tools.h1': 'Reconstitution Concentration Reference',
+    'tools.lede': 'A reference calculator for laboratory solution preparation. It computes the resulting concentration of a reconstituted research compound, or the diluent volume required to reach a target concentration — nothing more.',
+    'tools.scope_note': 'This tool performs solution-concentration arithmetic only. It does not calculate, suggest, or reference amounts for administration or use in any living organism.',
+    'tools.calc1.eyebrow': 'Calculator 01',
+    'tools.calc1.h': 'Concentration From Reconstitution',
+    'tools.calc1.desc': 'Enter the peptide mass and the diluent volume used to reconstitute it to find the resulting solution concentration.',
+    'tools.calc2.eyebrow': 'Calculator 02',
+    'tools.calc2.h': 'Diluent Volume For Target Concentration',
+    'tools.calc2.desc': 'Enter the peptide mass and the concentration you want the solution to reach to find the required diluent volume.',
+    'tools.field.mg': 'Peptide mass (mg)',
+    'tools.field.ml': 'Diluent volume added (mL)',
+    'tools.field.target': 'Target concentration (mg/mL)',
+    'tools.result.mgml': 'Concentration',
+    'tools.result.mcgml': 'Equivalent',
+    'tools.result.ml': 'Diluent volume required',
+    'tools.footnote': 'For laboratory research reference only. Not for human or veterinary use, consumption, diagnosis, treatment, cure or prevention of disease. This calculator does not provide administration, dosing, or usage guidance of any kind.',
   },
   es: {
-    'nav.home': 'Inicio', 'nav.products': 'Péptidos de Investigación', 'nav.science': 'Nuestra Ciencia', 'nav.contact': 'Contacto',
+    'nav.home': 'Inicio', 'nav.products': 'Péptidos de Investigación', 'nav.science': 'Nuestra Ciencia', 'nav.tools': 'Herramientas de Referencia', 'nav.contact': 'Contacto',
     'disclaimer.text': 'Uso exclusivo de laboratorio e investigación. No apto para consumo humano.',
 
     'hero.eyebrow': 'Referencia de Investigación · Fundada en 2024',
@@ -416,6 +434,24 @@ const I18N = {
 
     'form.sending': 'Enviando…', 'form.ok': 'Consulta enviada. Nuestro equipo de investigación dará seguimiento pronto.',
     'form.err': 'No se pudo enviar. Contáctanos por teléfono.',
+
+    'tools.eyebrow': 'Herramienta de Referencia de Laboratorio',
+    'tools.h1': 'Referencia de Concentración de Reconstitución',
+    'tools.lede': 'Una calculadora de referencia para la preparación de soluciones en laboratorio. Calcula la concentración resultante de un compuesto de investigación reconstituido, o el volumen de diluyente necesario para alcanzar una concentración objetivo — nada más.',
+    'tools.scope_note': 'Esta herramienta realiza únicamente aritmética de concentración de soluciones. No calcula, sugiere ni hace referencia a cantidades de administración o uso en ningún organismo vivo.',
+    'tools.calc1.eyebrow': 'Calculadora 01',
+    'tools.calc1.h': 'Concentración a Partir de la Reconstitución',
+    'tools.calc1.desc': 'Ingresa la masa del péptido y el volumen de diluyente usado para reconstituirlo, y obtén la concentración resultante de la solución.',
+    'tools.calc2.eyebrow': 'Calculadora 02',
+    'tools.calc2.h': 'Volumen de Diluyente Para una Concentración Objetivo',
+    'tools.calc2.desc': 'Ingresa la masa del péptido y la concentración a la que quieres llevar la solución, y obtén el volumen de diluyente necesario.',
+    'tools.field.mg': 'Masa del péptido (mg)',
+    'tools.field.ml': 'Volumen de diluyente agregado (mL)',
+    'tools.field.target': 'Concentración objetivo (mg/mL)',
+    'tools.result.mgml': 'Concentración',
+    'tools.result.mcgml': 'Equivalente',
+    'tools.result.ml': 'Volumen de diluyente necesario',
+    'tools.footnote': 'Solo como referencia de investigación de laboratorio. No apto para uso humano o veterinario, consumo, diagnóstico, tratamiento, cura o prevención de enfermedades. Esta calculadora no ofrece ninguna guía de administración, dosificación o uso.',
   },
 };
 
@@ -769,6 +805,57 @@ function initContactForm() {
 }
 
 // ============================================================================
+// Reconstitution concentration reference (tools.html only).
+// Pure solution-concentration arithmetic: mg + mL -> mg/mL, or
+// mg + target mg/mL -> mL. No syringe, pen, click, IU, or per-body-weight
+// units anywhere in this function — deliberately out of scope.
+// ============================================================================
+function initConcentrationCalc() {
+  const mg1 = document.getElementById('c1-mg');
+  const ml1 = document.getElementById('c1-ml');
+  const outMgMl = document.getElementById('c1-out-mgml');
+  const outMcgMl = document.getElementById('c1-out-mcgml');
+
+  const mg2 = document.getElementById('c2-mg');
+  const target2 = document.getElementById('c2-target');
+  const outMl2 = document.getElementById('c2-out-ml');
+
+  if (!mg1 && !mg2) return; // not on this page
+
+  function fmt(n) {
+    if (!Number.isFinite(n)) return '—';
+    return (Math.round(n * 1000) / 1000).toString();
+  }
+
+  function calc1() {
+    const mg = parseFloat(mg1.value);
+    const ml = parseFloat(ml1.value);
+    if (!Number.isFinite(mg) || !Number.isFinite(ml) || ml <= 0 || mg < 0) {
+      outMgMl.textContent = '—';
+      outMcgMl.textContent = '—';
+      return;
+    }
+    const mgPerMl = mg / ml;
+    outMgMl.textContent = `${fmt(mgPerMl)} mg/mL`;
+    outMcgMl.textContent = `${fmt(mgPerMl * 1000)} mcg/mL`;
+  }
+
+  function calc2() {
+    const mg = parseFloat(mg2.value);
+    const target = parseFloat(target2.value);
+    if (!Number.isFinite(mg) || !Number.isFinite(target) || target <= 0 || mg < 0) {
+      outMl2.textContent = '—';
+      return;
+    }
+    const ml = mg / target;
+    outMl2.textContent = `${fmt(ml)} mL`;
+  }
+
+  if (mg1 && ml1) { mg1.addEventListener('input', calc1); ml1.addEventListener('input', calc1); }
+  if (mg2 && target2) { mg2.addEventListener('input', calc2); target2.addEventListener('input', calc2); }
+}
+
+// ============================================================================
 // Init
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -777,6 +864,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initHeroCanvas();
   animateStats();
+  initConcentrationCalc();
 
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
