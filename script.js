@@ -58,6 +58,8 @@ const BIOHACKING_LENS_BY_PRODUCT = {
     'CJC-1295 (No DAC)': { objective: 'Short-acting GHRH-analogue research', community: 'Appears in growth-hormone signalling and performance conversations.', evidence: 'Do not treat it as interchangeable with DAC-bearing CJC-1295: their pharmacokinetics and evidence base differ. This is not a performance recommendation.', map: 'PERFORMANCE' },
     'NAD+': { objective: 'Cellular redox & energy-metabolism research', community: 'Appears in longevity and mitochondrial conversations because NAD+ is a core cellular cofactor, not a peptide.', evidence: 'Mechanistic importance is well established, while claimed human benefits of NAD+-boosting approaches remain mixed and formulation-specific.', map: 'CELLULAR HEALTH' },
     'BPC-157': { objective: 'Tissue-signalling & repair research', community: 'Appears in injury, tendon and recovery conversations.', evidence: 'Much of the discussion is preclinical. Research interest does not establish clinical effectiveness, product quality or a recovery outcome.', map: 'SKIN & TISSUE' },
+    GLOW: { objective: 'Tissue & dermal multi-pathway research', community: 'Appears in skin, connective-tissue and recovery conversations as the BPC-157 + TB-500 + GHK-Cu reference stack.', evidence: 'There is no independent clinical evidence for this three-compound combination; component literature cannot be added up as one outcome.', map: 'SKIN & TISSUE' },
+    KLOW: { objective: 'Tissue, dermal & inflammatory-signalling research', community: 'Appears in the same conversations as GLOW, with KPV added to the reference composition.', evidence: 'There is no independent clinical evidence for this four-compound combination; it must be assessed as its own research question.', map: 'SKIN & TISSUE' },
     Semax: { objective: 'Neurotrophin & neuroplasticity research', community: 'Appears in focus, cognitive-performance and neuroplasticity conversations — not as a calming compound.', evidence: 'Much of the BDNF / TrkB mechanism discussion comes from cell and animal work; it does not establish a personal cognitive outcome.', map: 'COGNITION' },
     Selank: { objective: 'Stress-regulation & GABAergic research', community: 'Appears in anxiety-related signalling and calm-cognition conversations — not as a focus or stimulation compound.', evidence: 'The literature includes GABA-related preclinical work and limited regional clinical research; it does not establish safety, approval or a personal outcome.', map: 'COGNITION' },
   },
@@ -68,6 +70,8 @@ const BIOHACKING_LENS_BY_PRODUCT = {
     'CJC-1295 (No DAC)': { objective: 'Investigaci\u00f3n de an\u00e1logo GHRH de acci\u00f3n corta', community: 'Aparece en conversaciones sobre se\u00f1alizaci\u00f3n de hormona de crecimiento y rendimiento.', evidence: 'No debe tratarse como equivalente al CJC-1295 con DAC: su farmacocin\u00e9tica y base de evidencia son distintas. No es una recomendaci\u00f3n de rendimiento.', map: 'RENDIMIENTO' },
     'NAD+': { objective: 'Investigaci\u00f3n de redox celular y metabolismo energ\u00e9tico', community: 'Aparece en conversaciones sobre longevidad y mitocondria porque NAD+ es un cofactor celular central, no un p\u00e9ptido.', evidence: 'Su importancia mecan\u00edstica est\u00e1 bien establecida, mientras los beneficios humanos atribuidos a enfoques para elevar NAD+ siguen siendo mixtos y dependientes de formulaci\u00f3n.', map: 'SALUD CELULAR' },
     'BPC-157': { objective: 'Investigaci\u00f3n de se\u00f1alizaci\u00f3n tisular y reparaci\u00f3n', community: 'Aparece en conversaciones sobre lesiones, tend\u00f3n y recuperaci\u00f3n.', evidence: 'Gran parte de la conversaci\u00f3n es precl\u00ednica. El inter\u00e9s de investigaci\u00f3n no establece eficacia cl\u00ednica, calidad del producto ni un resultado de recuperaci\u00f3n.', map: 'PIEL Y TEJIDO' },
+    GLOW: { objective: 'Investigaci\u00f3n multiv\u00eda tisular y d\u00e9rmica', community: 'Aparece en conversaciones sobre piel, tejido conectivo y recuperaci\u00f3n como el stack de referencia BPC-157 + TB-500 + GHK-Cu.', evidence: 'No existe evidencia cl\u00ednica independiente para esta combinaci\u00f3n de tres compuestos; la literatura de componentes no se puede sumar como un solo resultado.', map: 'PIEL Y TEJIDO' },
+    KLOW: { objective: 'Investigaci\u00f3n de se\u00f1alizaci\u00f3n tisular, d\u00e9rmica e inflamatoria', community: 'Aparece en las mismas conversaciones que GLOW, con KPV a\u00f1adido a la composici\u00f3n de referencia.', evidence: 'No existe evidencia cl\u00ednica independiente para esta combinaci\u00f3n de cuatro compuestos; debe evaluarse como una pregunta de investigaci\u00f3n propia.', map: 'PIEL Y TEJIDO' },
     Semax: { objective: 'Investigaci\u00f3n de neurotrofinas y neuroplasticidad', community: 'Aparece en conversaciones sobre enfoque, rendimiento cognitivo y neuroplasticidad; no como compuesto de calma.', evidence: 'Gran parte de la conversaci\u00f3n sobre BDNF / TrkB proviene de trabajo celular y animal; no establece un resultado cognitivo personal.', map: 'COGNICI\u00d3N' },
     Selank: { objective: 'Investigaci\u00f3n de regulaci\u00f3n del estr\u00e9s y GABA', community: 'Aparece en conversaciones sobre se\u00f1alizaci\u00f3n relacionada con ansiedad y cognici\u00f3n en calma; no como compuesto de enfoque o estimulaci\u00f3n.', evidence: 'La literatura incluye trabajo precl\u00ednico relacionado con GABA y estudios cl\u00ednicos regionales limitados; no establece seguridad, aprobaci\u00f3n ni un resultado personal.', map: 'COGNICI\u00d3N' },
   },
@@ -318,14 +322,14 @@ const PEPTORA_PRODUCTS = [
     desc: { en: 'Higher-concentration research vial of the tissue-repair blend.', es: 'Vial de mayor concentración del blend de reparación tisular.' },
     mech: { en: 'Same tissue-repair research synergy, in a higher-concentration research vial.', es: 'Misma sinergia de investigación de reparación tisular, en un vial de mayor concentración.' },
     interest: { en: 'The same combined research protocol as the standard version, referenced in study designs calling for a higher-concentration vial. Same research profile as the standard blend, referenced for higher-concentration study designs.', es: 'El mismo protocolo de investigación combinado que la versión estándar, referenciado en diseños de estudio que requieren un vial de mayor concentración. Mismo perfil de investigación que el blend estándar, referenciado para diseños de estudio de mayor concentración.' } },
-  { cat: 'stacks', name: { en: 'BPC-157 + GHK-Cu + TB-500', es: 'BPC-157 + GHK-Cu + TB-500' },
-    desc: { en: 'Triple-peptide blend studied in tissue-regeneration research.', es: 'Blend triple de péptidos estudiado en investigación de regeneración tisular.' },
-    mech: { en: 'Combines gastric-repair, collagen-remodeling and tissue-regeneration research pathways in a single blend.', es: 'Combina vías de investigación de reparación gástrica, remodelación de colágeno y regeneración tisular en un solo blend.' },
-    interest: { en: 'Adds a skin-focused compound to the classic tissue-repair pairing, broadening the combined research protocol. Referenced in independent research literature exploring multi-pathway regenerative protocols.', es: 'Agrega un compuesto enfocado en la piel a la combinación clásica de reparación tisular, ampliando el protocolo de investigación combinado. Referenciado en literatura de investigación independiente que explora protocolos regenerativos multivía.' } },
-  { cat: 'stacks', name: { en: 'GHK-Cu + TB-500 + BPC-157 + KPV', es: 'GHK-Cu + TB-500 + BPC-157 + KPV' },
-    desc: { en: 'Quad-peptide blend for advanced multi-pathway research.', es: 'Blend cuádruple para investigación avanzada de múltiples vías.' },
-    mech: { en: 'Combines four research pathways: dermal regeneration, tissue repair, angiogenesis and local inflammatory-response models.', es: 'Combina cuatro vías de investigación: regeneración dérmica, reparación tisular, angiogénesis y modelos de respuesta inflamatoria local.' },
-    interest: { en: 'The most layered combination on this list, bringing together four individually well-referenced research compounds. A more complex combination referenced in advanced multi-pathway research protocols.', es: 'La combinación más compleja de esta lista, reuniendo cuatro compuestos de investigación individualmente bien referenciados. Una combinación más compleja referenciada en protocolos de investigación avanzados de múltiples vías.' } },
+  { cat: 'stacks', name: { en: 'GLOW', es: 'GLOW' },
+    desc: { en: 'Reference stack: BPC-157 + TB-500 + GHK-Cu.', es: 'Stack de referencia: BPC-157 + TB-500 + GHK-Cu.' },
+    mech: { en: 'A three-compound reference combining tissue-signalling, actin-regulation and copper-peptide research contexts.', es: 'Referencia de tres compuestos que combina contextos de investigaci\u00f3n de se\u00f1alizaci\u00f3n tisular, regulaci\u00f3n de actina y p\u00e9ptidos de cobre.' },
+    interest: { en: 'A named multi-pathway reference for tissue and dermal research discussion. It is not an independently validated combined intervention.', es: 'Referencia multiv\u00eda nombrada para conversaciones de investigaci\u00f3n tisular y d\u00e9rmica. No es una intervenci\u00f3n combinada validada de forma independiente.' } },
+  { cat: 'stacks', name: { en: 'KLOW', es: 'KLOW' },
+    desc: { en: 'Reference stack: BPC-157 + TB-500 + GHK-Cu + KPV.', es: 'Stack de referencia: BPC-157 + TB-500 + GHK-Cu + KPV.' },
+    mech: { en: 'Builds on GLOW by adding KPV-related inflammatory-signalling research context.', es: 'Parte de GLOW y a\u00f1ade el contexto de investigaci\u00f3n de se\u00f1alizaci\u00f3n inflamatoria relacionada con KPV.' },
+    interest: { en: 'A four-compound research reference that should be evaluated as a distinct combination, not as four proven effects added together.', es: 'Referencia de cuatro compuestos que debe evaluarse como combinaci\u00f3n distinta, no como cuatro efectos probados sumados.' } },
 
   // ---- Lab Supplies ----
   { cat: 'supplies', name: { en: 'Bacteriostatic Water / PBS', es: 'Agua Bacteriostática / PBS' },
@@ -710,24 +714,14 @@ function renderProducts() {
   const lang = CURRENT_LANG;
 
   if (featuredGrid) {
-    const featuredNames = ['Retatrutide', 'MOTS-c', 'Tesamorelin', 'CJC-1295 (No DAC)', 'NAD+', 'BPC-157'];
+    const featuredNames = ['Retatrutide', 'MOTS-c', 'Tesamorelin', 'CJC-1295 (No DAC)', 'NAD+', 'BPC-157', 'GLOW', 'KLOW'];
     const featured = featuredNames.map(name => PEPTORA_PRODUCTS.find(product => nameOf(product) === name)).filter(Boolean);
-    const editorialReferences = [
-      { name: 'GLOW', en: 'Popular reference profile. Formula-specific context is published only once its composition is verified.', es: 'Perfil de referencia popular. El contexto espec\u00edfico se publica s\u00f3lo cuando se verifica su composici\u00f3n.' },
-      { name: 'KLOW', en: 'Popular reference profile. Formula-specific context is published only once its composition is verified.', es: 'Perfil de referencia popular. El contexto espec\u00edfico se publica s\u00f3lo cuando se verifica su composici\u00f3n.' },
-    ];
     featuredGrid.innerHTML = featured.map((p, index) => `
       <article class="featured-card">
         <span>${String(index + 1).padStart(2, '0')} / ${CAT_LABELS[lang][p.cat] || p.cat}</span>
         <h3>${nameOf(p)}</h3>
         <p>${p.desc[lang]}</p>
         <a href="#productos">${t('featured.view')} <b>→</b></a>
-      </article>`).join('') + editorialReferences.map((reference, index) => `
-      <article class="featured-card featured-card-pending">
-        <span>${String(featured.length + index + 1).padStart(2, '0')} / ${lang === 'es' ? 'Referencia popular' : 'Popular reference'}</span>
-        <h3>${reference.name}</h3>
-        <p>${reference[lang]}</p>
-        <a href="#contacto">${lang === 'es' ? 'Solicitar perfil' : 'Request profile'} <b>→</b></a>
       </article>`).join('');
   }
 
