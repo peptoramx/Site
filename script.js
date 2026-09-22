@@ -48,6 +48,19 @@ const BIOHACKING_LENS_LABELS = {
   es: { title: 'Lente de biohacking', objective: 'Objetivo de investigaci\u00f3n', community: 'Contexto de conversaci\u00f3n', evidence: 'L\u00edmite de evidencia', explore: 'Explorar ruta', note: 'Contexto educativo \u00fanicamente; no es un protocolo, recomendaci\u00f3n ni gu\u00eda de administraci\u00f3n.' },
 };
 
+// Named profiles override the category lens whenever a compound has a
+// materially different research conversation.
+const BIOHACKING_LENS_BY_PRODUCT = {
+  en: {
+    Semax: { objective: 'Neurotrophin & neuroplasticity research', community: 'Appears in focus, cognitive-performance and neuroplasticity conversations — not as a calming compound.', evidence: 'Much of the BDNF / TrkB mechanism discussion comes from cell and animal work; it does not establish a personal cognitive outcome.', map: 'COGNITION' },
+    Selank: { objective: 'Stress-regulation & GABAergic research', community: 'Appears in anxiety-related signalling and calm-cognition conversations — not as a focus or stimulation compound.', evidence: 'The literature includes GABA-related preclinical work and limited regional clinical research; it does not establish safety, approval or a personal outcome.', map: 'COGNITION' },
+  },
+  es: {
+    Semax: { objective: 'Investigaci\u00f3n de neurotrofinas y neuroplasticidad', community: 'Aparece en conversaciones sobre enfoque, rendimiento cognitivo y neuroplasticidad; no como compuesto de calma.', evidence: 'Gran parte de la conversaci\u00f3n sobre BDNF / TrkB proviene de trabajo celular y animal; no establece un resultado cognitivo personal.', map: 'COGNICI\u00d3N' },
+    Selank: { objective: 'Investigaci\u00f3n de regulaci\u00f3n del estr\u00e9s y GABA', community: 'Aparece en conversaciones sobre se\u00f1alizaci\u00f3n relacionada con ansiedad y cognici\u00f3n en calma; no como compuesto de enfoque o estimulaci\u00f3n.', evidence: 'La literatura incluye trabajo precl\u00ednico relacionado con GABA y estudios cl\u00ednicos regionales limitados; no establece seguridad, aprobaci\u00f3n ni un resultado personal.', map: 'COGNICI\u00d3N' },
+  },
+};
+
 // ---- Research compound reference (bilingual). Not for sale — reference only. ----
 const PEPTORA_PRODUCTS = [
   // ---- Metabolic Research ----
@@ -685,14 +698,24 @@ function renderProducts() {
   const lang = CURRENT_LANG;
 
   if (featuredGrid) {
-    const featuredCategories = ['metabolic', 'gh-igf', 'brain-sleep'];
-    const featured = featuredCategories.map(category => PEPTORA_PRODUCTS.find(product => product.cat === category)).filter(Boolean);
+    const featuredNames = ['Retatrutide', 'MOTS-c', 'Tesamorelin', 'CJC-1295 (No DAC)', 'NAD+', 'BPC-157'];
+    const featured = featuredNames.map(name => PEPTORA_PRODUCTS.find(product => nameOf(product) === name)).filter(Boolean);
+    const editorialReferences = [
+      { name: 'GLOW', en: 'Popular reference profile. Formula-specific context is published only once its composition is verified.', es: 'Perfil de referencia popular. El contexto espec\u00edfico se publica s\u00f3lo cuando se verifica su composici\u00f3n.' },
+      { name: 'KLOW', en: 'Popular reference profile. Formula-specific context is published only once its composition is verified.', es: 'Perfil de referencia popular. El contexto espec\u00edfico se publica s\u00f3lo cuando se verifica su composici\u00f3n.' },
+    ];
     featuredGrid.innerHTML = featured.map((p, index) => `
       <article class="featured-card">
         <span>${String(index + 1).padStart(2, '0')} / ${CAT_LABELS[lang][p.cat] || p.cat}</span>
         <h3>${nameOf(p)}</h3>
         <p>${p.desc[lang]}</p>
         <a href="#productos">${t('featured.view')} <b>→</b></a>
+      </article>`).join('') + editorialReferences.map((reference, index) => `
+      <article class="featured-card featured-card-pending">
+        <span>${String(featured.length + index + 1).padStart(2, '0')} / ${lang === 'es' ? 'Referencia popular' : 'Popular reference'}</span>
+        <h3>${reference.name}</h3>
+        <p>${reference[lang]}</p>
+        <a href="#contacto">${lang === 'es' ? 'Solicitar perfil' : 'Request profile'} <b>→</b></a>
       </article>`).join('');
   }
 
@@ -701,7 +724,7 @@ function renderProducts() {
   grid.innerHTML = PEPTORA_PRODUCTS.map((p) => {
     const name = nameOf(p);
     const catLabel = CAT_LABELS[lang][p.cat] || p.cat;
-    const lens = BIOHACKING_LENS[lang][p.cat] || BIOHACKING_LENS.en[p.cat];
+    const lens = BIOHACKING_LENS_BY_PRODUCT[lang][name] || BIOHACKING_LENS[lang][p.cat] || BIOHACKING_LENS.en[p.cat];
     const lensLabels = BIOHACKING_LENS_LABELS[lang];
     return `
     <div class="product-card" data-cat="${p.cat}">
