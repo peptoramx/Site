@@ -5,7 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let saved = null;
   const requested = new URLSearchParams(window.location.search).get('lang');
   try { saved = requested || sessionStorage.getItem('peptora_session_lang'); } catch (error) { saved = requested; }
-  if (saved === 'es' && typeof setLanguage === 'function') setLanguage('es');
+  function setStaticLanguage(lang) {
+    document.documentElement.lang = lang;
+    const label = document.getElementById('langLabel');
+    if (label) label.textContent = lang === 'es' ? 'EN' : 'ES';
+  }
+
+  if (saved === 'es') {
+    if (typeof setLanguage === 'function') setLanguage('es');
+    else setStaticLanguage('es');
+  }
 
   function updateInternalLinks(lang) {
     document.querySelectorAll('a[href]').forEach(link => {
@@ -23,8 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('langToggle');
   if (!toggle) return;
   toggle.addEventListener('click', () => {
-    const lang = document.documentElement.lang === 'es' ? 'es' : 'en';
+    const lang = typeof setLanguage === 'function'
+      ? (document.documentElement.lang === 'es' ? 'es' : 'en')
+      : (document.documentElement.lang === 'es' ? 'en' : 'es');
+    if (typeof setLanguage !== 'function') setStaticLanguage(lang);
     try { sessionStorage.setItem('peptora_session_lang', lang); } catch (error) {}
     updateInternalLinks(lang);
   });
 });
+
