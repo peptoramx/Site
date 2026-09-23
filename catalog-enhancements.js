@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('productGrid'); if (!grid) return; enhance(); new MutationObserver(enhance).observe(grid,{childList:true});
   const row = document.createElement('div'); row.className = 'type-filter-row'; row.innerHTML = '<span>VIEW</span><button data-type="all" class="active">ALL TYPES</button><button data-type="compound">COMPOUNDS</button><button data-type="combination">COMBINATIONS</button><button data-type="tool">LAB TOOLS</button>';
   document.getElementById('filterRow')?.after(row);
-  row.addEventListener('click', event => { const button=event.target.closest('button'); if(!button)return; row.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===button)); const type=button.dataset.type; document.querySelectorAll('.product-card').forEach(card=>card.hidden=type!=='all'&&card.dataset.type!==type); });
+  function setType(button) { row.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===button)); const type=button.dataset.type; document.querySelectorAll('.product-card').forEach(card=>card.hidden=type!=='all'&&card.dataset.type!==type); }
+  document.addEventListener('click', event => { const button=event.target.closest('.type-filter-row button'); if(!button)return; event.preventDefault(); event.stopImmediatePropagation(); setType(button); }, true);
 });
 
