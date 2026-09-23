@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('click', event => {
+    const filter = event.target.closest('.filter-pill');
+    if (filter && typeof setCatalogFilter === 'function') {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      setCatalogFilter(filter.getAttribute('data-filter'));
+      return;
+    }
     const objective = event.target.closest('.objective-list a');
     if (objective) {
       const target = objectiveTargets[[...document.querySelectorAll('.objective-list a')].indexOf(objective)];
