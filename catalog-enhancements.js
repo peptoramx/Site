@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (relatedNames.length) {
         const block = document.createElement('div'); block.className = 'pc-related';
         block.innerHTML = `<b>RELATED REFERENCES</b><div>${relatedNames.map(item => `<a href="index.html?compound=${encodeURIComponent(item)}#productos">${item}</a>`).join('')}</div>`;
-        card.appendChild(block);
+        card.appendChild(block);const opener=document.createElement('button');opener.type='button';opener.className='pc-open-record';const label=()=>opener.textContent=card.classList.contains('is-record-open')?(document.documentElement.lang==='es'?'CERRAR FICHA −':'CLOSE RECORD −'):(document.documentElement.lang==='es'?'VER FICHA +':'VIEW RECORD +');label();opener.addEventListener('click',()=>{card.classList.toggle('is-record-open');label()});card.appendChild(opener);
       }
     });
   }
