@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let saved = null;
   const requested = new URLSearchParams(window.location.search).get('lang');
   try { saved = requested || sessionStorage.getItem('peptora_session_lang'); } catch (error) { saved = requested; }
+  if (requested === 'en' || requested === 'es') {
+    try { sessionStorage.setItem('peptora_session_lang', requested); } catch (error) {}
+  }
   function setStaticLanguage(lang) {
     document.documentElement.lang = lang;
     const label = document.getElementById('langLabel');
@@ -43,4 +46,3 @@ document.addEventListener('DOMContentLoaded', () => {
     updateInternalLinks(lang);
   });
 });
-
