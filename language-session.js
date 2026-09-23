@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
       : (document.documentElement.lang === 'es' ? 'en' : 'es');
     if (typeof setLanguage !== 'function') setStaticLanguage(lang);
     try { sessionStorage.setItem('peptora_session_lang', lang); } catch (error) {}
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('lang', lang);
+    history.replaceState(null, '', currentUrl);
     updateInternalLinks(lang);
   });
 });

@@ -993,6 +993,7 @@ function initConcentrationCalc() {
   }
 
   [mass, diluent, reference, mlPerClick].forEach(input => input.addEventListener('input', calculate));
+  document.getElementById('langToggle')?.addEventListener('click', calculate);
 }
 
 // ============================================================================
@@ -1068,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const header = document.querySelector('.site-header');
   const onScroll = () => {
-    header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(191,160,84,.4)' : 'rgba(0,0,0,.08)';
+    if (header) header.style.borderBottomColor = window.scrollY > 20 ? '#b6d5e5' : '#c9dce5';
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
