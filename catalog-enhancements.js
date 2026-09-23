@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     'BPC-157':['TB-500 (Thymosin B4 Acetate)','GHK-Cu','GLOW']
   };
   const evidence = {Retatrutide:'CLINICAL', Tesamorelin:'REGULATORY', Semax:'PRECLINICAL', Selank:'PRECLINICAL', 'MOTS-c':'MECHANISTIC', 'NAD+':'MECHANISTIC', 'BPC-157':'PRECLINICAL', GLOW:'PRECLINICAL', KLOW:'PRECLINICAL', 'CJC-1295 (No DAC)':'PRECLINICAL'};
+  const categoryRelated = {
+    metabolic:['Retatrutide','Tirzepatide','Cagrilintide'], 'gh-igf':['CJC-1295 (No DAC)','Ipamorelin','Tesamorelin'],
+    'brain-sleep':['Semax','Selank','DSIP'], performance:['MOTS-c','SS-31','Epitalon'],
+    immune:['KPV','Thymosin Alpha-1','LL-37'], hormonal:['PT-141','HCG','Kisspeptin-10'],
+    aesthetic:['BPC-157','TB-500 (Thymosin B4 Acetate)','GHK-Cu'], stacks:['GLOW','KLOW','BPC-157 + TB-500 Standard'],
+    supplies:['Bacteriostatic Water / PBS','Benzyl Alcohol 0.9%','Acetic Acid 0.6%']
+  };
   const typeFor = card => card.dataset.cat === 'supplies' ? 'tool' : card.dataset.cat === 'stacks' ? 'combination' : 'compound';
   function enhance() {
     document.querySelectorAll('.product-card').forEach(card => {
@@ -17,9 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
       card.dataset.enhanced = 'true'; card.dataset.type = typeFor(card);
       const name = card.querySelector('h4')?.textContent.trim(); const level = evidence[name] || 'RESEARCH';
       const tag = document.createElement('span'); tag.className = `pc-evidence pc-evidence-${level.toLowerCase()}`; tag.textContent = level; card.querySelector('.pc-cat')?.after(tag);
-      if (related[name]) {
+      const relatedNames = (related[name] || categoryRelated[card.dataset.cat] || []).filter(item => item !== name);
+      if (relatedNames.length) {
         const block = document.createElement('div'); block.className = 'pc-related';
-        block.innerHTML = `<b>RELATED REFERENCES</b><div>${related[name].map(item => `<a href="index.html?compound=${encodeURIComponent(item)}#productos">${item}</a>`).join('')}</div>`;
+        block.innerHTML = `<b>RELATED REFERENCES</b><div>${relatedNames.map(item => `<a href="index.html?compound=${encodeURIComponent(item)}#productos">${item}</a>`).join('')}</div>`;
         card.appendChild(block);
       }
     });
