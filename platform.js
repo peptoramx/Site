@@ -53,9 +53,11 @@ function type(p){return p.cat==='supplies'?'tools':p.cat==='stacks'?'combination
 function typeLabel(p){return {tools:loc('Laboratory reference','Referencia de laboratorio'),combinations:loc('Combination','Combinación'),individual:loc('Individual reference','Referencia individual')}[type(p)];}
 function recordButton(p,cls='reference-card',number){
  const l=lens(p);
+ const laboratory=p.cat==='supplies';
+ const summary=laboratory?p.desc[CURRENT_LANG]:(l?.community||p.interest[CURRENT_LANG]);
  return '<button type="button" class="'+cls+'" data-compound="'+escape(stableName(p))+'">'+
  (number!==undefined?'<span class="card-number">'+String(number+1).padStart(2,'0')+' / PEPTORA</span>':'<span>'+typeLabel(p)+'</span>')+
- '<h3>'+escape(displayName(p))+'</h3><p>'+escape(l?.objective||p.desc[CURRENT_LANG])+'</p><span class="card-open">'+loc('Open reference →','Abrir ficha →')+'</span></button>';
+ '<h3>'+escape(displayName(p))+'</h3><span class="card-context-label">'+(laboratory?loc('Laboratory context','Contexto de laboratorio'):loc('Why biohackers discuss it','Por qué interesa en biohacking'))+'</span><p class="card-community">'+escape(summary)+'</p><span class="card-open">'+(laboratory?loc('Open reference →','Abrir ficha →'):loc('Explore context & evidence →','Explorar contexto y evidencia →'))+'</span></button>';
 }
 
 function renderExplorer(){
@@ -96,11 +98,10 @@ function renderRecord(){
  if(!p)return;
  const brief={Retatrutide:'retatrutide','MOTS-c':'mots',Semax:'semax',Tesamorelin:'tesamorelin','BPC-157':'tissue',GLOW:'tissue',KLOW:'tissue','NAD+':'nad'}[record];
  document.getElementById('recordContent').innerHTML='<p class="kicker">'+typeLabel(p)+'</p><h2 id="compoundTitle" tabindex="-1">'+escape(displayName(p))+'</h2><p class="record-lead">'+escape(p.desc[CURRENT_LANG])+'</p>'+
+ '<section class="record-community"><h3>'+(p.cat==='supplies'?loc('Laboratory context','Contexto de laboratorio'):loc('The biohacking conversation','La conversación en biohacking'))+'</h3><p>'+escape(l?.community||p.interest[CURRENT_LANG])+'</p>'+(l&&l.community!==p.interest[CURRENT_LANG]?'<p>'+escape(p.interest[CURRENT_LANG])+'</p>':'')+'</section>'+
  '<section><h3>'+loc('The mechanism','El mecanismo')+'</h3><p>'+escape(p.mech[CURRENT_LANG])+'</p></section>'+
- '<section><h3>'+loc('The biohacking conversation','La conversación en biohacking')+'</h3><p>'+escape(l?.community||p.interest[CURRENT_LANG])+'</p></section>'+
  (l?'<section><h3>'+loc('Evidence in context','La evidencia en contexto')+'</h3><p>'+escape(l.evidence)+'</p></section>':'')+
  '<div class="record-actions"><button class="solid-button" type="button" data-action="compare" '+(!compared.has(record)&&compared.size>=3?'disabled':'')+'>'+ (compared.has(record)?loc('Remove from comparison','Quitar de comparación'):compared.size>=3?loc('Comparison full (3/3)','Comparación llena (3/3)'):loc('Add to comparison','Agregar a comparación'))+'</button><button type="button" class="text-link" data-action="show-comparison">'+loc('View comparison','Ver comparación')+' ('+compared.size+')</button></div>'+
- '<details><summary>'+loc('More research context +','Más contexto de investigación +')+'</summary><p>'+escape(p.interest[CURRENT_LANG])+'</p></details>'+
  '<section><h3>'+loc('Related references','Referencias relacionadas')+'</h3><p style="margin-bottom:14px">'+loc('Related research questions, not equivalent compounds.','Preguntas de investigación relacionadas, no compuestos equivalentes.')+'</p><div class="related-list">'+related(p).map(r=>'<button type="button" data-compound="'+escape(stableName(r))+'">'+escape(displayName(r))+' ↗</button>').join('')+'</div></section>'+
  '<a class="text-link" href="'+href('research.html'+(brief?'#'+brief:''))+'">'+(brief?loc('Read the related research brief →','Leer el brief de investigación relacionado →'):loc('Explore the research library →','Explorar la biblioteca de investigación →'))+'</a><p class="record-note">'+loc('Educational and laboratory reference. Not a recommendation for administration or personal use.','Referencia educativa y de laboratorio. No es una recomendación de administración ni de uso personal.')+'</p>';
 }
