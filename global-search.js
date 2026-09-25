@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   const products=typeof PEPTORA_PRODUCTS==='undefined'?[]:PEPTORA_PRODUCTS.map(p=>{
    const stable=typeof p.name==='string'?p.name:p.name.en,name=typeof p.name==='string'?p.name:p.name[lang()];
    const lens=typeof BIOHACKING_LENS_BY_PRODUCT==='undefined'?null:BIOHACKING_LENS_BY_PRODUCT[lang()][stable];
-   return {name,text:[stable,name,p.desc.en,p.desc.es,p.mech.en,p.mech.es,lens?.objective,lens?.community].join(' '),href:'index.html?compound='+encodeURIComponent(stable)+'#productos',type:t('Reference','Referencia')};
+   const community=typeof PEPTORA_COMMUNITY==='undefined'?null:PEPTORA_COMMUNITY[stable];
+   return {name,text:[stable,name,p.desc.en,p.desc.es,p.mech.en,p.mech.es,lens?.objective,lens?.community,community?.en.context,community?.es.context,community?.en.summary,community?.es.summary].join(' '),href:'index.html?compound='+encodeURIComponent(stable)+'#productos',type:t('Reference','Referencia')};
   });
   const entries=[...guides.map(g=>({name:g[lang()==='es'?1:0],text:g.slice(0,3).join(' '),href:g[3],type:t('Learn / tools','Guía / herramientas')})),...products];
   const matching=q?entries.filter(e=>normalize(e.text).includes(q)):entries.slice(0,6);
@@ -41,5 +42,4 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'&&!document.querySelector('dialog[open]')){e.preventDefault();button.click();}});
  labels();
 });
-
 

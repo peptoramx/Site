@@ -34,6 +34,12 @@ const find=n=>PEPTORA_PRODUCTS.find(p=>stableName(p)===n);
 const language=()=>CURRENT_LANG==='es';
 const loc=(en,es)=>language()?es:en;
 const lens=p=>BIOHACKING_LENS_BY_PRODUCT[CURRENT_LANG][stableName(p)]||BIOHACKING_LENS_BY_PRODUCT[CURRENT_LANG][displayName(p)];
+const community=p=>typeof PEPTORA_COMMUNITY==='undefined'?null:PEPTORA_COMMUNITY[stableName(p)]?.[CURRENT_LANG];
+function communitySources(p){
+ const sources=typeof PEPTORA_COMMUNITY_SOURCES==='undefined'?[]:PEPTORA_COMMUNITY_SOURCES[stableName(p)]||[];
+ if(!sources.length)return '';
+ return '<div class="record-sources">'+sources.map(s=>'<a href="'+escape(s[0])+'" target="_blank" rel="noopener noreferrer">'+escape(s[language()?2:1])+' ↗</a>').join('')+'</div><p class="community-source-note">'+loc('Sources clarify the evidence and its limits; they do not verify community testimonials or this catalogue’s product quality.','Las fuentes aclaran la evidencia y sus límites; no verifican testimonios de la comunidad ni la calidad de los productos del catálogo.')+'</p>';
+}
 const href=path=>{const u=new URL(path,location.href);u.searchParams.set('lang',CURRENT_LANG);return u.pathname+u.search+u.hash;};
 let ready=false,active='metabolic',record=null,opener=null,priorUrl=null;
 const compared=new Set();
@@ -54,7 +60,7 @@ function typeLabel(p){return {tools:loc('Laboratory reference','Referencia de la
 function recordButton(p,cls='reference-card',number){
  const l=lens(p);
  const laboratory=p.cat==='supplies';
- const summary=laboratory?p.desc[CURRENT_LANG]:(l?.community||p.interest[CURRENT_LANG]);
+ const summary=community(p)?.summary||(laboratory?p.desc[CURRENT_LANG]:(l?.community||p.interest[CURRENT_LANG]));
  return '<button type="button" class="'+cls+'" data-compound="'+escape(stableName(p))+'">'+
  (number!==undefined?'<span class="card-number">'+String(number+1).padStart(2,'0')+' / PEPTORA</span>':'<span>'+typeLabel(p)+'</span>')+
  '<h3>'+escape(displayName(p))+'</h3><span class="card-context-label">'+(laboratory?loc('Laboratory context','Contexto de laboratorio'):loc('Why biohackers discuss it','Por qué interesa en biohacking'))+'</span><p class="card-community">'+escape(summary)+'</p><span class="card-open">'+(laboratory?loc('Open reference →','Abrir ficha →'):loc('Explore context & evidence →','Explorar contexto y evidencia →'))+'</span></button>';
@@ -72,7 +78,7 @@ function renderExplorer(){
 }
 function renderIndex(){
  const q=normalize(document.getElementById('referenceSearch').value),objective=document.getElementById('objectiveFilter').value,kind=document.getElementById('referenceType').value;
- const items=PEPTORA_PRODUCTS.filter(p=>(objective==='all'||memberships(p).includes(objective))&&(kind==='all'||type(p)===kind)&&normalize([displayName(p),stableName(p),p.desc.en,p.desc.es,p.mech.en,p.mech.es,lens(p)?.objective,memberships(p).map(k=>objectives.find(o=>o[0]===k).slice(1,3).join(' '))].join(' ')).includes(q));
+ const items=PEPTORA_PRODUCTS.filter(p=>(objective==='all'||memberships(p).includes(objective))&&(kind==='all'||type(p)===kind)&&normalize([displayName(p),stableName(p),p.desc.en,p.desc.es,p.mech.en,p.mech.es,lens(p)?.objective,lens(p)?.community,community(p)?.context,memberships(p).map(k=>objectives.find(o=>o[0]===k).slice(1,3).join(' '))].join(' ')).includes(q));
  document.getElementById('referenceCount').textContent=items.length+loc(' of '+PEPTORA_PRODUCTS.length+' references',' de '+PEPTORA_PRODUCTS.length+' referencias');
  document.getElementById('referenceGrid').innerHTML=items.length?items.map(p=>recordButton(p)).join(''):'<p class="empty-state">'+loc('No matching references. Try another term or reset the filters.','No hay referencias coincidentes. Prueba otro término o restablece los filtros.')+'</p>';
 }
@@ -94,13 +100,14 @@ function related(p){
 }
 function renderRecord(){
  if(!record)return;
- const p=find(record),l=lens(p);
+ const p=find(record),l=p?lens(p):null,c=p?community(p):null;
  if(!p)return;
  const brief={Retatrutide:'retatrutide','MOTS-c':'mots',Semax:'semax',Tesamorelin:'tesamorelin','BPC-157':'tissue',GLOW:'tissue',KLOW:'tissue','NAD+':'nad'}[record];
  document.getElementById('recordContent').innerHTML='<p class="kicker">'+typeLabel(p)+'</p><h2 id="compoundTitle" tabindex="-1">'+escape(displayName(p))+'</h2><p class="record-lead">'+escape(p.desc[CURRENT_LANG])+'</p>'+
- '<section class="record-community"><h3>'+(p.cat==='supplies'?loc('Laboratory context','Contexto de laboratorio'):loc('The biohacking conversation','La conversación en biohacking'))+'</h3><p>'+escape(l?.community||p.interest[CURRENT_LANG])+'</p>'+(l&&l.community!==p.interest[CURRENT_LANG]?'<p>'+escape(p.interest[CURRENT_LANG])+'</p>':'')+'</section>'+
+ '<section class="record-community"><h3>'+(p.cat==='supplies'?loc('Laboratory context','Contexto de laboratorio'):loc('Inside the biohacking conversation','Dentro de la conversación biohacking'))+'</h3><p class="community-summary">'+escape(c?.summary||l?.community||p.interest[CURRENT_LANG])+'</p>'+(c?'<p>'+escape(c.context)+'</p><aside class="community-boundary"><h4>'+loc('Keep the distinction clear','La distinción importa')+'</h4><p>'+escape(c.boundary)+'</p></aside>':'')+'</section>'+
  '<section><h3>'+loc('The mechanism','El mecanismo')+'</h3><p>'+escape(p.mech[CURRENT_LANG])+'</p></section>'+
- (l?'<section><h3>'+loc('Evidence in context','La evidencia en contexto')+'</h3><p>'+escape(l.evidence)+'</p></section>':'')+
+ (l?'<section><h3>'+loc('Evidence in context','La evidencia en contexto')+'</h3><p>'+escape(l.evidence)+'</p>'+communitySources(p)+'</section>':'')+
+ '<details class="research-background"><summary>'+loc('More research background +','Más contexto de investigación +')+'</summary><p>'+escape(p.interest[CURRENT_LANG])+'</p></details>'+
  '<div class="record-actions"><button class="solid-button" type="button" data-action="compare" '+(!compared.has(record)&&compared.size>=3?'disabled':'')+'>'+ (compared.has(record)?loc('Remove from comparison','Quitar de comparación'):compared.size>=3?loc('Comparison full (3/3)','Comparación llena (3/3)'):loc('Add to comparison','Agregar a comparación'))+'</button><button type="button" class="text-link" data-action="show-comparison">'+loc('View comparison','Ver comparación')+' ('+compared.size+')</button></div>'+
  '<section><h3>'+loc('Related references','Referencias relacionadas')+'</h3><p style="margin-bottom:14px">'+loc('Related research questions, not equivalent compounds.','Preguntas de investigación relacionadas, no compuestos equivalentes.')+'</p><div class="related-list">'+related(p).map(r=>'<button type="button" data-compound="'+escape(stableName(r))+'">'+escape(displayName(r))+' ↗</button>').join('')+'</div></section>'+
  '<a class="text-link" href="'+href('research.html'+(brief?'#'+brief:''))+'">'+(brief?loc('Read the related research brief →','Leer el brief de investigación relacionado →'):loc('Explore the research library →','Explorar la biblioteca de investigación →'))+'</a><p class="record-note">'+loc('Educational and laboratory reference. Not a recommendation for administration or personal use.','Referencia educativa y de laboratorio. No es una recomendación de administración ni de uso personal.')+'</p>';
