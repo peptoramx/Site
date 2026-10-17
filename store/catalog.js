@@ -12,7 +12,7 @@
   ];
   const rows=[
     ['tirzepatide','Tirzepatide','Tirzepatida',['metabolic'],['20 mg','30 mg'],'GIP + GLP-1','Tirzepatida tirzepatide'],
-    ['retatrutide','Retatrutide','Retatrutida',['metabolic'],['10 mg','20 mg'],'GIP + GLP-1 + glucagon','Retatrutida retatrutide'],
+    ['retatrutide','RT','RT',['metabolic'],['10 mg','20 mg'],'Triple agonist: GLP-1, GIP and glucagon / Triple agonista: GLP-1, GIP y glucagón','Retatrutida retatrutide RT triple agonista triple agonist'],
     ['ghk-cu','GHK-Cu','GHK-Cu',['skin','recovery'],['50 mg','100 mg'],'Copper peptide / Péptido de cobre','GHK-Cu'],
     ['ipamorelin','Ipamorelin','Ipamorelin',['performance'],['10 mg'],'GH axis / Eje GH','Ipamorelin'],
     ['cjc-1295-no-dac','CJC-1295 no DAC','CJC-1295 sin DAC',['performance'],['5 mg'],'GH axis / Eje GH','CJC-1295'],
@@ -56,7 +56,7 @@
       'klow':[['BPC-157',10],['TB-500',10],['GHK-Cu',50],['KPV',10]]
     };
     const unit=product.segments.includes('supplies')?'ml':'mg';
-    const ingredients=(blends[product.id]||[[product.en,Number.parseFloat(variant.presentation)]]).map(([name,amount])=>({name,amount,unit}));
+    const ingredients=(blends[product.id]||[[product.id==='retatrutide'?'Retatrutide':product.en,Number.parseFloat(variant.presentation)]]).map(([name,amount])=>({name,amount,unit}));
     return {ingredients,total:ingredients.reduce((n,i)=>n+i.amount,0),unit,breakdownPending:false};
   }
   const api={products,segments,normalize,filterProducts,sanitizeCart,cartSummary,composition};
