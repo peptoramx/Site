@@ -62,3 +62,4 @@
   const api={products,segments,normalize,filterProducts,sanitizeCart,cartSummary,composition};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PeptoraCatalog=api;
 })(typeof window!=='undefined'?window:globalThis);
+

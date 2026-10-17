@@ -8,3 +8,4 @@
  function message(lines,customer,lang){const es=lang==='es';return [es?'Hola PEPTORA Sonora, quiero confirmar esta compra:':'Hello PEPTORA Sonora, I would like to confirm this purchase:',...lines.map(r=>r.qty+' × '+r.product[lang]+' · '+r.details.presentation+(r.details.available?'':(es?' · Bajo pedido':' · On request'))), '',(es?'Nombre: ':'Name: ')+customer.name.trim(),(es?'Dirección: ':'Address: ')+customer.address.trim(),'',es?'Por favor confirma precios, disponibilidad y costo de envío. Para productos sin existencias, entiendo que el envío puede tardar de 5 a 7 días después de confirmar la compra.':'Please confirm prices, availability and shipping cost. For out-of-stock products, I understand shipping may take 5–7 days after purchase confirmation.'].join('\n');}
  const api={offers,apply,message,phone:'526624621816'};if(typeof module!=='undefined')module.exports=api;else root.PeptoraCommerce=api;
 })(typeof window!=='undefined'?window:globalThis);
+

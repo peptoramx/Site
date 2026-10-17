@@ -42,3 +42,4 @@ Owner workflow: open `/store/manage.html`, enter retail MXN prices and confirmed
 
 Inventory integration is **not automatic**. Record actual confirmed sales in the existing inventory system, then publish the remaining available stock. Connecting both safely requires a verified SKU mapping and an authenticated server/action; no administrative inventory data or access tokens are exposed by this storefront. Opening WhatsApp does not prove payment or completion. No stock was changed by testing.
 
+

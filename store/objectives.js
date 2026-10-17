@@ -79,3 +79,4 @@ for(const [id,[enGoals,esGoals,enText,esText]] of Object.entries(rows)){
  p.en.goals=enGoals;p.es.goals=esGoals;p.en.applied=enText;p.es.applied=esText;
 }
 })();
+
