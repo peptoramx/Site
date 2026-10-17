@@ -4,7 +4,7 @@ Static GitHub Pages collection: 18 groups / 21 presentations, bilingual EN/ES, f
 
 ## Single source of retail data
 
-Prices and availability come from `https://raw.githubusercontent.com/peptoramx/Peptora/main/data/store-offers.json`. The inventory system creates that public projection atomically with lot changes, sales, returns and consignments using `js/transacciones.js`. No cost, provider, commission, customer record or credential is loaded into the storefront. Changes are fetched on page load, window focus and every 60 seconds; CDN propagation may add delay. Direct edits to inventory JSON outside the inventory app require projection regeneration.
+Prices and availability come from `https://raw.githubusercontent.com/peptoramx/Peptora/main/data/store-offers.json`. The feed includes only price and boolean availability, never exact quantities. In-stock products show no stock notice; unavailable ones show under-order shipping terms. The inventory system creates that public projection atomically with lot changes, sales, returns and consignments using `js/transacciones.js`. No cost, provider, commission, customer record or credential is loaded into the storefront. Changes are fetched on page load, window focus and every 60 seconds; CDN propagation may add delay. Direct edits to inventory JSON outside the inventory app require projection regeneration.
 
 Spanish: retail MXN from inventory. English: `round(MXN / 18.2 + 5, 2)` USD per vial, including supplies. Cart totals multiply converted unit prices, not a single US$5 addition per cart. Prices/shipping remain subject to seller confirmation. Missing mappings/prices display pending, never $0. Network failures clear prices/availability rather than showing stale inventory.
 
