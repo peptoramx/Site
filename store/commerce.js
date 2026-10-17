@@ -4,7 +4,7 @@
  */
 (function(root){
  let offers={};
- const endpoint='https://raw.githubusercontent.com/peptoramx/Peptora/main/data/store-offers.json';
+ const endpoint='https://raw.githubusercontent.com/peptoramx/Peptora/refs/heads/main/data/store-offers.json';
  const contacts={es:'526624621816',en:'17316665112'};
  async function load(catalog){try{const response=await fetch(endpoint+'?t='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error();const feed=await response.json();if(feed.schema!==1||feed.currency!=='MXN'||!feed.offers||typeof feed.offers!=='object')throw Error();offers=feed.offers;apply(catalog);return true;}catch{offers={};apply(catalog);return false;}}
  const amount=(mxn,lang)=>Number.isFinite(mxn)&&mxn>0?(lang==='en'?Math.round((mxn/18.2+5)*100)/100:mxn):null;
