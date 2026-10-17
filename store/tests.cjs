@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const C=require('./catalog.js');let n=0;const test=(name,fn)=>{fn();n++;console.log('PASS '+name)};
-test('18 products and 21 presentations',()=>{assert.equal(C.products.length,18);assert.equal(C.products.flatMap(p=>p.variants).length,21)});
+test('19 products and 22 presentations',()=>{assert.equal(C.products.length,19);assert.equal(C.products.flatMap(p=>p.variants).length,22)});
 test('Unique IDs',()=>{const ids=C.products.flatMap(p=>p.variants.map(v=>v.id));assert.equal(new Set(ids).size,ids.length)});
 test('No fabricated prices or available stock',()=>C.products.forEach(p=>p.variants.forEach(v=>{assert.equal(v.price,null);assert.equal(v.available,false)})));
 test('CJC-1295 no DAC, corrected name',()=>{assert.equal(C.filterProducts('CJC 1295 5mg','performance').length,2);assert.equal(C.filterProducts('1290').length,0)});
@@ -10,7 +10,7 @@ test('Segments filter compounds correctly',()=>{assert.deepEqual(C.filterProduct
 test('Search combines with segment and type',()=>{assert.equal(C.filterProducts('water','supplies','supplies').length,2);assert.equal(C.filterProducts('water','all','compounds').length,0);assert.equal(C.filterProducts('semax','metabolic').length,0)});
 test('Unknown search empty',()=>assert.equal(C.filterProducts('<script>').length,0));
 test('KLOW confirmed at 80 mg',()=>assert.equal(C.products.find(p=>p.id==='klow').variants[0].presentation,'80 mg'));
-test('Unique compound label colors',()=>assert.equal(new Set(C.products.map(p=>p.color)).size,18));
+test('Unique compound label colors',()=>assert.equal(new Set(C.products.map(p=>p.color)).size,19));
 test('KLOW confirmed ingredient amounts total 80 mg',()=>{const p=C.products.find(p=>p.id==='klow'),c=C.composition(p,p.variants[0]);assert.deepEqual(c.ingredients.map(i=>i.name),['BPC-157','TB-500','GHK-Cu','KPV']);assert.equal(c.total,80);assert.deepEqual(c.ingredients.map(i=>i.amount),[10,10,50,10])});
 test('Combination amounts match selected catalog',()=>{for(const [id,amounts,total] of [['wolverine',[5,5],10],['tesamorelin-ipamorelin',[10,5],15],['cjc-ipamorelin',[5,5],10]]){const p=C.products.find(p=>p.id===id),c=C.composition(p,p.variants[0]);assert.deepEqual(c.ingredients.map(i=>i.amount),amounts);assert.equal(c.total,total)}});
 test('Single ingredient content changes with presentation',()=>{const p=C.products.find(p=>p.id==='ghk-cu');assert.equal(C.composition(p,p.variants[0]).total,50);assert.equal(C.composition(p,p.variants[1]).total,100)});
@@ -32,4 +32,3 @@ test('English retail prices use fixed MXN conversion plus USD 5 per vial',()=>{c
 test('WhatsApp routes match selected language',()=>{const M=require('./commerce.js');assert.equal(M.contacts.en,'17316665112');assert.equal(M.contacts.es,'526624621816')});
 test('RT display name and inventory IDs',()=>{const p=C.products.find(p=>p.id==='retatrutide');assert.equal(p.en,'RT');assert.equal(p.es,'RT');assert.equal(C.composition(p,p.variants[0]).ingredients[0].name,'RT');assert.equal(C.filterProducts('retatrutida')[0].id,p.id);assert.ok(p.context.includes('Triple agonista'));});
 test('Inverted strength prices are withheld, not invented',()=>{const M=require('./commerce.js');const bad={'retatrutide-1':{price:2200,available:true},'retatrutide-2':{price:2100,available:true}};const safe=M.validate(bad);assert.equal(safe['retatrutide-1'].price,null);assert.equal(safe['retatrutide-2'].price,null);assert.equal(bad['retatrutide-1'].price,2200);assert.equal(safe['retatrutide-2'].available,true);});
-

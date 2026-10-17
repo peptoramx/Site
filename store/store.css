@@ -21,4 +21,3 @@
 /* Keep the entire collection inside the frame at phone and tablet widths. */
 .hero-vial-item:first-child{left:25%;rotate:none;transform:translateX(-50%) rotate(-10deg)}.hero-vial-item:last-child{left:75%;rotate:none;transform:translateX(-50%) rotate(10deg)}.hero-packshot .mockup{width:clamp(120px,13vw,205px)}@media(max-width:720px){.hero-art{min-height:315px}.hero-packshot{height:245px}.hero-packshot .mockup{width:132px}.hero-vial-item:first-child{left:26%;top:25px}.hero-vial-item:last-child{left:74%;top:25px}}
 @media(max-width:360px){.hero-packshot .mockup{width:116px}.hero-vial-item:first-child{left:28%}.hero-vial-item:last-child{left:72%}.hero-packshot .label-product{font-size:7.5px}.hero-packshot .label-mg{font-size:6.5px}.hero-packshot .label-research{font-size:3px}.hero-packshot .mockup-label>small{font-size:2.3px}}
-

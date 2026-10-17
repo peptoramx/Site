@@ -28,12 +28,13 @@
     ['glutathione','Glutathione','Glutatión',['cellular'],['600 mg'],'Antioxidant research / Investigación antioxidante','Glutathion Glutathione Glutation Glutatión'],
     ['bac-water-3ml','BAC Water','Agua BAC',['supplies'],['3 ml'],'Bacteriostatic water / Agua bacteriostática','BAC Water agua bacteriostatica 3ml'],
     ['bac-water-10ml','BAC Water','Agua BAC',['supplies'],['10 ml'],'Bacteriostatic water / Agua bacteriostática','BAC Water agua bacteriostatica 10ml'],
-    ['cjc-ipamorelin','CJC-1295 no DAC + Ipamorelin','CJC-1295 sin DAC + Ipamorelin',['performance'],['5 mg + 5 mg'],'Combination / Combinación','CJC-1295 no DAC Ipamorelin']
+    ['cjc-ipamorelin','CJC-1295 no DAC + Ipamorelin','CJC-1295 sin DAC + Ipamorelin',['performance'],['5 mg + 5 mg'],'Combination / Combinación','CJC-1295 no DAC Ipamorelin'],
+    ['dsip','DSIP','DSIP',['recovery'],['10 mg'],'Rest & night routine / Descanso y rutina nocturna','DSIP Delta sleep inducing peptide descanso sleep']
   ];
   const products=rows.map(([id,en,es,segments,presentations,context,aliases])=>({id,en,es,segments,context,aliases,
     variants:presentations.map((presentation,i)=>({id:id+'-'+(i+1),presentation,price:null,currency:'MXN',available:false,needsConfirmation:false}))}));
   const colors=['#12618c','#674b9f','#b16d39','#16827d','#50779f','#8a517b','#2b60b5','#3b8e65','#7d5ea5','#65932d','#b37b22','#b34c73','#32765a','#9a6b32','#4a8280','#7396a5','#445f76','#8c5c3a'];
-  products.forEach((p,i)=>p.color=colors[i]);
+  colors.push('#596ca0');products.forEach((p,i)=>p.color=colors[i]);
   const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
   function filterProducts(query='',segment='all',type='all'){
     const terms=String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
@@ -62,4 +63,3 @@
   const api={products,segments,normalize,filterProducts,sanitizeCart,cartSummary,composition};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PeptoraCatalog=api;
 })(typeof window!=='undefined'?window:globalThis);
-

@@ -1,6 +1,6 @@
 # PEPTORA Store
 
-Static GitHub Pages collection: 18 groups / 21 presentations, bilingual EN/ES, filters, variant labels, product dialogs, cart and deliberate WhatsApp inquiry checkout. Archivo/Inter and original unchanged PEPTORA logo. Generated vial assets are visual packaging representations; actual product photography was not supplied. Every vial displays declared ingredient amounts; KLOW = BPC-157 10 + TB-500 10 + GHK-Cu 50 + KPV 10 = 80 mg. COAs on express request, per owner.
+Static GitHub Pages collection: 19 groups / 22 presentations, including DSIP 10 mg, bilingual EN/ES, filters, variant labels, product dialogs, cart and deliberate WhatsApp inquiry checkout. Editorial coastal imagery, Archivo/Inter and original unchanged PEPTORA logo. Generated vial assets are visual packaging representations; actual product photography was not supplied. Every vial displays declared ingredient amounts; KLOW = BPC-157 10 + TB-500 10 + GHK-Cu 50 + KPV 10 = 80 mg. COAs on express request, per owner.
 
 ## Single source of retail data
 
@@ -8,7 +8,7 @@ Prices and availability come from `https://raw.githubusercontent.com/peptoramx/P
 
 Spanish: retail MXN from inventory. English: `round(MXN / 18.2 + 5, 2)` USD per vial, including supplies. Cart totals multiply converted unit prices, not a single US$5 addition per cart. Prices/shipping remain subject to seller confirmation. Missing mappings/prices display pending, never $0. Network failures clear prices/availability rather than showing stale inventory.
 
-Exact matched product/presentation only. Unexpired units sum across lots. Price is from the newest acquisition date with positive retail price; tied dates use the last inventory row. Six unmatched presentations currently stay under order: CJC-1295 no DAC (inventory has no DAC designation), Tesamorelin/Ipamorelin and Wolverine (inventory records lack component amounts), SS-31, glutathione and CJC/Ipamorelin (no inventory records). Do not substitute another strength or blend. Ipamorelin was corrected by explicit owner instruction from 100 to 10 mg.
+Exact matched product/presentation only. Unexpired units sum across lots. Price follows the most recently edited retail price/presentation using the internal store-sync-state.json; stock-only changes do not override that precedence. Acquisition date and row order are legacy fallbacks. All 22 presentations now have prices. Blend identities retain owner-confirmed recipes; the owner reconfirmed CJC/Ipamorelin's single 5 mg inventory field means 5 mg per component (10 mg total). Do not substitute another strength or blend. Ipamorelin was corrected by explicit owner instruction from 100 to 10 mg.
 
 `manage.html` now links to the existing inventory, not a separate offers editor. Change prices/stock in the existing lot editor. Stock already assigned to consignments is not counted a second time. The storefront is not a reservation or payment system: confirm actual sales in the inventory app. Opening WhatsApp does not constitute a sale or decrement stock.
 
@@ -19,4 +19,3 @@ Spanish WhatsApp: +52 662 462 1816 (Sonora). English WhatsApp: +1 731 666 5112 (
 Editorial content describes community objectives without claiming guaranteed efficacy or providing administration/dose protocols. Repeated lab/development copy is removed; brief essential compound information is retained where material. Motion respects reduced-motion preferences. Vials use two optimized WebP bases with unique compound color stripes and responsive labels.
 
 Tests: `node store/tests.cjs`. Inventory projection/atomic-commit tests are in the inventory repository. Tests use synthetic customers and do not send messages or register real sales.
-

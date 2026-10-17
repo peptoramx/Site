@@ -1,0 +1,9 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),C=require('./catalog.js'),M=require('./commerce.js');
+if(!process.argv[2])throw Error('Provide a sanitized public inventory feed JSON path.');
+const feed=JSON.parse(fs.readFileSync(process.argv[2],'utf8')),variants=C.products.flatMap(p=>p.variants);
+assert.equal(feed.currency,'MXN');assert.equal(Object.keys(feed.offers).length,variants.length);
+for(const v of variants){const o=feed.offers[v.id];assert.ok(o,v.id+' must map to inventory');assert.ok(Number.isFinite(o.price)&&o.price>0,v.id+' price');assert.equal(typeof o.available,'boolean');assert.deepEqual(Object.keys(o).sort(),['available','price']);}
+const safe=M.validate(feed.offers);for(const v of variants)assert.equal(safe[v.id].price,feed.offers[v.id].price,v.id+' must not be blocked');
+const expected={'retatrutide-1':1915.8,'retatrutide-2':3200,'tirzepatide-1':1900,'tirzepatide-2':2900,'ghk-cu-1':1200,'mots-c-1':1650,'nad-plus-1':1450,'dsip-1':1715,'cjc-ipamorelin-1':1550};for(const [id,price]of Object.entries(expected))assert.equal(feed.offers[id].price,price,id+' latest owner price');
+const script=fs.readFileSync(__dirname+'/commerce.js','utf8'),context=vm.createContext({window:{},AbortSignal,Intl,URL,Date,fetch:async()=>({ok:true,json:async()=>feed})});vm.runInContext(script,context);
+context.window.PeptoraCommerce.load(C).then(ok=>{assert.ok(ok);for(const v of variants){assert.equal(v.price,feed.offers[v.id].price);assert.equal(v.available,feed.offers[v.id].available);assert.ok(!Object.hasOwn(v,'stock'));}assert.equal(C.products.find(p=>p.id==='cjc-ipamorelin').variants[0].available,false);assert.equal(C.products.find(p=>p.id==='dsip').variants[0].price,1715);assert.equal(M.amount(3200,'en'),180.82);console.log('PASS: all '+variants.length+' presentations map to current inventory; MXN/USD, latest edits, availability and privacy validated.');}).catch(e=>{console.error(e);process.exitCode=1;});
