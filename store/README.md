@@ -14,6 +14,10 @@ Update product records here after confirming the selected commercial catalog. Do
 
 ## Current features
 
+Customer-facing copy now omits mockup/illustration labels and development banners. `objectives.js` adds three practical community interests and a longer, product-specific EN/ES explanation to every product, keeping these separate from medical indications, protocols or demonstrated effects. COAs are stated as available on express request per the owner's instruction; the request link opens PEPTORA contact, without inventing a download, lab result or certification. No actual COA was supplied or independently verified in this implementation.
+
+Motion includes a floating hero vial, subtle light/orbit movement, card/filter entrances, hover feedback and a cart-count animation. All animations honor `prefers-reduced-motion`; the catalog is never dependent on animation to remain readable. Prices and checkout status remain truthful.
+
 - EN first visit; explicit `?lang=en|es` and existing `peptora_session_lang` session preference are respected. Links back to the main site retain language.
 - Segment + text + type filters, accent/punctuation-insensitive search, presentation selectors and product dialogs; shareable `?product=id` / `?segment=id` links.
 - Browser-local selection, quantity controls, removal, clear, safe parsing, maximum 99 per presentation and cross-tab updates. Language-independent variant IDs.
@@ -28,3 +32,13 @@ Before commercial activation, confirm product eligibility and permitted claims i
 ## Checks
 
 Run `node store/tests.cjs` from repository root. Tests do not create orders or change inventory.
+# WhatsApp checkout and public offers
+
+Sales contact: +52 662 462 1816 (Sonora). The checkout collects name and full shipping address, then prepares a message on deliberate submission with consent. It does not save customer details, charge, create an order or reserve/decrement stock. WhatsApp receives the details in its link; the customer reviews and sends the message there.
+
+Default: all presentations are **under order**, prices pending. Out-of-stock shipping may take **5–7 days after purchase confirmation**; seller confirms shipping costs and availability. This is not a guaranteed delivery date.
+
+Owner workflow: open `/store/manage.html`, enter retail MXN prices and confirmed available units by presentation, download `commerce.js`, and replace `store/commerce.js` in the Site repository. This preparer is public but cannot publish changes; repository authorization remains required. Never enter private costs or credentials. Re-uploading offers does not modify inventory. For urgent price changes, bump the commerce script cache version in index.html too.
+
+Inventory integration is **not automatic**. Record actual confirmed sales in the existing inventory system, then publish the remaining available stock. Connecting both safely requires a verified SKU mapping and an authenticated server/action; no administrative inventory data or access tokens are exposed by this storefront. Opening WhatsApp does not prove payment or completion. No stock was changed by testing.
+

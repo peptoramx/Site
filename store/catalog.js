@@ -37,7 +37,7 @@
   const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
   function filterProducts(query='',segment='all',type='all'){
     const terms=String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
-    return products.filter(p=>(segment==='all'||p.segments.includes(segment))&&(type==='all'||(type==='supplies')===p.segments.includes('supplies'))&&terms.every(t=>normalize([p.en,p.es,p.context,p.aliases,...p.variants.map(v=>v.presentation),...segments.filter(s=>p.segments.includes(s.id)).flatMap(s=>[s.en,s.es]),...Object.values(root.PeptoraCommunity?.[p.id]||{}).flatMap(c=>[c.headline,c.short])].join(' ')).includes(t)));
+    return products.filter(p=>(segment==='all'||p.segments.includes(segment))&&(type==='all'||(type==='supplies')===p.segments.includes('supplies'))&&terms.every(t=>normalize([p.en,p.es,p.context,p.aliases,...p.variants.map(v=>v.presentation),...segments.filter(s=>p.segments.includes(s.id)).flatMap(s=>[s.en,s.es]),...Object.values(root.PeptoraCommunity?.[p.id]||{}).flatMap(c=>[c.headline,c.short,...(c.goals||[])])].join(' ')).includes(t)));
   }
   function sanitizeCart(raw){
     if(!Array.isArray(raw))return [];
