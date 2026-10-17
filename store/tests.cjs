@@ -30,5 +30,5 @@ test('Local page assets resolve',()=>{const html=fs.readFileSync(path.join(__dir
 console.log(n+' store checks passed.');
 test('English retail prices use fixed MXN conversion plus USD 5 per vial',()=>{const M=require('./commerce.js');assert.equal(M.amount(1820,'en'),105);assert.equal(M.amount(1820,'es'),1820);assert.equal(M.amount(null,'en'),null);assert.equal(M.amount(950,'en'),57.2);assert.equal(M.amount(950,'en')*2,114.4)});
 test('WhatsApp routes match selected language',()=>{const M=require('./commerce.js');assert.equal(M.contacts.en,'17316665112');assert.equal(M.contacts.es,'526624621816')});
-test('RT keeps full ingredient identity and inventory IDs',()=>{const p=C.products.find(p=>p.id==='retatrutide');assert.equal(p.en,'RT');assert.equal(p.es,'RT');assert.equal(C.composition(p,p.variants[0]).ingredients[0].name,'Retatrutide');assert.equal(C.filterProducts('retatrutida')[0].id,p.id);assert.ok(p.context.includes('Triple agonista'));});
+test('RT display name and inventory IDs',()=>{const p=C.products.find(p=>p.id==='retatrutide');assert.equal(p.en,'RT');assert.equal(p.es,'RT');assert.equal(C.composition(p,p.variants[0]).ingredients[0].name,'RT');assert.equal(C.filterProducts('retatrutida')[0].id,p.id);assert.ok(p.context.includes('Triple agonista'));});
 

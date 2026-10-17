@@ -56,7 +56,7 @@
       'klow':[['BPC-157',10],['TB-500',10],['GHK-Cu',50],['KPV',10]]
     };
     const unit=product.segments.includes('supplies')?'ml':'mg';
-    const ingredients=(blends[product.id]||[[product.id==='retatrutide'?'Retatrutide':product.en,Number.parseFloat(variant.presentation)]]).map(([name,amount])=>({name,amount,unit}));
+    const ingredients=(blends[product.id]||[[product.en,Number.parseFloat(variant.presentation)]]).map(([name,amount])=>({name,amount,unit}));
     return {ingredients,total:ingredients.reduce((n,i)=>n+i.amount,0),unit,breakdownPending:false};
   }
   const api={products,segments,normalize,filterProducts,sanitizeCart,cartSummary,composition};
